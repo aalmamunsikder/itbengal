@@ -72,6 +72,20 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/packages/types/dist ./node_modules/@itbengal/types/dist
 COPY --from=builder /app/packages/types/package.json ./node_modules/@itbengal/types/package.json
 
+COPY --from=builder /app/packages/database/dist ./node_modules/@itbengal/database/dist
+COPY --from=builder /app/packages/database/package.json ./node_modules/@itbengal/database/package.json
+COPY --from=builder /app/packages/database/prisma ./node_modules/@itbengal/database/prisma
+
+COPY --from=builder /app/packages/utils/dist ./node_modules/@itbengal/utils/dist
+COPY --from=builder /app/packages/utils/package.json ./node_modules/@itbengal/utils/package.json
+
+COPY --from=builder /app/packages/logger/dist ./node_modules/@itbengal/logger/dist
+COPY --from=builder /app/packages/logger/package.json ./node_modules/@itbengal/logger/package.json
+
+# Copy Prisma Client generated binaries
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+
 # Set ownership
 RUN chown -R itbengal:itbengal /app
 

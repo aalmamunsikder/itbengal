@@ -1,0 +1,130 @@
+# ==============================================================================
+# ITBengal Hosting Platform — Production Docker Compose
+# ==============================================================================
+# Usage:
+#   docker-compose -f docker-compose.prod.yml up --build -d
+#   docker-compose -f docker-compose.prod.yml logs -f
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  # 1. Traefik Routing Engine & LetsEncrypt SSL Resolver
+  traefik:
+    image: traefik:v3.0
+    container_name: itbengal-traefik
+    restart: unless-stopped
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.email=admin@itbengal.xyz"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    networks:
+      - itbengal-network
+
+  # 2. Database Server (PostgreSQL) — Bind port locally for host queries
+  postgres:
+    image: postgres:15-alpine
+    container_name: itbengal-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: itbengal
+      POSTGRES_USER: itbengal_user
+      POSTGRES_PASSWORD: secure_pg_password
+    ports:
+      - "127.0.0.1:5432:5432" # Binds locally to VPS only (secure)
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - itbengal-network
+
+  # 3. Redis Cache & Job Broker (BullMQ)
+  redis:
+    image: redis:7-alpine
+    container_name: itbengal-redis-prod
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - itbengal-network
+
+  # 4. ITBengal API Service
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+    container_name: itbengal-api-prod
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      # Expose host docker daemon so the API can orchestrate customer containers
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`api.itbengal.xyz`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.api.loadbalancer.server.port=4000"
+    networks:
+      - itbengal-network
+
+  # 5. Client Portal UI
+  dashboard:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.dashboard
+      args:
+        - NEXT_PUBLIC_API_URL=https://api.itbengal.xyz/api/v1
+    container_name: itbengal-dashboard-prod
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.itbengal.xyz/api/v1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.itbengal.xyz`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      - "traefik.http.services.dashboard.loadbalancer.server.port=3000"
+    networks:
+      - itbengal-network
+
+  # 6. Admin Panel UI
+  admin:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.admin
+      args:
+        - NEXT_PUBLIC_API_URL=https://api.itbengal.xyz/api/v1
+    container_name: itbengal-admin-prod
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.itbengal.xyz/api/v1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=Host(`admin.itbengal.xyz`)"
+      - "traefik.http.routers.admin.entrypoints=websecure"
+      - "traefik.http.routers.admin.tls.certresolver=letsencrypt"
+      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+    networks:
+      - itbengal-network
+
+volumes:
+  pgdata:
+    name: itbengal-pgdata-prod
+
+networks:
+  itbengal-network:
+    name: itbengal-network
+    external: true
