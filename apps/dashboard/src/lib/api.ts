@@ -65,7 +65,9 @@ class ApiClient {
 
   /** Build the full URL for a given path */
   private buildUrl(path: string, params?: Record<string, string>): string {
-    const url = new URL(path, this.config.baseUrl);
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanBase = this.config.baseUrl.endsWith('/') ? this.config.baseUrl : `${this.config.baseUrl}/`;
+    const url = new URL(cleanPath, cleanBase);
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         url.searchParams.append(key, value);
