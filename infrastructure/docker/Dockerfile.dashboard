@@ -69,7 +69,7 @@ RUN addgroup --system --gid 1001 itbengal && \
 # Copy Next.js standalone build
 COPY --from=builder /app/apps/dashboard/.next/standalone ./
 COPY --from=builder /app/apps/dashboard/.next/static ./apps/dashboard/.next/static
-COPY --from=builder /app/apps/dashboard/public ./apps/dashboard/public 2>/dev/null || true
+COPY --from=builder /app/apps/dashboard/public ./apps/dashboard/public
 
 # Set ownership
 RUN chown -R itbengal:itbengal /app
