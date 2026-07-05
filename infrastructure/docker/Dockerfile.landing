@@ -1,0 +1,81 @@
+# ==============================================================================
+# ITBengal Public Landing Page — Multi-stage Dockerfile
+# ==============================================================================
+# Build:  docker build -f infrastructure/docker/Dockerfile.landing -t itbengal-landing .
+# Run:    docker run -p 3002:3002 itbengal-landing
+# ==============================================================================
+
+# --------------------------------------------------------------------------
+# Stage 1: Install dependencies
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS deps
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Copy workspace config
+COPY package.json package-lock.json turbo.json ./
+
+# Copy all package.json files for workspace resolution
+COPY apps/landing/package.json ./apps/landing/
+COPY packages/types/package.json ./packages/types/
+
+# Install all dependencies
+RUN npm ci --ignore-scripts
+
+# --------------------------------------------------------------------------
+# Stage 2: Build Next.js application
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy deps
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json ./package.json
+COPY --from=deps /app/package-lock.json ./package-lock.json
+
+# Copy source code
+COPY tsconfig.json ./
+COPY turbo.json ./
+COPY apps/landing ./apps/landing
+COPY packages ./packages
+
+# Set Next.js telemetry to disabled
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the landing page and its dependencies
+RUN npx turbo run build --filter=@itbengal/landing
+
+# --------------------------------------------------------------------------
+# Stage 3: Production runner (standalone output)
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache dumb-init
+
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup --system --gid 1001 itbengal && \
+    adduser --system --uid 1001 itbengal
+
+# Copy Next.js standalone build
+COPY --from=builder /app/apps/landing/.next/standalone ./
+COPY --from=builder /app/apps/landing/.next/static ./apps/landing/.next/static
+COPY --from=builder /app/apps/landing/public ./apps/landing/public
+
+# Set ownership
+RUN chown -R itbengal:itbengal /app
+
+USER itbengal
+
+ENV NODE_ENV=production
+ENV PORT=3002
+ENV HOSTNAME="0.0.0.0"
+ENV NEXT_TELEMETRY_DISABLED=1
+
+EXPOSE 3002
+
+CMD ["dumb-init", "node", "apps/landing/server.js"]

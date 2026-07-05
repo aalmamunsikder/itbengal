@@ -124,6 +124,22 @@ services:
     networks:
       - itbengal-network
 
+  # 7. Public Marketing Landing Page
+  landing:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.landing
+    container_name: itbengal-landing-prod
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.landing.rule=Host(`itbengal.xyz`) || Host(`www.itbengal.xyz`)"
+      - "traefik.http.routers.landing.entrypoints=websecure"
+      - "traefik.http.routers.landing.tls.certresolver=letsencrypt"
+      - "traefik.http.services.landing.loadbalancer.server.port=3002"
+    networks:
+      - itbengal-network
+
 volumes:
   pgdata:
     name: itbengal-pgdata-prod
