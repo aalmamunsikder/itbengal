@@ -1,6 +1,6 @@
 'use client';
 
-import { ShieldCheck, Server, Database, Zap, Activity, Terminal } from 'lucide-react';
+import { ShieldCheck, Server, Database, Zap, Activity } from 'lucide-react';
 
 export default function Features() {
   const bulletPoints = [
