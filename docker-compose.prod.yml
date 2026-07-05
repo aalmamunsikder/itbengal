@@ -118,7 +118,7 @@ services:
       - "traefik.http.routers.admin.rule=Host(`admin.itbengal.xyz`)"
       - "traefik.http.routers.admin.entrypoints=websecure"
       - "traefik.http.routers.admin.tls.certresolver=letsencrypt"
-      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+      - "traefik.http.services.admin.loadbalancer.server.port=3001"
     networks:
       - itbengal-network
 
