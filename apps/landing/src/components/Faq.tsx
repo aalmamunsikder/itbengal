@@ -12,41 +12,41 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="py-24 px-6 max-w-4xl mx-auto border-t border-slate-200">
+    <section id="faq" className="py-24 px-6 max-w-4xl mx-auto border-t border-white/5 relative z-10">
       <div className="text-center mb-16">
-        <span className="text-[#0052cc] text-sm font-bold uppercase tracking-wider">Support Hub</span>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-4">
+        <span className="text-primary-400 text-sm font-bold uppercase tracking-wider">Support Hub</span>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-2 mb-4">
           FAQ's
         </h2>
-        <p className="text-slate-500 text-sm md:text-base">
+        <p className="text-slate-400 text-sm md:text-base">
           Quick answers to common questions about domains, billing, and isolated hosting environments.
         </p>
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-4 mb-20 text-slate-700">
+      <div className="space-y-4 mb-20 text-slate-300">
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300"
+            className="border border-white/5 rounded-2xl overflow-hidden bg-[#060415]/60 shadow-lg transition-all duration-300 hover:border-primary-500/20"
           >
             <button
               onClick={() => toggleFaq(index)}
               className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
             >
-              <span className="font-bold text-slate-800 text-sm md:text-base">{faq.question}</span>
+              <span className="font-bold text-white text-sm md:text-base">{faq.question}</span>
               <ChevronDown
                 className={`h-5 w-5 text-slate-400 transition-transform duration-300 ${
-                  activeFaq === index ? 'rotate-180 text-primaryBlue' : ''
+                  activeFaq === index ? 'rotate-180 text-primary-400' : ''
                 }`}
               />
             </button>
             <div
               className={`transition-all duration-300 overflow-hidden ${
-                activeFaq === index ? 'max-h-40 border-t border-slate-100' : 'max-h-0'
+                activeFaq === index ? 'max-h-40 border-t border-white/5' : 'max-h-0'
               }`}
             >
-              <p className="px-6 py-5 text-xs md:text-sm text-slate-500 leading-relaxed bg-slate-50/50">
+              <p className="px-6 py-5 text-xs md:text-sm text-slate-400 leading-relaxed bg-[#0b0825]/20">
                 {faq.answer}
               </p>
             </div>
@@ -54,19 +54,21 @@ export default function Faq() {
         ))}
       </div>
 
-      {/* Blue Banner: Have Questions About Hosting or Domains? */}
-      <div className="w-full rounded-2xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-8 text-center text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-left space-y-2">
-          <h3 className="text-xl md:text-2xl font-extrabold">Have Questions About Hosting or Domains?</h3>
+      {/* Luxury banner: Have Questions About Hosting or Domains? */}
+      <div className="w-full rounded-2xl bg-gradient-to-r from-[#1e1b4b] via-[#311042] to-[#1e1b4b] border border-white/10 p-8 text-center text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-primary-600/10 blur-[80px] pointer-events-none" />
+        
+        <div className="text-left space-y-2 relative z-10">
+          <h3 className="text-xl md:text-2xl font-extrabold text-white">Have Questions About Hosting or Domains?</h3>
           <p className="text-blue-100/70 text-xs md:text-sm">
             Our local support team is active 24/7. Connect right now to clarify plan choices.
           </p>
         </div>
         <Link
           href="https://dashboard.itbengal.xyz/support"
-          className="bg-[#0052cc] hover:bg-blue-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-md active:scale-[0.98] flex items-center gap-2 whitespace-nowrap"
+          className="bg-white hover:bg-slate-100 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-xl active:scale-[0.98] flex items-center gap-2 whitespace-nowrap relative z-10"
         >
-          <MessageSquare className="h-4 w-4" />
+          <MessageSquare className="h-4 w-4 text-slate-900 fill-slate-900/10" />
           Talk to Support
         </Link>
       </div>
