@@ -2,9 +2,7 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -14,13 +12,12 @@ const config: Config = {
         textSecondary: '#ffffff',
         textTertiary: 'oklab(0.882 -0.0161359 -0.0567506 / 0.8)',
         textInverse: 'oklch(0.21 0.034 264.665)',
-        surfaceBase: '#000000',
+        surfaceBase: '#ffffff',
         surfaceRaised: 'oklch(0.208 0.042 265.755)',
         surfaceStrong: 'oklch(0.872 0.01 258.338)',
         borderDefault: 'oklch(0.928 0.006 264.531)',
         borderMuted: 'oklch(0.546 0.245 262.881)',
         focusRing: 'oklab(0.707 -0.00331825 -0.0217483 / 0.5)',
-        // primary theme brand colors
         primaryBlue: '#0052cc',
         accentBlue: '#0066ff',
         lightBlue: '#e6f0ff',
@@ -44,7 +41,7 @@ const config: Config = {
         },
         pulseSoft: {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-          '55%': { opacity: '0.9', transform: 'scale(0.99)' },
+          '50%': { opacity: '0.98', transform: 'scale(0.99)' },
         },
       },
     },

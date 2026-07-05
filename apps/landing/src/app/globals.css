@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #060415;
-  --foreground: #f8fafc;
+  --background: #f8fafc;
+  --foreground: oklch(0.13 0.028 261.692);
 }
 
 body {
@@ -16,37 +16,33 @@ body {
   overflow-x: hidden;
 }
 
-/* Premium gradient animations */
-.gradient-text-luxury {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-300 to-[#8b5cf6];
+/* Custom premium styles */
+.gradient-text-blue {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-primaryBlue to-blue-600;
 }
 
-.gradient-text-neon {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#a78bfa] via-[#f472b6] to-[#2dd4bf];
-}
-
-.bg-grid-pattern-luxury {
-  background-size: 60px 60px;
+.bg-grid-pattern-light {
+  background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(139, 92, 246, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(139, 92, 246, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 82, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 82, 204, 0.03) 1px, transparent 1px);
 }
 
-.glass-panel-luxury {
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 82, 204, 0.08);
 }
 
-.glass-panel-hover-luxury {
+.glass-panel-hover-light {
   @apply transition-all duration-300;
 }
-.glass-panel-hover-luxury:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(139, 92, 246, 0.25);
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.12);
-  transform: translateY(-4px);
+.glass-panel-hover-light:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 82, 204, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.05);
+  transform: translateY(-2px);
 }
 
 /* Custom scrollbars */
@@ -54,12 +50,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #060415;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #110e2e;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1d184d;
+  background: #94a3b8;
 }

@@ -15,24 +15,20 @@ export default function DomainSearch() {
   ];
 
   return (
-    <section id="domains" className="py-24 px-6 max-w-7xl mx-auto border border-white/5 bg-[#0b0825]/40 text-white rounded-3xl mt-12 mb-16 relative overflow-hidden backdrop-blur-xl">
-      {/* Background neon blur shapes */}
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-[#0066ff]/5 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-primary-600/5 blur-[100px] pointer-events-none" />
-
-      <div className="text-center mb-12 relative z-10">
-        <span className="text-primary-400 text-sm font-bold uppercase tracking-wider">Domain Registration</span>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-2 mb-4">
+    <section id="domains" className="py-20 px-6 max-w-7xl mx-auto border border-slate-200 bg-white text-slate-800 rounded-3xl shadow-xl mt-12 mb-16 relative">
+      <div className="text-center mb-12">
+        <span className="text-[#0052cc] text-sm font-bold uppercase tracking-wider">Domain Registration</span>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-4">
           Search your Domain Name
         </h2>
-        <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-          Secure your brand identity instantly. Map domains, edit DNS zones, and auto-provision wildcard SSL certificates directly.
+        <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+          Bind your brand to premium domain extensions instantly with automated wildcard routing.
         </p>
       </div>
 
       {/* Search Input Box */}
-      <div className="relative mx-auto max-w-3xl bg-slate-950/60 border border-white/10 rounded-2xl p-2.5 flex items-center shadow-2xl mb-12 z-10 backdrop-blur-md focus-within:border-primary-500/50 transition-colors">
-        <div className="flex items-center pl-3 text-slate-500">
+      <div className="mx-auto max-w-3xl bg-slate-50 border border-slate-200 rounded-2xl p-2.5 flex items-center shadow-md mb-8">
+        <div className="flex items-center pl-3 text-slate-400">
           <Globe className="h-5 w-5" />
         </div>
         <input
@@ -40,11 +36,11 @@ export default function DomainSearch() {
           placeholder="Type your ideal domain name (e.g. mycompany)..."
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
-          className="w-full bg-transparent border-0 outline-none text-white placeholder-slate-500 px-3 py-3 text-sm md:text-base focus:ring-0"
+          className="w-full bg-transparent border-0 outline-none text-slate-800 placeholder-slate-400 px-3 py-3 text-sm md:text-base focus:ring-0"
         />
         <Link
           href={`https://dashboard.itbengal.xyz/domains`}
-          className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-bold px-8 py-3.5 rounded-xl text-sm md:text-base transition-all shadow-glow-primary active:scale-[0.98] flex items-center gap-2"
+          className="bg-[#0052cc] hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl text-sm md:text-base transition-all shadow-md active:scale-[0.98] flex items-center gap-2"
         >
           <Search className="h-4 w-4" />
           Search
@@ -52,22 +48,22 @@ export default function DomainSearch() {
       </div>
 
       {/* Domain extensions */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto relative z-10">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
         {badges.map((item, idx) => (
           <div
             key={idx}
-            className="border border-white/5 rounded-2xl p-5 bg-[#060415]/60 text-center flex flex-col justify-between hover:border-primary-500/20 hover:bg-[#060415]/80 transition-all cursor-pointer relative group"
+            className="border border-slate-200 rounded-xl p-4 bg-slate-50 text-center flex flex-col justify-between hover:border-[#0052cc]/30 hover:bg-slate-100/50 transition-all cursor-pointer relative"
           >
             {item.badge && (
-              <span className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider text-primary-300 bg-primary-950/50 px-2 py-0.5 rounded-full border border-primary-500/20">
+              <span className="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider text-[#0052cc] bg-blue-50 px-2 py-0.5 rounded-full">
                 {item.badge}
               </span>
             )}
             <div>
-              <span className="text-2xl font-extrabold text-white group-hover:text-primary-400 transition-colors">{item.ext}</span>
+              <span className="text-2xl font-extrabold text-slate-800">{item.ext}</span>
               <p className="text-slate-500 text-xs mt-1">Starting price</p>
             </div>
-            <div className="mt-5 font-bold text-slate-200 text-base">{item.price}</div>
+            <div className="mt-4 font-bold text-slate-900 text-base">{item.price}</div>
           </div>
         ))}
       </div>
