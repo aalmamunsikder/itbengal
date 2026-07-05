@@ -28,7 +28,7 @@ COPY packages/logger/package.json ./packages/logger/
 RUN npm ci --ignore-scripts
 
 # --------------------------------------------------------------------------
-# Stage 2: Build the application
+# Stage 2: Generate Prisma client
 # --------------------------------------------------------------------------
 FROM node:20-alpine AS builder
 
@@ -45,8 +45,8 @@ COPY turbo.json ./
 COPY apps/api ./apps/api
 COPY packages ./packages
 
-# Build the API and its dependencies
-RUN npx turbo run build --filter=@itbengal/api
+# Generate Prisma Client
+RUN npx prisma generate --schema=packages/database/prisma/schema.prisma
 
 # --------------------------------------------------------------------------
 # Stage 3: Production runner
@@ -61,30 +61,20 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 itbengal && \
     adduser --system --uid 1001 itbengal
 
-# Copy built artifacts
-COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/apps/api/package.json ./package.json
+# Copy API source files
+COPY --from=builder /app/apps/api ./apps/api
+COPY --from=builder /app/package.json ./package.json
 
-# Copy production node_modules
+# Copy production node_modules and Prisma generated client
 COPY --from=deps /app/node_modules ./node_modules
-
-# Copy package workspace dependencies
-COPY --from=builder /app/packages/types/dist ./node_modules/@itbengal/types/dist
-COPY --from=builder /app/packages/types/package.json ./node_modules/@itbengal/types/package.json
-
-COPY --from=builder /app/packages/database/dist ./node_modules/@itbengal/database/dist
-COPY --from=builder /app/packages/database/package.json ./node_modules/@itbengal/database/package.json
-COPY --from=builder /app/packages/database/prisma ./node_modules/@itbengal/database/prisma
-
-COPY --from=builder /app/packages/utils/dist ./node_modules/@itbengal/utils/dist
-COPY --from=builder /app/packages/utils/package.json ./node_modules/@itbengal/utils/package.json
-
-COPY --from=builder /app/packages/logger/dist ./node_modules/@itbengal/logger/dist
-COPY --from=builder /app/packages/logger/package.json ./node_modules/@itbengal/logger/package.json
-
-# Copy Prisma Client generated binaries
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+
+# Copy workspace packages
+COPY --from=builder /app/packages/types ./packages/types
+COPY --from=builder /app/packages/database ./packages/database
+COPY --from=builder /app/packages/utils ./packages/utils
+COPY --from=builder /app/packages/logger ./packages/logger
 
 # Set ownership
 RUN chown -R itbengal:itbengal /app
@@ -96,5 +86,5 @@ ENV PORT=4000
 
 EXPOSE 4000
 
-# Use dumb-init to handle signals properly
-CMD ["dumb-init", "node", "dist/index.js"]
+# Use dumb-init and start via tsx directly
+CMD ["dumb-init", "npx", "tsx", "apps/api/src/index.ts"]
