@@ -11,7 +11,7 @@ version: '3.8'
 services:
   # 1. Traefik Routing Engine & LetsEncrypt SSL Resolver
   traefik:
-    image: traefik:v3.0
+    image: traefik:v3.2
     container_name: itbengal-traefik
     restart: unless-stopped
     environment:
