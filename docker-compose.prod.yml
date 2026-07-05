@@ -14,6 +14,8 @@ services:
     image: traefik:v3.0
     container_name: itbengal-traefik
     restart: unless-stopped
+    environment:
+      - DOCKER_API_VERSION=1.40
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
