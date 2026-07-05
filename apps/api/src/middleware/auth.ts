@@ -77,7 +77,14 @@ export function authenticate(
   }
 
   try {
-    req.user = verifyAccessToken(token);
+    const user = verifyAccessToken(token);
+    req.user = user;
+    
+    // Automatically inject the organization ID header if not provided by the client
+    if (user.organizationId && !req.headers['x-organization-id']) {
+      req.headers['x-organization-id'] = user.organizationId;
+    }
+    
     next();
   } catch (err) {
     next(err);
