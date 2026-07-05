@@ -20,8 +20,8 @@ COPY package.json package-lock.json turbo.json ./
 # Copy all package.json files for workspace resolution
 COPY apps/dashboard/package.json ./apps/dashboard/
 COPY packages/types/package.json ./packages/types/
-COPY packages/ui/package.json ./packages/ui/ 2>/dev/null || true
-COPY packages/utils/package.json ./packages/utils/ 2>/dev/null || true
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/utils/package.json ./packages/utils/
 
 # Install all dependencies
 RUN npm ci --ignore-scripts
