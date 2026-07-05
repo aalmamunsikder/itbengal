@@ -1,0 +1,943 @@
+// ============================================================================
+// ITBengal Hosting Platform — Prisma Schema
+// ============================================================================
+// PostgreSQL 16 · Prisma 6 · Phase 1 Complete Schema (~22 models)
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// Datasource & Generator
+// ---------------------------------------------------------------------------
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ===========================================================================
+// Enums
+// ===========================================================================
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  CUSTOMER_OWNER
+  CUSTOMER_MEMBER
+  CUSTOMER_VIEWER
+  SUPPORT_AGENT
+}
+
+enum UserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  LOCKED
+  DELETED
+}
+
+enum TeamMemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum Framework {
+  REACT
+  NEXTJS
+  VITE
+  REMIX
+  ASTRO
+  GATSBY
+  ANGULAR
+  SVELTE
+}
+
+enum GitProvider {
+  GITHUB
+  GITLAB
+  BITBUCKET
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+  DELETED
+}
+
+enum ApplicationType {
+  REACT
+  WORDPRESS
+}
+
+enum ContainerStatus {
+  CREATING
+  RUNNING
+  STOPPED
+  RESTARTING
+  ERROR
+  REMOVING
+  UNKNOWN
+}
+
+enum SslStatus {
+  PENDING
+  PROVISIONING
+  ACTIVE
+  EXPIRED
+  FAILED
+  REVOKED
+}
+
+enum DeploymentTrigger {
+  GIT_PUSH
+  MANUAL
+  ROLLBACK
+  REDEPLOY
+  SCHEDULED
+  API
+}
+
+enum DeploymentStatus {
+  QUEUED
+  BUILDING
+  DEPLOYING
+  ACTIVE
+  FAILED
+  CANCELLED
+  ROLLED_BACK
+  SUPERSEDED
+}
+
+enum LogLevel {
+  INFO
+  WARN
+  ERROR
+  DEBUG
+}
+
+enum LogSource {
+  BUILD
+  DEPLOY
+  HEALTH
+}
+
+enum EnvVarTarget {
+  PRODUCTION
+  PREVIEW
+  ALL
+}
+
+enum SslCertificateType {
+  LETS_ENCRYPT
+  CUSTOM
+  SHARED
+}
+
+enum SslCertificateStatus {
+  PENDING
+  ISSUING
+  ACTIVE
+  EXPIRED
+  FAILED
+  REVOKED
+}
+
+enum ServerNodeType {
+  PLATFORM
+  REACT_HOSTING
+  WORDPRESS_HOSTING
+  MIXED
+}
+
+enum ServerNodeStatus {
+  PROVISIONING
+  ACTIVE
+  MAINTENANCE
+  DRAINING
+  OFFLINE
+  DECOMMISSIONED
+}
+
+enum BackupType {
+  FULL
+  INCREMENTAL
+  DATABASE_ONLY
+  FILES_ONLY
+}
+
+enum BackupStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  EXPIRED
+  DELETED
+}
+
+enum BackupTrigger {
+  SCHEDULED
+  MANUAL
+  SYSTEM
+}
+
+enum PlanType {
+  REACT_HOSTING
+  WORDPRESS_HOSTING
+}
+
+enum PlanTier {
+  STARTER
+  BASIC
+  PROFESSIONAL
+  BUSINESS
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+  PAUSED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+  REFUNDED
+}
+
+enum InvoiceItemType {
+  HOSTING
+  DOMAIN
+  ADDON
+  OVERAGE
+}
+
+enum PaymentMethod {
+  BKASH
+  NAGAD
+  ROCKET
+  BANK_TRANSFER
+  CARD
+  MANUAL
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum OrderType {
+  HOSTING_SIGNUP
+  DOMAIN_REGISTRATION
+  UPGRADE
+  DOWNGRADE
+  RENEWAL
+  ADDON
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  IN_APP
+  PUSH
+}
+
+// ===========================================================================
+// Models
+// ===========================================================================
+
+// ---------------------------------------------------------------------------
+// 1. User
+// ---------------------------------------------------------------------------
+model User {
+  id                       String    @id @default(uuid()) @db.Uuid
+  email                    String    @unique @db.VarChar(255)
+  passwordHash             String    @map("password_hash") @db.VarChar(255)
+  firstName                String    @map("first_name") @db.VarChar(100)
+  lastName                 String    @map("last_name") @db.VarChar(100)
+  role                     UserRole  @default(CUSTOMER_OWNER)
+  status                   UserStatus @default(PENDING_VERIFICATION)
+  emailVerified            Boolean   @default(false) @map("email_verified")
+  emailVerificationToken   String?   @map("email_verification_token") @db.VarChar(255)
+  emailVerificationExpiry  DateTime? @map("email_verification_expiry")
+  passwordResetToken       String?   @map("password_reset_token") @db.VarChar(255)
+  passwordResetExpiry      DateTime? @map("password_reset_expiry")
+  twoFactorEnabled         Boolean   @default(false) @map("two_factor_enabled")
+  twoFactorSecret          String?   @map("two_factor_secret") @db.VarChar(255)
+  backupCodes              String[]  @map("backup_codes")
+  avatarUrl                String?   @map("avatar_url") @db.VarChar(512)
+  lastLoginAt              DateTime? @map("last_login_at")
+  failedLoginAttempts      Int       @default(0) @map("failed_login_attempts")
+  lockedUntil              DateTime? @map("locked_until")
+  organizationId           String?   @map("organization_id") @db.Uuid
+  createdAt                DateTime  @default(now()) @map("created_at")
+  updatedAt                DateTime  @updatedAt @map("updated_at")
+  deletedAt                DateTime? @map("deleted_at")
+
+  // Relations
+  organization             Organization? @relation("UserOrganization", fields: [organizationId], references: [id])
+  ownedOrganizations       Organization[] @relation("OrganizationOwner")
+  sessions                 Session[]
+  apiKeys                  ApiKey[]
+  teamMemberships          TeamMember[]
+  triggeredDeployments     Deployment[]
+  auditLogs                AuditLog[]
+  notifications            Notification[]
+
+  @@index([email])
+  @@index([organizationId])
+  @@index([status])
+  @@map("users")
+}
+
+// ---------------------------------------------------------------------------
+// 2. Organization
+// ---------------------------------------------------------------------------
+model Organization {
+  id              String    @id @default(uuid()) @db.Uuid
+  name            String    @db.VarChar(255)
+  slug            String    @unique @db.VarChar(100)
+  ownerId         String    @map("owner_id") @db.Uuid
+  billingEmail    String?   @map("billing_email") @db.VarChar(255)
+  billingAddress  Json?     @map("billing_address")
+  vatNumber       String?   @map("vat_number") @db.VarChar(50)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  deletedAt       DateTime? @map("deleted_at")
+
+  // Relations
+  owner           User        @relation("OrganizationOwner", fields: [ownerId], references: [id])
+  members         TeamMember[]
+  users           User[]      @relation("UserOrganization")
+  projects        Project[]
+  subscriptions   Subscription[]
+  invoices        Invoice[]
+  payments        Payment[]
+  orders          Order[]
+  domains         Domain[]
+
+  @@index([ownerId])
+  @@map("organizations")
+}
+
+// ---------------------------------------------------------------------------
+// 3. TeamMember
+// ---------------------------------------------------------------------------
+model TeamMember {
+  id              String          @id @default(uuid()) @db.Uuid
+  organizationId  String          @map("organization_id") @db.Uuid
+  userId          String          @map("user_id") @db.Uuid
+  role            TeamMemberRole  @default(MEMBER)
+  invitedBy       String?         @map("invited_by") @db.Uuid
+  invitedAt       DateTime?       @map("invited_at")
+  joinedAt        DateTime?       @map("joined_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@map("team_members")
+}
+
+// ---------------------------------------------------------------------------
+// 4. Session
+// ---------------------------------------------------------------------------
+model Session {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  tokenHash     String   @unique @map("token_hash") @db.VarChar(255)
+  ipAddress     String?  @map("ip_address") @db.VarChar(45)
+  userAgent     String?  @map("user_agent") @db.VarChar(512)
+  expiresAt     DateTime @map("expires_at")
+  lastActiveAt  DateTime @default(now()) @map("last_active_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+// ---------------------------------------------------------------------------
+// 5. ApiKey
+// ---------------------------------------------------------------------------
+model ApiKey {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @map("user_id") @db.Uuid
+  name        String    @db.VarChar(100)
+  keyHash     String    @unique @map("key_hash") @db.VarChar(255)
+  keyPrefix   String    @map("key_prefix") @db.VarChar(12)
+  scopes      String[]
+  lastUsedAt  DateTime? @map("last_used_at")
+  expiresAt   DateTime? @map("expires_at")
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([keyPrefix])
+  @@map("api_keys")
+}
+
+// ---------------------------------------------------------------------------
+// 6. Project
+// ---------------------------------------------------------------------------
+model Project {
+  id                  String        @id @default(uuid()) @db.Uuid
+  organizationId      String        @map("organization_id") @db.Uuid
+  name                String        @db.VarChar(255)
+  slug                String        @db.VarChar(100)
+  description         String?       @db.Text
+  framework           Framework
+  gitProvider          GitProvider?  @map("git_provider")
+  gitRepoUrl          String?       @map("git_repo_url") @db.VarChar(512)
+  gitRepoId           String?       @map("git_repo_id") @db.VarChar(255)
+  gitBranch           String        @default("main") @map("git_branch") @db.VarChar(255)
+  gitAccessToken      String?       @map("git_access_token") @db.Text
+  buildCommand        String?       @map("build_command") @db.VarChar(512)
+  installCommand      String?       @map("install_command") @db.VarChar(512)
+  outputDirectory     String?       @map("output_directory") @db.VarChar(512)
+  nodeVersion         String        @default("20") @map("node_version") @db.VarChar(20)
+  rootDirectory       String        @default(".") @map("root_directory") @db.VarChar(512)
+  autoDeployEnabled   Boolean       @default(true) @map("auto_deploy_enabled")
+  status              ProjectStatus @default(ACTIVE)
+  createdAt           DateTime      @default(now()) @map("created_at")
+  updatedAt           DateTime      @updatedAt @map("updated_at")
+  deletedAt           DateTime?     @map("deleted_at")
+
+  // Relations
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  applications        Application[]
+  deployments         Deployment[]
+  environmentVariables EnvironmentVariable[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId])
+  @@index([status])
+  @@map("projects")
+}
+
+// ---------------------------------------------------------------------------
+// 7. Application
+// ---------------------------------------------------------------------------
+model Application {
+  id                String          @id @default(uuid()) @db.Uuid
+  projectId         String          @map("project_id") @db.Uuid
+  type              ApplicationType
+  serverNodeId      String?         @map("server_node_id") @db.Uuid
+  containerId       String?         @map("container_id") @db.VarChar(255)
+  containerStatus   ContainerStatus @default(CREATING) @map("container_status")
+  domain            String          @unique @db.VarChar(255)
+  customDomain      String?         @unique @map("custom_domain") @db.VarChar(255)
+  sslStatus         SslStatus       @default(PENDING) @map("ssl_status")
+  resourceCpu       Float?          @map("resource_cpu")
+  resourceMemoryMb  Int?            @map("resource_memory_mb")
+  resourceStorageMb Int?            @map("resource_storage_mb")
+  port              Int?
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  project           Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  serverNode        ServerNode?    @relation(fields: [serverNodeId], references: [id])
+  deployments       Deployment[]
+  sslCertificates   SSLCertificate[]
+  wordpressSite     WordPressSite?
+  backups           Backup[]
+
+  @@index([projectId])
+  @@index([serverNodeId])
+  @@map("applications")
+}
+
+// ---------------------------------------------------------------------------
+// 8. Deployment
+// ---------------------------------------------------------------------------
+model Deployment {
+  id                    String           @id @default(uuid()) @db.Uuid
+  applicationId         String           @map("application_id") @db.Uuid
+  projectId             String           @map("project_id") @db.Uuid
+  triggerType            DeploymentTrigger @map("trigger_type")
+  gitCommitSha          String?          @map("git_commit_sha") @db.VarChar(40)
+  gitCommitMessage      String?          @map("git_commit_message") @db.Text
+  gitBranch             String?          @map("git_branch") @db.VarChar(255)
+  status                DeploymentStatus @default(QUEUED)
+  buildDurationMs       Int?             @map("build_duration_ms")
+  deployDurationMs      Int?             @map("deploy_duration_ms")
+  imageTag              String?          @map("image_tag") @db.VarChar(255)
+  containerPort         Int?             @map("container_port")
+  errorMessage          String?          @map("error_message") @db.Text
+  metadata              Json?
+  triggeredBy           String?          @map("triggered_by") @db.Uuid
+  previousDeploymentId  String?          @map("previous_deployment_id") @db.Uuid
+  createdAt             DateTime         @default(now()) @map("created_at")
+  updatedAt             DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  project               Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  triggeredByUser       User?       @relation(fields: [triggeredBy], references: [id])
+  previousDeployment    Deployment? @relation("DeploymentHistory", fields: [previousDeploymentId], references: [id])
+  subsequentDeployments Deployment[] @relation("DeploymentHistory")
+  logs                  DeploymentLog[]
+
+  @@index([applicationId, status])
+  @@index([projectId, createdAt])
+  @@map("deployments")
+}
+
+// ---------------------------------------------------------------------------
+// 9. DeploymentLog
+// ---------------------------------------------------------------------------
+model DeploymentLog {
+  id            String    @id @default(uuid()) @db.Uuid
+  deploymentId  String    @map("deployment_id") @db.Uuid
+  level         LogLevel
+  message       String    @db.Text
+  source        LogSource
+  timestamp     DateTime  @default(now())
+
+  // Relations
+  deployment    Deployment @relation(fields: [deploymentId], references: [id], onDelete: Cascade)
+
+  @@index([deploymentId, timestamp])
+  @@map("deployment_logs")
+}
+
+// ---------------------------------------------------------------------------
+// 10. EnvironmentVariable
+// ---------------------------------------------------------------------------
+model EnvironmentVariable {
+  id              String       @id @default(uuid()) @db.Uuid
+  projectId       String       @map("project_id") @db.Uuid
+  key             String       @db.VarChar(255)
+  encryptedValue  String       @map("encrypted_value") @db.Text
+  target          EnvVarTarget @default(ALL)
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  project         Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, key, target])
+  @@map("environment_variables")
+}
+
+// ---------------------------------------------------------------------------
+// 11. SSLCertificate
+// ---------------------------------------------------------------------------
+model SSLCertificate {
+  id                  String               @id @default(uuid()) @db.Uuid
+  domainName          String               @map("domain_name") @db.VarChar(255)
+  applicationId       String               @map("application_id") @db.Uuid
+  type                SslCertificateType
+  status              SslCertificateStatus @default(PENDING)
+  issuedAt            DateTime?            @map("issued_at")
+  expiresAt           DateTime?            @map("expires_at")
+  autoRenew           Boolean              @default(true) @map("auto_renew")
+  lastRenewalAttempt  DateTime?            @map("last_renewal_attempt")
+  certificatePath     String?              @map("certificate_path") @db.VarChar(512)
+  privateKeyPath      String?              @map("private_key_path") @db.VarChar(512)
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+
+  // Relations
+  application         Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([domainName])
+  @@index([applicationId])
+  @@map("ssl_certificates")
+}
+
+// ---------------------------------------------------------------------------
+// 12. ServerNode
+// ---------------------------------------------------------------------------
+model ServerNode {
+  id              String           @id @default(uuid()) @db.Uuid
+  hostname        String           @unique @db.VarChar(255)
+  ipAddress       String           @unique @map("ip_address") @db.VarChar(45)
+  type            ServerNodeType
+  status          ServerNodeStatus @default(PROVISIONING)
+  cpuCores        Int              @map("cpu_cores")
+  memoryMb        Int              @map("memory_mb")
+  storageMb       Int              @map("storage_mb")
+  cpuUsage        Float            @default(0) @map("cpu_usage")
+  memoryUsage     Float            @default(0) @map("memory_usage")
+  storageUsage    Float            @default(0) @map("storage_usage")
+  containerCount  Int              @default(0) @map("container_count")
+  maxContainers   Int              @default(50) @map("max_containers")
+  healthScore     Float            @default(100) @map("health_score")
+  lastHealthCheck DateTime?        @map("last_health_check")
+  region          String           @default("bd-dhaka") @db.VarChar(50)
+  agentVersion    String?          @map("agent_version") @db.VarChar(20)
+  metadata        Json?
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  applications    Application[]
+
+  @@index([type, status])
+  @@map("server_nodes")
+}
+
+// ---------------------------------------------------------------------------
+// 13. WordPressSite
+// ---------------------------------------------------------------------------
+model WordPressSite {
+  id                  String      @id @default(uuid()) @db.Uuid
+  applicationId       String      @unique @map("application_id") @db.Uuid
+  wpVersion           String?     @map("wp_version") @db.VarChar(20)
+  phpVersion          String      @default("8.2") @map("php_version") @db.VarChar(10)
+  dbName              String?     @map("db_name") @db.VarChar(100)
+  dbUser              String?     @map("db_user") @db.VarChar(100)
+  dbPasswordEncrypted String?     @map("db_password_encrypted") @db.Text
+  siteTitle           String?     @map("site_title") @db.VarChar(255)
+  siteUrl             String?     @map("site_url") @db.VarChar(512)
+  adminEmail          String?     @map("admin_email") @db.VarChar(255)
+  adminUsername       String?     @map("admin_username") @db.VarChar(100)
+  cacheEnabled        Boolean     @default(false) @map("cache_enabled")
+  autoUpdatesEnabled  Boolean     @default(true) @map("auto_updates_enabled")
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  application         Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@map("wordpress_sites")
+}
+
+// ---------------------------------------------------------------------------
+// 14. Backup
+// ---------------------------------------------------------------------------
+model Backup {
+  id              String        @id @default(uuid()) @db.Uuid
+  applicationId   String        @map("application_id") @db.Uuid
+  type            BackupType
+  status          BackupStatus  @default(PENDING)
+  sizeBytes       BigInt?       @map("size_bytes")
+  storagePath     String?       @map("storage_path") @db.VarChar(512)
+  encryptionKey   String?       @map("encryption_key") @db.Text
+  retentionDays   Int           @default(7) @map("retention_days")
+  triggeredBy     BackupTrigger @map("triggered_by")
+  completedAt     DateTime?     @map("completed_at")
+  expiresAt       DateTime?     @map("expires_at")
+  metadata        Json?
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  application     Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId, createdAt])
+  @@map("backups")
+}
+
+// ---------------------------------------------------------------------------
+// 15. Plan
+// ---------------------------------------------------------------------------
+model Plan {
+  id                  String   @id @default(uuid()) @db.Uuid
+  name                String   @db.VarChar(100)
+  slug                String   @unique @db.VarChar(100)
+  type                PlanType
+  tier                PlanTier
+  priceMonthly        Decimal  @map("price_monthly") @db.Decimal(10, 2)
+  priceYearly         Decimal  @map("price_yearly") @db.Decimal(10, 2)
+  currency            String   @default("BDT") @db.VarChar(3)
+  cpu                 Float
+  memoryMb            Int      @map("memory_mb")
+  storageMb           Int      @map("storage_mb")
+  bandwidthMb         BigInt   @map("bandwidth_mb")
+  maxProjects         Int      @map("max_projects")
+  maxDomains          Int      @map("max_domains")
+  maxTeamMembers      Int      @map("max_team_members")
+  buildMinutes        Int      @map("build_minutes")
+  deploymentsPerDay   Int      @map("deployments_per_day")
+  backupRetentionDays Int      @map("backup_retention_days")
+  sslIncluded         Boolean  @default(true) @map("ssl_included")
+  prioritySupport     Boolean  @default(false) @map("priority_support")
+  features            Json?
+  isActive            Boolean  @default(true) @map("is_active")
+  sortOrder           Int      @default(0) @map("sort_order")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  subscriptions       Subscription[]
+
+  @@index([type, isActive])
+  @@map("plans")
+}
+
+// ---------------------------------------------------------------------------
+// 16. Subscription
+// ---------------------------------------------------------------------------
+model Subscription {
+  id                  String             @id @default(uuid()) @db.Uuid
+  organizationId      String             @map("organization_id") @db.Uuid
+  planId              String             @map("plan_id") @db.Uuid
+  status              SubscriptionStatus @default(TRIALING)
+  currentPeriodStart  DateTime           @map("current_period_start")
+  currentPeriodEnd    DateTime           @map("current_period_end")
+  cancelledAt         DateTime?          @map("cancelled_at")
+  cancelReason        String?            @map("cancel_reason") @db.Text
+  autoRenew           Boolean            @default(true) @map("auto_renew")
+  trialEndsAt         DateTime?          @map("trial_ends_at")
+  createdAt           DateTime           @default(now()) @map("created_at")
+  updatedAt           DateTime           @updatedAt @map("updated_at")
+
+  // Relations
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan                Plan         @relation(fields: [planId], references: [id])
+  invoices            Invoice[]
+
+  @@index([organizationId, status])
+  @@map("subscriptions")
+}
+
+// ---------------------------------------------------------------------------
+// 17. Invoice
+// ---------------------------------------------------------------------------
+model Invoice {
+  id              String        @id @default(uuid()) @db.Uuid
+  organizationId  String        @map("organization_id") @db.Uuid
+  subscriptionId  String?       @map("subscription_id") @db.Uuid
+  invoiceNumber   String        @unique @map("invoice_number") @db.VarChar(50)
+  status          InvoiceStatus @default(DRAFT)
+  subtotal        Decimal       @db.Decimal(10, 2)
+  discount        Decimal       @default(0) @db.Decimal(10, 2)
+  tax             Decimal       @default(0) @db.Decimal(10, 2)
+  total           Decimal       @db.Decimal(10, 2)
+  currency        String        @default("BDT") @db.VarChar(3)
+  dueDate         DateTime      @map("due_date")
+  paidAt          DateTime?     @map("paid_at")
+  pdfUrl          String?       @map("pdf_url") @db.VarChar(512)
+  notes           String?       @db.Text
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  organization    Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subscription    Subscription?  @relation(fields: [subscriptionId], references: [id])
+  items           InvoiceItem[]
+  payments        Payment[]
+
+  @@index([organizationId, status])
+  @@map("invoices")
+}
+
+// ---------------------------------------------------------------------------
+// 18. InvoiceItem
+// ---------------------------------------------------------------------------
+model InvoiceItem {
+  id          String          @id @default(uuid()) @db.Uuid
+  invoiceId   String          @map("invoice_id") @db.Uuid
+  description String          @db.VarChar(500)
+  quantity    Int             @default(1)
+  unitPrice   Decimal         @map("unit_price") @db.Decimal(10, 2)
+  total       Decimal         @db.Decimal(10, 2)
+  type        InvoiceItemType
+  periodStart DateTime?       @map("period_start")
+  periodEnd   DateTime?       @map("period_end")
+  createdAt   DateTime        @default(now()) @map("created_at")
+
+  // Relations
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+  @@map("invoice_items")
+}
+
+// ---------------------------------------------------------------------------
+// 19. Payment
+// ---------------------------------------------------------------------------
+model Payment {
+  id                    String        @id @default(uuid()) @db.Uuid
+  organizationId        String        @map("organization_id") @db.Uuid
+  invoiceId             String        @map("invoice_id") @db.Uuid
+  amount                Decimal       @db.Decimal(10, 2)
+  currency              String        @default("BDT") @db.VarChar(3)
+  paymentMethod         PaymentMethod @map("payment_method")
+  gatewayTransactionId  String?       @map("gateway_transaction_id") @db.VarChar(255)
+  gatewayResponse       Json?         @map("gateway_response")
+  status                PaymentStatus @default(PENDING)
+  refundedAmount        Decimal       @default(0) @map("refunded_amount") @db.Decimal(10, 2)
+  refundedAt            DateTime?     @map("refunded_at")
+  createdAt             DateTime      @default(now()) @map("created_at")
+  updatedAt             DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  organization          Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invoice               Invoice      @relation(fields: [invoiceId], references: [id])
+
+  @@index([organizationId, createdAt])
+  @@map("payments")
+}
+
+// ---------------------------------------------------------------------------
+// 20. Order
+// ---------------------------------------------------------------------------
+model Order {
+  id              String      @id @default(uuid()) @db.Uuid
+  organizationId  String      @map("organization_id") @db.Uuid
+  type            OrderType
+  status          OrderStatus @default(PENDING)
+  items           Json
+  subtotal        Decimal     @db.Decimal(10, 2)
+  discount        Decimal     @default(0) @db.Decimal(10, 2)
+  tax             Decimal     @default(0) @db.Decimal(10, 2)
+  total           Decimal     @db.Decimal(10, 2)
+  currency        String      @default("BDT") @db.VarChar(3)
+  notes           String?     @db.Text
+  completedAt     DateTime?   @map("completed_at")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@map("orders")
+}
+
+// ---------------------------------------------------------------------------
+// 21. AuditLog
+// ---------------------------------------------------------------------------
+model AuditLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String?  @map("user_id") @db.Uuid
+  action      String   @db.VarChar(100)
+  resource    String   @db.VarChar(100)
+  resourceId  String   @map("resource_id") @db.VarChar(255)
+  ipAddress   String?  @map("ip_address") @db.VarChar(45)
+  userAgent   String?  @map("user_agent") @db.VarChar(512)
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user        User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([resource, resourceId])
+  @@map("audit_logs")
+}
+
+// ---------------------------------------------------------------------------
+// 22. Notification
+// ---------------------------------------------------------------------------
+model Notification {
+  id        String              @id @default(uuid()) @db.Uuid
+  userId    String              @map("user_id") @db.Uuid
+  type      String              @db.VarChar(100)
+  title     String              @db.VarChar(255)
+  message   String              @db.Text
+  channel   NotificationChannel @default(IN_APP)
+  read      Boolean             @default(false)
+  readAt    DateTime?           @map("read_at")
+  data      Json?
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  // Relations
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, read, createdAt])
+  @@map("notifications")
+}
+
+// ===========================================================================
+// Enums for Domain Management
+// ===========================================================================
+
+enum DomainRegistrationStatus {
+  PENDING_PAYMENT
+  REGISTERING
+  ACTIVE
+  EXPIRED
+  FAILED
+  TRANSFERRED_OUT
+}
+
+enum DnsRecordType {
+  A
+  AAAA
+  CNAME
+  MX
+  TXT
+  SRV
+  NS
+  CAA
+}
+
+// ===========================================================================
+// Models for Domain Management
+// ===========================================================================
+
+model Domain {
+  id               String                   @id @default(uuid()) @db.Uuid
+  organizationId   String                   @map("organization_id") @db.Uuid
+  name             String                   @unique @db.VarChar(255)
+  status           DomainRegistrationStatus @default(PENDING_PAYMENT)
+  registrationDate DateTime?                @map("registration_date")
+  expiryDate       DateTime?                @map("expiry_date")
+  autoRenew        Boolean                  @default(true) @map("auto_renew")
+  whoisPrivacy     Boolean                  @default(false) @map("whois_privacy")
+  authCode         String?                  @map("auth_code") @db.VarChar(100)
+  createdAt        DateTime                 @default(now()) @map("created_at")
+  updatedAt        DateTime                 @updatedAt @map("updated_at")
+
+  // Relations
+  organization     Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  dnsRecords       DnsRecord[]
+
+  @@index([organizationId])
+  @@map("registered_domains")
+}
+
+model DnsRecord {
+  id        String        @id @default(uuid()) @db.Uuid
+  domainId  String        @map("domain_id") @db.Uuid
+  name      String        @db.VarChar(255)
+  type      DnsRecordType
+  content   String        @db.Text
+  ttl       Int           @default(3600)
+  priority  Int?
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  domain    Domain        @relation(fields: [domainId], references: [id], onDelete: Cascade)
+
+  @@index([domainId])
+  @@map("dns_records")
+}

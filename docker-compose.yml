@@ -1,0 +1,111 @@
+# ==============================================================================
+# ITBengal Hosting Platform — Docker Compose (Local Development)
+# ==============================================================================
+# Usage:
+#   docker compose up -d          # Start all services
+#   docker compose down           # Stop all services
+#   docker compose logs -f        # Follow logs
+#   docker compose ps             # List running services
+# ==============================================================================
+
+services:
+  # --------------------------------------------------------------------------
+  # PostgreSQL 16
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: itbengal-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: itbengal
+      POSTGRES_PASSWORD: itbengal_dev_password
+      POSTGRES_DB: itbengal
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U itbengal -d itbengal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - itbengal-network
+
+  # --------------------------------------------------------------------------
+  # Redis 7
+  # --------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: itbengal-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - itbengal-network
+
+  # --------------------------------------------------------------------------
+  # Mailpit — Local email testing (SMTP + Web UI)
+  # --------------------------------------------------------------------------
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: itbengal-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "true"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "true"
+      MP_UI_AUTH: ""
+    networks:
+      - itbengal-network
+
+  # --------------------------------------------------------------------------
+  # Traefik v3 — Reverse Proxy & Load Balancer
+  # --------------------------------------------------------------------------
+  traefik:
+    image: traefik:v3.2
+    container_name: itbengal-traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
+      - "8080:8080"   # Traefik Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./infrastructure/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./infrastructure/traefik/dynamic:/etc/traefik/dynamic:ro
+      - traefik_certs:/etc/traefik/acme
+    networks:
+      - itbengal-network
+
+# ==============================================================================
+# Networks
+# ==============================================================================
+networks:
+  itbengal-network:
+    name: itbengal-network
+    driver: bridge
+
+# ==============================================================================
+# Volumes
+# ==============================================================================
+volumes:
+  postgres_data:
+    name: itbengal-postgres-data
+  redis_data:
+    name: itbengal-redis-data
+  traefik_certs:
+    name: itbengal-traefik-certs

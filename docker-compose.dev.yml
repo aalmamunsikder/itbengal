@@ -1,0 +1,120 @@
+# ==============================================================================
+# ITBengal — Docker Compose Development Override
+# ==============================================================================
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+#
+# This file extends the base docker-compose.yml with development-specific
+# configuration: source code volume mounts, debug ports, and relaxed settings.
+# ==============================================================================
+
+services:
+  # --------------------------------------------------------------------------
+  # PostgreSQL — Development overrides
+  # --------------------------------------------------------------------------
+  postgres:
+    environment:
+      # Enable verbose query logging for development
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    command: >
+      postgres
+        -c log_statement=all
+        -c log_duration=on
+        -c log_min_duration_statement=100
+        -c shared_preload_libraries=pg_stat_statements
+
+  # --------------------------------------------------------------------------
+  # Redis — Development overrides
+  # --------------------------------------------------------------------------
+  redis:
+    command: >
+      redis-server
+        --appendonly yes
+        --maxmemory 128mb
+        --maxmemory-policy allkeys-lru
+        --loglevel verbose
+
+  # --------------------------------------------------------------------------
+  # API Server — Development with hot reload
+  # --------------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+      target: deps
+    container_name: itbengal-api-dev
+    restart: unless-stopped
+    ports:
+      - "4000:4000"   # API
+      - "9229:9229"   # Node.js debugger
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+      - ./packages:/app/packages
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://itbengal:itbengal_dev_password@postgres:5432/itbengal?schema=public
+      REDIS_URL: redis://redis:6379
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_SECURE: "false"
+    command: npx tsx watch --inspect=0.0.0.0:9229 apps/api/src/index.ts
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    networks:
+      - itbengal-network
+
+  # --------------------------------------------------------------------------
+  # Dashboard — Development with hot reload
+  # --------------------------------------------------------------------------
+  dashboard:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.dashboard
+      target: deps
+    container_name: itbengal-dashboard-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/dashboard/src:/app/apps/dashboard/src
+      - ./packages:/app/packages
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api/v1
+    command: npm run dev --workspace=@itbengal/dashboard
+    depends_on:
+      - api
+    networks:
+      - itbengal-network
+
+  # --------------------------------------------------------------------------
+  # Admin — Development with hot reload
+  # --------------------------------------------------------------------------
+  admin:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.admin
+      target: deps
+    container_name: itbengal-admin-dev
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./apps/admin/src:/app/apps/admin/src
+      - ./packages:/app/packages
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api/v1
+    command: npm run dev --workspace=@itbengal/admin
+    depends_on:
+      - api
+    networks:
+      - itbengal-network

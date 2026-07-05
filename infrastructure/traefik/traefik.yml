@@ -1,0 +1,84 @@
+# ==============================================================================
+# ITBengal — Traefik v3 Static Configuration
+# ==============================================================================
+# Documentation: https://doc.traefik.io/traefik/
+# ==============================================================================
+
+# --------------------------------------------------------------------------
+# Global
+# --------------------------------------------------------------------------
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+# --------------------------------------------------------------------------
+# Log
+# --------------------------------------------------------------------------
+log:
+  level: INFO
+  format: json
+
+accessLog:
+  format: json
+  filters:
+    statusCodes:
+      - "400-599"
+
+# --------------------------------------------------------------------------
+# API / Dashboard
+# --------------------------------------------------------------------------
+api:
+  dashboard: true
+  insecure: true  # Only for development — disable in production!
+
+# --------------------------------------------------------------------------
+# Entrypoints
+# --------------------------------------------------------------------------
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+
+# --------------------------------------------------------------------------
+# Certificate Resolvers (ACME / Let's Encrypt)
+# --------------------------------------------------------------------------
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: admin@itbengal.xyz
+      storage: /etc/traefik/acme/acme.json
+      httpChallenge:
+        entryPoint: web
+
+# --------------------------------------------------------------------------
+# Providers
+# --------------------------------------------------------------------------
+providers:
+  # Docker provider — auto-discover services via labels
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+    exposedByDefault: false
+    network: itbengal-network
+
+  # File provider — dynamic configuration files
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+
+# --------------------------------------------------------------------------
+# Ping (health check endpoint)
+# --------------------------------------------------------------------------
+ping:
+  entryPoint: web

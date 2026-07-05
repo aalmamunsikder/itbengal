@@ -1,0 +1,115 @@
+# ==============================================================================
+# ITBengal — Traefik Dynamic Routing Configuration (Local Dev)
+# ==============================================================================
+# This file defines the routing rules for local development.
+# In production, Docker labels or a production-specific config is used.
+# ==============================================================================
+
+http:
+  # --------------------------------------------------------------------------
+  # Routers
+  # --------------------------------------------------------------------------
+  routers:
+    # Customer Dashboard — app.localhost
+    dashboard:
+      rule: "Host(`app.localhost`)"
+      service: dashboard
+      entryPoints:
+        - web
+
+    # Admin Dashboard — admin.localhost
+    admin:
+      rule: "Host(`admin.localhost`)"
+      service: admin
+      entryPoints:
+        - web
+
+    # API — api.localhost
+    api:
+      rule: "Host(`api.localhost`)"
+      service: api
+      entryPoints:
+        - web
+
+    # API versioned path — localhost/api/v1/*
+    api-path:
+      rule: "PathPrefix(`/api`)"
+      service: api
+      entryPoints:
+        - web
+
+    # Mailpit Web UI — mail.localhost
+    mailpit:
+      rule: "Host(`mail.localhost`)"
+      service: mailpit
+      entryPoints:
+        - web
+
+  # --------------------------------------------------------------------------
+  # Services
+  # --------------------------------------------------------------------------
+  services:
+    dashboard:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:3000"
+
+    admin:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:3001"
+
+    api:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:4000"
+
+    mailpit:
+      loadBalancer:
+        servers:
+          - url: "http://itbengal-mailpit:8025"
+
+  # --------------------------------------------------------------------------
+  # Middlewares
+  # --------------------------------------------------------------------------
+  middlewares:
+    # CORS middleware for API
+    api-cors:
+      headers:
+        accessControlAllowMethods:
+          - "GET"
+          - "POST"
+          - "PUT"
+          - "PATCH"
+          - "DELETE"
+          - "OPTIONS"
+        accessControlAllowOriginList:
+          - "http://localhost:3000"
+          - "http://localhost:3001"
+          - "http://app.localhost"
+          - "http://admin.localhost"
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+          - "X-Requested-With"
+        accessControlAllowCredentials: true
+        accessControlMaxAge: 86400
+
+    # Rate limiting
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 50
+        period: 1m
+
+    # Security headers
+    security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        customFrameOptionsValue: "SAMEORIGIN"
+        referrerPolicy: "strict-origin-when-cross-origin"

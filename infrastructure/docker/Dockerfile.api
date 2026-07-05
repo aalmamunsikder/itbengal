@@ -1,0 +1,86 @@
+# ==============================================================================
+# ITBengal API — Multi-stage Dockerfile
+# ==============================================================================
+# Build:  docker build -f infrastructure/docker/Dockerfile.api -t itbengal-api .
+# Run:    docker run -p 4000:4000 itbengal-api
+# ==============================================================================
+
+# --------------------------------------------------------------------------
+# Stage 1: Install dependencies
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS deps
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Copy workspace config
+COPY package.json package-lock.json turbo.json ./
+
+# Copy all package.json files for workspace resolution
+COPY apps/api/package.json ./apps/api/
+COPY packages/types/package.json ./packages/types/
+COPY packages/database/package.json ./packages/database/ 2>/dev/null || true
+COPY packages/utils/package.json ./packages/utils/ 2>/dev/null || true
+COPY packages/email/package.json ./packages/email/ 2>/dev/null || true
+
+# Install all dependencies
+RUN npm ci --ignore-scripts
+
+# --------------------------------------------------------------------------
+# Stage 2: Build the application
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy deps from previous stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json ./package.json
+COPY --from=deps /app/package-lock.json ./package-lock.json
+
+# Copy source code
+COPY tsconfig.json ./
+COPY turbo.json ./
+COPY apps/api ./apps/api
+COPY packages ./packages
+
+# Build the API and its dependencies
+RUN npx turbo run build --filter=@itbengal/api
+
+# --------------------------------------------------------------------------
+# Stage 3: Production runner
+# --------------------------------------------------------------------------
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache dumb-init
+
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup --system --gid 1001 itbengal && \
+    adduser --system --uid 1001 itbengal
+
+# Copy built artifacts
+COPY --from=builder /app/apps/api/dist ./dist
+COPY --from=builder /app/apps/api/package.json ./package.json
+
+# Copy production node_modules
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy package workspace dependencies
+COPY --from=builder /app/packages/types/dist ./node_modules/@itbengal/types/dist
+COPY --from=builder /app/packages/types/package.json ./node_modules/@itbengal/types/package.json
+
+# Set ownership
+RUN chown -R itbengal:itbengal /app
+
+USER itbengal
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+EXPOSE 4000
+
+# Use dumb-init to handle signals properly
+CMD ["dumb-init", "node", "dist/index.js"]
