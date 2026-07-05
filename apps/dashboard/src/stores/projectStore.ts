@@ -529,8 +529,15 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
 
   fetchStats: async () => {
     try {
-      const response = await api.get<ApiResponse<ProjectStats>>('/projects/stats');
-      set({ stats: response.data });
+      const response = await api.get<ApiResponse<{ stats: any }>>('/projects/stats');
+      const apiStats = response.data.stats;
+      set({
+        stats: {
+          totalProjects: apiStats?.total ?? 0,
+          activeProjects: apiStats?.byStatus?.ACTIVE ?? 0,
+          byFramework: apiStats?.byFramework ?? {},
+        },
+      });
     } catch {
       // Stats are non-critical, fail silently
     }
