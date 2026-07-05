@@ -12,19 +12,19 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="py-24 px-6 max-w-4xl mx-auto border-t border-slate-200">
-      <div className="text-center mb-16">
-        <span className="text-[#0052cc] text-sm font-bold uppercase tracking-wider">Support Hub</span>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-4">
+    <section id="faq" className="py-14 px-6 max-w-3xl mx-auto border-t border-slate-200">
+      <div className="text-center mb-10">
+        <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Support Hub</span>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-2 tracking-tight">
           FAQ's
         </h2>
-        <p className="text-slate-500 text-sm md:text-base">
+        <p className="text-slate-500 text-xs md:text-sm">
           Quick answers to common questions about domains, billing, and isolated hosting environments.
         </p>
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-4 mb-20 text-slate-700">
+      <div className="space-y-3 mb-12 text-slate-700">
         {faqData.map((faq, index) => (
           <div
             key={index}
@@ -32,21 +32,21 @@ export default function Faq() {
           >
             <button
               onClick={() => toggleFaq(index)}
-              className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+              className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
             >
-              <span className="font-bold text-slate-800 text-sm md:text-base">{faq.question}</span>
+              <span className="font-bold text-slate-800 text-xs md:text-sm">{faq.question}</span>
               <ChevronDown
-                className={`h-5 w-5 text-slate-400 transition-transform duration-300 ${
+                className={`h-4.5 w-4.5 text-slate-400 transition-transform duration-300 ${
                   activeFaq === index ? 'rotate-180 text-primaryBlue' : ''
                 }`}
               />
             </button>
             <div
               className={`transition-all duration-300 overflow-hidden ${
-                activeFaq === index ? 'max-h-40 border-t border-slate-100' : 'max-h-0'
+                activeFaq === index ? 'max-h-32 border-t border-slate-100' : 'max-h-0'
               }`}
             >
-              <p className="px-6 py-5 text-xs md:text-sm text-slate-500 leading-relaxed bg-slate-50/50">
+              <p className="px-5 py-4 text-[11px] md:text-xs text-slate-500 leading-relaxed bg-slate-50/50">
                 {faq.answer}
               </p>
             </div>
@@ -55,18 +55,18 @@ export default function Faq() {
       </div>
 
       {/* Blue Banner: Have Questions About Hosting or Domains? */}
-      <div className="w-full rounded-2xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-8 text-center text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-left space-y-2">
-          <h3 className="text-xl md:text-2xl font-extrabold">Have Questions About Hosting or Domains?</h3>
-          <p className="text-blue-100/70 text-xs md:text-sm">
+      <div className="w-full rounded-xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-6 text-center text-white relative overflow-hidden shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="text-left space-y-1">
+          <h3 className="text-lg font-extrabold">Have Questions About Hosting or Domains?</h3>
+          <p className="text-blue-100/70 text-[11px] md:text-xs">
             Our local support team is active 24/7. Connect right now to clarify plan choices.
           </p>
         </div>
         <Link
           href="https://dashboard.itbengal.xyz/support"
-          className="bg-[#0052cc] hover:bg-blue-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-md active:scale-[0.98] flex items-center gap-2 whitespace-nowrap"
+          className="bg-[#0052cc] hover:bg-blue-600 text-white font-bold px-5 py-3 rounded-lg text-xs transition-all shadow active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
         >
-          <MessageSquare className="h-4 w-4" />
+          <MessageSquare className="h-3.5 w-3.5" />
           Talk to Support
         </Link>
       </div>
