@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #030014;
+  --background: #05021a;
   --foreground: #f8fafc;
 }
 
@@ -21,21 +21,28 @@ body {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-fuchsia-400 to-accent-400;
 }
 
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+}
+
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .glass-panel-hover {
   @apply transition-all duration-300;
 }
 .glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(139, 92, 246, 0.2);
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+  transform: translateY(-4px);
 }
 
 /* Custom scrollbars */
@@ -43,12 +50,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #030014;
+  background: #05021a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e1b4b;
+  background: #1b1642;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2e2a75;
+  background: #2a2267;
 }
