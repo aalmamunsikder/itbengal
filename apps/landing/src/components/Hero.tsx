@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Rocket, ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 
 export default function Hero() {
   return (
