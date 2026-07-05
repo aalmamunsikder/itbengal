@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MessageSquare } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Faq() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -11,40 +12,63 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-36 px-6 max-w-4xl mx-auto border-t border-white/5">
-      <div className="text-center mb-20">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">Frequently Asked <span className="gradient-text">Questions</span></h2>
-        <p className="text-slate-400 text-lg">Clear answers to common questions about our platform and hosting engine.</p>
+    <section id="faq" className="py-24 px-6 max-w-4xl mx-auto border-t border-slate-200">
+      <div className="text-center mb-16">
+        <span className="text-[#0052cc] text-sm font-bold uppercase tracking-wider">Support Hub</span>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-4">
+          FAQ's
+        </h2>
+        <p className="text-slate-500 text-sm md:text-base">
+          Quick answers to common questions about domains, billing, and isolated hosting environments.
+        </p>
       </div>
 
-      <div className="space-y-4">
+      {/* Accordion List */}
+      <div className="space-y-4 mb-20 text-slate-700">
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="glass-panel rounded-2xl overflow-hidden border border-white/5 transition-all duration-300"
+            className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300"
           >
             <button
               onClick={() => toggleFaq(index)}
               className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
             >
-              <span className="font-semibold text-slate-200">{faq.question}</span>
+              <span className="font-bold text-slate-800 text-sm md:text-base">{faq.question}</span>
               <ChevronDown
                 className={`h-5 w-5 text-slate-400 transition-transform duration-300 ${
-                  activeFaq === index ? 'rotate-180 text-primary-400' : ''
+                  activeFaq === index ? 'rotate-180 text-primaryBlue' : ''
                 }`}
               />
             </button>
             <div
               className={`transition-all duration-300 overflow-hidden ${
-                activeFaq === index ? 'max-h-40 border-t border-white/5' : 'max-h-0'
+                activeFaq === index ? 'max-h-40 border-t border-slate-100' : 'max-h-0'
               }`}
             >
-              <p className="px-6 py-5 text-sm text-slate-400 leading-relaxed bg-white/[0.01]">
+              <p className="px-6 py-5 text-xs md:text-sm text-slate-500 leading-relaxed bg-slate-50/50">
                 {faq.answer}
               </p>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Blue Banner: Have Questions About Hosting or Domains? */}
+      <div className="w-full rounded-2xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-8 text-center text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="text-left space-y-2">
+          <h3 className="text-xl md:text-2xl font-extrabold">Have Questions About Hosting or Domains?</h3>
+          <p className="text-blue-100/70 text-xs md:text-sm">
+            Our local support team is active 24/7. Connect right now to clarify plan choices.
+          </p>
+        </div>
+        <Link
+          href="https://dashboard.itbengal.xyz/support"
+          className="bg-[#0052cc] hover:bg-blue-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-md active:scale-[0.98] flex items-center gap-2 whitespace-nowrap"
+        >
+          <MessageSquare className="h-4 w-4" />
+          Talk to Support
+        </Link>
       </div>
     </section>
   );
@@ -52,19 +76,19 @@ export default function Faq() {
 
 const faqData = [
   {
-    question: 'How do Git-driven deployments work?',
-    answer: 'Once you connect your GitHub account and select a repository, our platform listens to commit push events via webhooks. Every time you push code, the build engine automatically pulls the branch, compiles the build, creates a fresh Docker container, and updates the routing without downtime.',
+    question: 'How fast is your SSD hosting infrastructure?',
+    answer: 'We leverage enterprise NVMe SSD disks configured in high-speed clusters. Combined with lightweight Alpine container environments and LiteSpeed caching, page loads are up to 10x faster than traditional shared hosting.',
   },
   {
-    question: 'Can I map a custom domain?',
-    answer: 'Yes. You can add your own custom domains (e.g. `example.com` or `app.example.com`). The platform automatically configures Traefik router rules and issues Let\'s Encrypt SSL certificates for your custom domains in seconds.',
+    question: 'How do you handle isolated WordPress environments?',
+    answer: 'Every WordPress deployment is structured as a separate, fully sandboxed two-container setup (one container runs Apache/PHP, the other runs MariaDB). This completely blocks memory leaks or security exploits from affecting neighboring accounts.',
   },
   {
-    question: 'What is the container isolation structure for WordPress?',
-    answer: 'Every WordPress site is deployed as a separate, fully isolated two-container stack (one container for the PHP-Apache WordPress app and one container for the MariaDB database). This guarantees data security, high stability, and makes database backups and file manipulation reliable.',
+    question: 'Can I migrate my website from another provider?',
+    answer: 'Yes! We offer 100% free website migration. Simply submit a ticket from your Client Portal, and our migration operators will migrate your static files, assets, databases, and SSL parameters with zero downtime.',
   },
   {
-    question: 'Are backups automated?',
-    answer: 'Yes! For all Managed WordPress sites, database SQL dumps and folder archive zips are automatically packaged and stored securely in cloud S3 storage buckets according to your plan\'s schedule.',
+    question: 'What happens to database backups?',
+    answer: 'For all WordPress and database-enabled sites, automated backups are packaged daily, encrypted via AES-256 standards, and transferred to secure, external cloud S3 buckets.',
   },
 ];

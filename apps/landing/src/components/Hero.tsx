@@ -1,91 +1,79 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Search, Globe } from 'lucide-react';
+import { ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
 
 export default function Hero() {
-  const [domainQuery, setDomainQuery] = useState('');
-
-  const extensions = [
-    { ext: '.com', price: '৳1,250/yr' },
-    { ext: '.net', price: '৳1,450/yr' },
-    { ext: '.org', price: '৳1,550/yr' },
-    { ext: '.xyz', price: '৳290/yr' },
-    { ext: '.info', price: '৳1,650/yr' },
-  ];
-
-  const partners = [
-    { name: 'stripe' },
-    { name: 'PHILIPS' },
-    { name: 'adidas' },
-    { name: 'w.monday' },
-    { name: 'gusto' },
-    { name: 'upwork' },
-    { name: 'Figma' }
+  const benefits = [
+    'Superfast SSD storage clusters',
+    'Automatic Let\'s Encrypt SSL config',
+    'Isolated MariaDB database systems',
+    'One-click WordPress container provisioning',
   ];
 
   return (
-    <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 flex flex-col items-center text-center px-6 overflow-hidden">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-100 pointer-events-none" />
+    <section className="relative w-full bg-gradient-to-r from-[#002e8c] via-[#001f5e] to-[#04081c] py-20 lg:py-28 px-6 overflow-hidden">
+      {/* Decorative Wavy Circle in Background */}
+      <div className="absolute top-1/2 left-[-10%] w-[350px] h-[350px] rounded-full bg-blue-500/10 blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[100px] pointer-events-none" />
 
-      {/* Main Tagline */}
-      <h1 className="relative max-w-5xl text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] mb-8 text-white">
-        Protect Your <span className="text-primary-400">Brand</span> with <br />
-        Trusted Domain <span className="bg-gradient-to-r from-fuchsia-400 via-primary-500 to-accent-400 bg-clip-text text-transparent">Security</span>
-      </h1>
+      <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center relative">
+        {/* Left Side: Content */}
+        <div className="space-y-8 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-400/20 bg-blue-950/40 text-xs font-semibold text-blue-300">
+            <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" />
+            Litespeed Optimized SSD Hosting
+          </div>
 
-      {/* Subdescription */}
-      <p className="relative max-w-2xl text-slate-400 font-medium md:text-lg mb-10 leading-relaxed">
-        Secure your brand instantly. Register domains, check DNS availability, and host with isolated containers, automated backups, and free wildcard SSL.
-      </p>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+            10x Faster Hosting. <br />
+            Launch in Minutes.
+          </h1>
 
-      {/* Domain Search Bar */}
-      <div className="relative w-full max-w-2xl bg-white/[0.03] border border-white/10 rounded-2xl p-2 flex items-center shadow-2xl backdrop-blur-xl mb-6">
-        <div className="flex items-center pl-4 text-slate-500">
-          <Search className="h-5 w-5" />
+          <p className="text-blue-100/80 text-base md:text-lg max-w-xl leading-relaxed">
+            Fast, reliable, and secure web hosting starting at just ৳0/mo. Register domain names, manage databases, and deploy your site in seconds with automatic wildcard SSL.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <Link
+              href="https://dashboard.itbengal.xyz/register"
+              className="px-8 py-4 rounded-lg text-base font-bold text-white bg-[#0052cc] hover:bg-blue-600 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              Get Started Now
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href="#pricing"
+              className="px-8 py-4 rounded-lg text-base font-bold text-slate-300 border border-white/10 hover:bg-white/5 transition-all duration-300 flex items-center justify-center"
+            >
+              View Pricing plans
+            </a>
+          </div>
+
+          {/* Bullet List */}
+          <div className="grid gap-3 sm:grid-cols-2 pt-6 border-t border-white/5">
+            {benefits.map((benefit, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-sm text-slate-300">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                <span>{benefit}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <input
-          type="text"
-          placeholder="Search for your ideal domain (e.g. mybrand.com)..."
-          value={domainQuery}
-          onChange={(e) => setDomainQuery(e.target.value)}
-          className="w-full bg-transparent border-0 outline-none text-slate-200 placeholder-slate-500 px-3 py-3 text-sm md:text-base focus:ring-0"
-        />
-        <Link
-          href={`https://dashboard.itbengal.xyz/domains`}
-          className="bg-primary-600 hover:bg-primary-500 text-white font-bold px-6 py-3 rounded-xl text-sm md:text-base transition-all duration-300 shadow-glow-primary active:scale-[0.98] flex items-center gap-2 whitespace-nowrap"
-        >
-          Check DNS
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
 
-      {/* Domain Extensions Row */}
-      <div className="relative flex flex-wrap justify-center gap-4 mb-20 text-xs md:text-sm">
-        {extensions.map((item, idx) => (
-          <span
-            key={idx}
-            className="px-3.5 py-1.5 rounded-full border border-white/5 bg-white/[0.01] text-slate-400 flex items-center gap-1.5 font-medium hover:border-primary-500/20 hover:text-white transition-all cursor-pointer"
-          >
-            <Globe className="h-3.5 w-3.5 text-primary-400" />
-            <span className="font-bold text-slate-300">{item.ext}</span>
-            <span className="text-slate-500">{item.price}</span>
-          </span>
-        ))}
-      </div>
-
-      {/* Faded Partner Logos Row */}
-      <div className="relative w-full max-w-6xl border-t border-b border-white/5 py-8 flex flex-wrap items-center justify-around gap-8 mb-20 select-none pointer-events-none opacity-40">
-        {partners.map((partner, idx) => (
-          <span
-            key={idx}
-            className="text-lg md:text-2xl font-bold tracking-widest uppercase font-mono text-slate-500"
-          >
-            {partner.name}
-          </span>
-        ))}
+        {/* Right Side: Presenter Illustration */}
+        <div className="relative flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl">
+            {/* Soft backdrop glow overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-indigo-600/10 to-transparent blur-2xl rounded-full" />
+            <img
+              src="/hostnin_presenter_mockup.png"
+              alt="High-Performance Hosting Features Illustration"
+              className="relative w-full object-cover hover:scale-[1.01] transition-all duration-500 select-none pointer-events-none"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,48 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #05021a;
-  --foreground: #f8fafc;
+  --background: #000000;
+  --foreground: oklch(0.928 0.006 264.531);
 }
 
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: 'Outfit', 'Inter', sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
 /* Custom premium styles */
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-fuchsia-400 to-accent-400;
+.gradient-text-blue {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-300 to-blue-600;
 }
 
 .bg-grid-pattern {
-  background-size: 50px 50px;
+  background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
-}
-
-.glass-panel {
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.glass-panel-hover {
-  @apply transition-all duration-300;
-}
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(139, 92, 246, 0.25);
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
-  transform: translateY(-4px);
+    linear-gradient(to right, rgba(0, 82, 204, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 82, 204, 0.04) 1px, transparent 1px);
 }
 
 /* Custom scrollbars */
@@ -50,12 +31,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #05021a;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b1642;
+  background: #0f172a;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2a2267;
+  background: #1e293b;
 }
