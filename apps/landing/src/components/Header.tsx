@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare } from 'lucide-react';
+import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare, HardDrive } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hostingMenuOpen, setHostingMenuOpen] = useState(false);
+  const [serverMenuOpen, setServerMenuOpen] = useState(false);
 
   // Live countdown timer state (hours, minutes, seconds)
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 0 });
@@ -114,6 +115,76 @@ export default function Header() {
                       </div>
                       <p className="text-[9px] text-slate-400 leading-relaxed">
                         Get instant support from our experts.
+                      </p>
+                    </div>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=8801325875955"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 w-full text-center bg-primaryBlue hover:bg-blue-600 text-white text-[10px] font-bold py-1.5 rounded flex items-center justify-center gap-1 shadow-sm transition-all"
+                    >
+                      <MessageSquare className="h-3 w-3" />
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Server with Mega Menu dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setServerMenuOpen(true)}
+              onMouseLeave={() => setServerMenuOpen(false)}
+            >
+              <button
+                className={`text-xs font-bold flex items-center gap-1 py-4 transition-colors ${
+                  serverMenuOpen ? 'text-primaryBlue' : 'text-slate-500 hover:text-primaryBlue'
+                }`}
+              >
+                Server
+              </button>
+
+              {/* Server Dropdown */}
+              {serverMenuOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/3 w-[520px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 grid grid-cols-12 gap-4 z-50 animate-fade-in">
+                  <div className="col-span-8 space-y-2">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Server Hosting</span>
+                    
+                    <Link
+                      href="/hosting/vps-hosting"
+                      onClick={() => setServerMenuOpen(false)}
+                      className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+                    >
+                      <Server className="h-5 w-5 text-primaryBlue mt-0.5" />
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Cloud VPS Hosting</h4>
+                        <p className="text-[10px] text-slate-400">AMD Epyc hardware with SSD storage.</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/hosting/dedicated-server"
+                      onClick={() => setServerMenuOpen(false)}
+                      className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+                    >
+                      <HardDrive className="h-5 w-5 text-primaryBlue mt-0.5" />
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Dedicated Server</h4>
+                        <p className="text-[10px] text-slate-400">Bare Metal unshared resources in Bangladesh.</p>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Help Sidebar */}
+                  <div className="col-span-4 border-l border-slate-100 pl-4 flex flex-col justify-between bg-slate-50/50 p-2.5 rounded-lg">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800">
+                        <HelpCircle className="h-3.5 w-3.5 text-primaryBlue" />
+                        <span>Custom Config?</span>
+                      </div>
+                      <p className="text-[9px] text-slate-400 leading-relaxed">
+                        Talk to sales for custom setups.
                       </p>
                     </div>
                     <a
