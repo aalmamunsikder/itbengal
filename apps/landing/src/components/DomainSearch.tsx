@@ -8,10 +8,10 @@ export default function DomainSearch() {
   const [domain, setDomain] = useState('');
 
   const badges = [
+    { ext: '.com.bd', price: '৳1,500/yr', badge: 'Local BD' },
     { ext: '.com', price: '৳1,250/yr', badge: 'Popular' },
     { ext: '.org', price: '৳1,550/yr', badge: 'Nonprofit' },
     { ext: '.xyz', price: '৳290/yr', badge: 'Tech' },
-    { ext: '.net', price: '৳1,450/yr', badge: 'Network' },
   ];
 
   return (
@@ -19,10 +19,10 @@ export default function DomainSearch() {
       <div className="text-center mb-6">
         <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Domain Registration</span>
         <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-2 tracking-tight">
-          Search your Domain Name
+          Register Your Custom Domain
         </h2>
         <p className="text-slate-500 max-w-lg mx-auto text-xs md:text-sm leading-relaxed">
-          Bind your brand to premium domain extensions instantly with automated wildcard routing.
+          Bind your brand to premium local and global domain extensions instantly with automated wildcard routing.
         </p>
       </div>
 

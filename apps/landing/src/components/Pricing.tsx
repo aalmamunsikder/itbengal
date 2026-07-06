@@ -133,7 +133,7 @@ export default function Pricing() {
           {/* WP Starter */}
           <div className="border border-slate-200 rounded-xl p-5 bg-white flex flex-col justify-between hover:shadow transition-all">
             <div>
-              <h3 className="text-base font-bold text-slate-900">WP Starter</h3>
+              <h3 className="text-base font-bold text-slate-900">WP Lite</h3>
               <p className="text-slate-400 text-[10px] mt-0.5">Blogs, personal sites, & portfolios</p>
               <div className="my-4">
                 <span className="text-2xl font-extrabold text-[#0052cc]">৳1,500</span>
@@ -147,7 +147,7 @@ export default function Pricing() {
               </ul>
             </div>
             <Link href="https://dashboard.itbengal.xyz/register" className="w-full py-2 rounded-lg text-center text-xs font-bold border border-slate-200 hover:bg-slate-50 transition-all text-[#0052cc]">
-              Deploy WP Starter
+              Deploy WP Lite
             </Link>
           </div>
 

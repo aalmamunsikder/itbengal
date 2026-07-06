@@ -5,7 +5,7 @@ import { ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
 
 export default function Hero() {
   const benefits = [
-    'Superfast SSD storage clusters',
+    'Local BDT bKash/Nagad billing',
     'Automatic Let\'s Encrypt SSL config',
     'Isolated MariaDB database systems',
     'One-click WordPress container provisioning',
@@ -22,16 +22,16 @@ export default function Hero() {
         <div className="lg:col-span-7 space-y-6 text-left">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-blue-400/20 bg-blue-950/40 text-[10px] font-bold text-blue-300 uppercase tracking-wider">
             <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" />
-            Litespeed Optimized SSD Hosting
+            Litespeed Optimized SSD Containers
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-            10x Faster Hosting. <br />
-            Launch in Minutes.
+            The Developer Cloud <br />
+            for Bangladesh.
           </h1>
 
           <p className="text-blue-100/80 text-sm md:text-base max-w-lg leading-relaxed">
-            Fast, reliable, and secure web hosting starting at just ৳0/mo. Register domain names, manage databases, and deploy your site in seconds with automatic wildcard SSL.
+            Deploy React static apps and container-isolated WordPress stacks in seconds. High-speed local servers starting at ৳0/mo.
           </p>
 
           {/* Action CTAs */}
@@ -40,7 +40,7 @@ export default function Hero() {
               href="https://dashboard.itbengal.xyz/register"
               className="px-6 py-3.5 rounded-lg text-sm font-bold text-white bg-primaryBlue hover:bg-blue-700 shadow-md hover:shadow-blue-500/15 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Get Started Now
+              Deploy Your First App
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a

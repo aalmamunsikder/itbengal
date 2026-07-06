@@ -23,10 +23,10 @@ export default function Testimonials() {
       <div className="text-center mb-8">
         <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Testimonials</span>
         <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-2 tracking-tight">
-          Success Stories
+          Trusted by Bangladeshi Innovators
         </h2>
         <p className="text-slate-500 max-w-lg mx-auto text-xs md:text-sm leading-relaxed">
-          Read reviews and video stories from customers running high-performance projects on our platform.
+          Read reviews and video stories from developers and fast-growing digital agencies running projects on our platform.
         </p>
       </div>
 
@@ -42,8 +42,8 @@ export default function Testimonials() {
             </div>
             {/* Testimonial label overlay */}
             <div className="absolute bottom-4 left-4 right-4 z-20 text-white select-none">
-              <span className="bg-yellow-400 text-slate-900 text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Featured</span>
-              <h3 className="text-base md:text-lg font-extrabold mt-1.5 drop-shadow">
+              <span className="bg-yellow-400 text-slate-900 text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Best Managed Cloud Platform in BD</span>
+              <h3 className="text-xl font-extrabold mt-1.5 drop-shadow">
                 "Best Web Hosting Company I have ever seen in BD"
               </h3>
               <p className="text-[11px] text-slate-200 mt-0.5 opacity-90">— Md. Al-Mamun, IT Architect</p>

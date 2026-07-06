@@ -1,22 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { Server } from 'lucide-react';
+import { Cloud } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 py-10 px-6 bg-slate-50 text-slate-500 text-xs">
+    <footer className="border-t border-slate-200 py-10 px-6 bg-slate-50 text-slate-550 text-xs">
       <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-4 mb-8">
         {/* Branding Column */}
         <div className="space-y-3">
           <div className="flex items-center gap-1.5">
             <div className="h-7 w-7 rounded-lg bg-primaryBlue flex items-center justify-center">
-              <Server className="h-4 w-4 text-white" />
+              <Cloud className="h-4 w-4 text-white" />
             </div>
-            <span className="text-base font-bold text-slate-800 tracking-tight">HOSTNIN</span>
+            <span className="text-base font-bold text-slate-800 tracking-tight">ITBENGAL</span>
           </div>
           <p className="text-slate-400 text-[11px] leading-relaxed">
-            High-performance, containerized hosting solutions for modern static React applications and fully isolated WordPress projects.
+            High-performance, containerized hosting solutions for modern static React applications and fully isolated WordPress projects in Bangladesh.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto border-t border-slate-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-slate-400 text-[11px]">
-        <p>© {new Date().getFullYear()} HOSTNIN / ITBengal. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} ITBENGAL. All rights reserved.</p>
         <div className="flex gap-4">
           <a href="#" className="hover:text-primaryBlue">Status</a>
           <a href="#" className="hover:text-primaryBlue">Security</a>

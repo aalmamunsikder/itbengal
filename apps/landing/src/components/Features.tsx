@@ -21,7 +21,7 @@ export default function Features() {
   ];
 
   return (
-    <div className="w-full bg-white py-12 text-slate-800 space-y-16">
+    <div className="w-full bg-white py-12 text-slate-800 space-y-16" id="features">
       {/* 1. Moving From Another Host? */}
       <section className="max-w-7xl mx-auto px-6 grid gap-8 lg:grid-cols-2 items-center">
         {/* Node diagram illustration on left */}
@@ -30,7 +30,7 @@ export default function Features() {
           <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-6 w-full max-w-sm shadow-sm flex flex-col items-center">
             {/* Center Node */}
             <div className="h-14 w-14 rounded-full bg-[#0052cc] flex items-center justify-center text-white shadow-md text-xl font-extrabold select-none animate-pulse-soft">
-              H
+              ITB
             </div>
             {/* Surrounding floating nodes */}
             <div className="grid grid-cols-3 gap-4 mt-6 w-full">
@@ -50,7 +50,7 @@ export default function Features() {
             Moving From Another Host?
           </h2>
           <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-            Switch to HOSTNIN stress-free. Our automated systems and manual operators migrate your static files, databases, and SSL configs in minutes.
+            Switch to ITBengal stress-free. Our automated systems and manual operators migrate your static files, databases, and SSL configs in minutes.
           </p>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -82,14 +82,14 @@ export default function Features() {
         <div className="space-y-4 lg:order-1">
           <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Optimized Speed Engine</span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
-            Lightning Fast Loading Speed
+            Local Uptime & Low Latency
           </h2>
           <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-            Our container stack leverages SSD storage, Cloudflare edge caching, and lightweight Alpine images to achieve up to 10x faster execution than traditional servers.
+            Our servers are optimized for South Asian network routing. Your applications load with minimal latency for local audiences in Bangladesh.
           </p>
 
           <div className="grid gap-2 sm:grid-cols-2">
-            {['Superfast SSD Disks', 'LiteSpeed Cache Engine', 'PHP SHORTINIT optimization', 'Alpine runner isolation'].map((label, idx) => (
+            {['Superfast SSD Disks', 'LiteSpeed Cache Engine', 'South Asian BDIX Routing', 'Alpine runner isolation'].map((label, idx) => (
               <div key={idx} className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
                 <ShieldCheck className="h-4.5 w-4.5 text-emerald-500 flex-shrink-0" />
                 <span>{label}</span>
@@ -109,11 +109,11 @@ export default function Features() {
 
         {/* Floating badge circles on right */}
         <div className="relative flex justify-center lg:order-2">
-          <div className="absolute inset-0 bg-blue-50/50 blur-2xl rounded-full pointer-events-none" />
+          <div className="absolute inset-0 bg-blue-100/50 blur-2xl rounded-full pointer-events-none" />
           <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-6 w-full max-w-sm shadow-sm flex flex-col items-center">
             {/* Center Node */}
             <div className="h-14 w-14 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 shadow-sm text-2xl font-extrabold select-none mb-4">
-              ⚙️
+              🚀
             </div>
             {/* Round Badge Grid */}
             <div className="grid grid-cols-2 gap-3 w-full">
@@ -134,10 +134,10 @@ export default function Features() {
         <div className="space-y-4">
           <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Dashboard Portal</span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
-            User-Friendly Control Panel
+            Isolated Container Stack
           </h2>
           <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-            Manage your websites, domains, S3 database backups, container restarts, and real-time logs in one clean dashboard without opening terminal command lines.
+            Each WordPress site runs in a dedicated container stack, guaranteeing memory boundaries and solid security out of the box.
           </p>
 
           <div className="space-y-3">
@@ -158,7 +158,7 @@ export default function Features() {
         <div className="relative flex justify-center">
           <div className="absolute inset-0 bg-blue-50/50 blur-2xl rounded-full pointer-events-none" />
           <div className="relative w-full max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-md overflow-hidden group">
-            <div className="rounded-xl border border-slate-200 overflow-hidden bg-slate-955 p-3.5 text-left bg-slate-950">
+            <div className="rounded-xl border border-slate-200 overflow-hidden bg-slate-950 p-3.5 text-left">
               {/* Header circles */}
               <div className="flex items-center gap-1.5 mb-3 select-none">
                 <div className="w-2 h-2 rounded-full bg-red-500" />
@@ -169,7 +169,7 @@ export default function Features() {
               {/* Mockup layout */}
               <div className="space-y-2.5 font-mono text-[11px] text-slate-400">
                 <p className="text-slate-500">// Managed WordPress Container State</p>
-                <div className="border border-slate-850 rounded-lg p-2.5 bg-slate-900 flex justify-between items-center border-slate-800">
+                <div className="border border-slate-800 rounded-lg p-2.5 bg-slate-900 flex justify-between items-center">
                   <div>
                     <span className="font-bold text-white text-xs">wp-myblog-prod</span>
                     <p className="text-[9px] text-slate-500">itbengal-wp-stack:v1</p>

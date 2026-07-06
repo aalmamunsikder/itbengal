@@ -84,8 +84,8 @@ const faqData = [
     answer: 'Every WordPress deployment is structured as a separate, fully sandboxed two-container setup (one container runs Apache/PHP, the other runs MariaDB). This completely blocks memory leaks or security exploits from affecting neighboring accounts.',
   },
   {
-    question: 'Can I migrate my website from another provider?',
-    answer: 'Yes! We offer 100% free website migration. Simply submit a ticket from your Client Portal, and our migration operators will migrate your static files, assets, databases, and SSL parameters with zero downtime.',
+    question: 'Can I pay with local methods like bKash or Nagad?',
+    answer: 'Yes! We support local BDT payment options including bKash, Nagad, and local Bangladeshi credit cards directly inside your Client Portal for invoice renewals.',
   },
   {
     question: 'What happens to database backups?',
