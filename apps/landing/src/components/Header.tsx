@@ -81,7 +81,7 @@ export default function Header() {
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Hosting Services</span>
                     
                     <Link
-                      href="#pricing"
+                      href="/hosting/react"
                       onClick={() => setHostingMenuOpen(false)}
                       className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
                     >
@@ -93,7 +93,7 @@ export default function Header() {
                     </Link>
 
                     <Link
-                      href="#pricing"
+                      href="/hosting/wordpress"
                       onClick={() => setHostingMenuOpen(false)}
                       className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
                     >
