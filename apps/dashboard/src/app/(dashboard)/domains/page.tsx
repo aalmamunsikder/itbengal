@@ -261,7 +261,7 @@ export default function DomainsPage() {
           className={cn(
             'py-3.5 px-6 font-semibold text-sm border-b-2 -mb-[2px] transition-all',
             activeTab === 'MY_DOMAINS' && !selectedDomain
-              ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
           )}
         >
@@ -275,14 +275,14 @@ export default function DomainsPage() {
           className={cn(
             'py-3.5 px-6 font-semibold text-sm border-b-2 -mb-[2px] transition-all',
             activeTab === 'SEARCH'
-              ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
           )}
         >
           Register TLDs
         </button>
         {selectedDomain && (
-          <span className="py-3.5 px-6 font-semibold text-sm border-b-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 -mb-[2px]">
+          <span className="py-3.5 px-6 font-semibold text-sm border-b-2 border-primary-600 text-primary-600 dark:text-primary-400 -mb-[2px]">
             Manage: {selectedDomain.name}
           </span>
         )}
@@ -295,13 +295,13 @@ export default function DomainsPage() {
           <div className="md:col-span-1 space-y-6">
             <button
               onClick={() => setSelectedDomain(null)}
-              className="inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:underline"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:underline"
             >
               <ChevronLeft className="h-4 w-4" /> Back to List
             </button>
 
             <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-5">
-              <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400">
                 <Globe className="h-5 w-5" />
                 <h3 className="font-bold text-lg">{selectedDomain.name}</h3>
               </div>
@@ -350,7 +350,7 @@ export default function DomainsPage() {
                     disabled={actionLoading}
                     className={cn(
                       'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 outline-none',
-                      selectedDomain.whoisPrivacy ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-800'
+                      selectedDomain.whoisPrivacy ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-800'
                     )}
                   >
                     <span
@@ -370,7 +370,7 @@ export default function DomainsPage() {
             {/* DNS list */}
             <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-4">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
-                <Server className="h-5 w-5 text-indigo-500" /> DNS Records & Zone File
+                <Server className="h-5 w-5 text-primary-500" /> DNS Records & Zone File
               </h3>
               <div className="overflow-x-auto">
                 <table className="min-w-full text-left text-xs divide-y divide-gray-150 dark:divide-gray-800">
@@ -394,7 +394,7 @@ export default function DomainsPage() {
                       selectedDomain.dnsRecords?.map((record) => (
                         <tr key={record.id} className="hover:bg-gray-50/50 dark:hover:bg-gray-800/10">
                           <td className="py-3.5 px-2">
-                            <span className="rounded bg-indigo-50 dark:bg-indigo-950/50 px-2 py-0.5 text-indigo-600 dark:text-indigo-400 font-bold">
+                            <span className="rounded bg-primary-50 dark:bg-primary-950/50 px-2 py-0.5 text-primary-600 dark:text-primary-400 font-bold">
                               {record.type}
                             </span>
                           </td>
@@ -406,7 +406,7 @@ export default function DomainsPage() {
                           <td className="py-3.5 px-2 text-right flex gap-1 justify-end">
                             <button
                               onClick={() => startEditDnsRecord(record)}
-                              className="p-1 rounded bg-gray-100 hover:bg-indigo-500 hover:text-white dark:bg-gray-800 text-gray-500 transition-all"
+                              className="p-1 rounded bg-gray-100 hover:bg-primary-500 hover:text-white dark:bg-gray-800 text-gray-500 transition-all"
                             >
                               <Edit2 className="h-3.5 w-3.5" />
                             </button>
@@ -436,7 +436,7 @@ export default function DomainsPage() {
                   <select
                     value={dnsType}
                     onChange={(e) => setDnsType(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-primary-500"
                   >
                     <option value="A">A (IPv4)</option>
                     <option value="AAAA">AAAA (IPv6)</option>
@@ -456,7 +456,7 @@ export default function DomainsPage() {
                     placeholder="e.g. @ or www"
                     value={dnsName}
                     onChange={(e) => setDnsName(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-primary-500"
                   />
                 </div>
 
@@ -468,7 +468,7 @@ export default function DomainsPage() {
                     placeholder="e.g. 192.168.1.1"
                     value={dnsContent}
                     onChange={(e) => setDnsContent(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-primary-500"
                   />
                 </div>
 
@@ -479,7 +479,7 @@ export default function DomainsPage() {
                     required
                     value={dnsTtl}
                     onChange={(e) => setDnsTtl(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-primary-500"
                   />
                 </div>
 
@@ -492,7 +492,7 @@ export default function DomainsPage() {
                       placeholder="10"
                       value={dnsPriority}
                       onChange={(e) => setDnsPriority(e.target.value)}
-                      className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-indigo-500"
+                      className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-3 py-2 text-xs outline-none focus:border-primary-500"
                     />
                   </div>
                 )}
@@ -514,7 +514,7 @@ export default function DomainsPage() {
                   <button
                     type="submit"
                     disabled={actionLoading}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold hover:bg-indigo-500"
+                    className="px-4 py-2 bg-primary-600 text-white rounded-xl text-xs font-semibold hover:bg-primary-500"
                   >
                     {editingRecordId ? 'Update Record' : 'Add Record'}
                   </button>
@@ -532,7 +532,7 @@ export default function DomainsPage() {
             </div>
           ) : domains.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-              <div className="p-3.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-500 mb-4">
+              <div className="p-3.5 rounded-full bg-primary-50 dark:bg-primary-950/50 text-primary-500 mb-4">
                 <Globe className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">No registered domains</h3>
@@ -578,7 +578,7 @@ export default function DomainsPage() {
                         <span
                           className={cn(
                             'inline-flex items-center gap-1 text-xs font-semibold',
-                            dom.whoisPrivacy ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-400'
+                            dom.whoisPrivacy ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400'
                           )}
                         >
                           {dom.whoisPrivacy ? <ShieldCheck className="h-4 w-4" /> : <ShieldAlert className="h-4 w-4" />}
@@ -615,13 +615,13 @@ export default function DomainsPage() {
                   placeholder="e.g. mynewbrand (no extension needed)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 pl-10 pr-4 py-3 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 pl-10 pr-4 py-3 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
                 />
               </div>
               <button
                 type="submit"
                 disabled={searching}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-500 transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-primary-600 text-white rounded-xl text-sm font-semibold hover:bg-primary-500 transition-all flex items-center gap-2"
               >
                 {searching ? <RefreshCw className="h-4 w-4 animate-spin" /> : null}
                 {searching ? 'Checking...' : 'Check Availability'}
@@ -653,7 +653,7 @@ export default function DomainsPage() {
                         <button
                           onClick={() => handleRegister(result.domain, result.tld)}
                           disabled={actionLoading}
-                          className="px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-500 rounded-xl text-xs font-bold transition-all"
+                          className="px-4 py-2 bg-primary-600 text-white hover:bg-primary-500 rounded-xl text-xs font-bold transition-all"
                         >
                           Buy Domain
                         </button>

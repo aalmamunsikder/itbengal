@@ -160,7 +160,7 @@ export default function AdminContainersPage() {
               const isManaged = c.labels['itbengal.managed'] === 'true';
               return (
                 <div key={c.id} className={cn('p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all',
-                  isManaged ? 'border-indigo-150 dark:border-indigo-900/40 bg-indigo-50/5 dark:bg-indigo-950/5' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30')}>
+                  isManaged ? 'border-primary-150 dark:border-primary-900/40 bg-primary-50/5 dark:bg-primary-950/5' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30')}>
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">

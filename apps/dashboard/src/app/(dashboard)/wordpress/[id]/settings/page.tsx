@@ -124,7 +124,7 @@ export default function WordPressSettingsPage(props: PageProps) {
   if (loading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
       </div>
     );
   }
@@ -133,7 +133,7 @@ export default function WordPressSettingsPage(props: PageProps) {
     return (
       <div className="max-w-2xl mx-auto text-center space-y-4 p-12">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">WordPress Site Not Found</h2>
-        <Link href="/wordpress" className="text-indigo-500 hover:underline">Back to installations</Link>
+        <Link href="/wordpress" className="text-primary-500 hover:underline">Back to installations</Link>
       </div>
     );
   }
@@ -174,7 +174,7 @@ export default function WordPressSettingsPage(props: PageProps) {
         <Link href={`/wordpress/${params.id}/backups`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Backups
         </Link>
-        <Link href={`/wordpress/${params.id}/settings`} className="border-b-2 border-indigo-500 pb-4 text-indigo-500">
+        <Link href={`/wordpress/${params.id}/settings`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           Settings
         </Link>
       </div>
@@ -184,7 +184,7 @@ export default function WordPressSettingsPage(props: PageProps) {
         {/* Core Config form */}
         <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm">
           <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center gap-2 mb-4">
-            <Settings className="h-5 w-5 text-indigo-500" /> Site Configurations
+            <Settings className="h-5 w-5 text-primary-500" /> Site Configurations
           </h3>
 
           <form onSubmit={handleSaveSettings} className="space-y-6 max-w-xl">
@@ -197,7 +197,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                 required
                 value={siteTitle}
                 onChange={(e) => setSiteTitle(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
               />
             </div>
 
@@ -210,10 +210,10 @@ export default function WordPressSettingsPage(props: PageProps) {
                 placeholder="my-blog.com"
                 value={customDomain}
                 onChange={(e) => setCustomDomain(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
               />
               <p className="text-[11px] text-gray-400">
-                Point your domain&apos;s CNAME record to <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-indigo-400">itbengal.xyz</code> to activate SSL.
+                Point your domain&apos;s CNAME record to <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-primary-400">itbengal.xyz</code> to activate SSL.
               </p>
             </div>
 
@@ -238,7 +238,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                   type="checkbox"
                   checked={autoUpdates}
                   onChange={(e) => setAutoUpdates(e.target.checked)}
-                  className="rounded border-gray-350 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-gray-350 text-primary-600 focus:ring-primary-500"
                 />
                 <div className="text-sm">
                   <span className="block font-medium text-gray-900 dark:text-white">Enable WordPress Auto-Updates</span>
@@ -251,7 +251,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                   type="checkbox"
                   checked={caching}
                   onChange={(e) => setCaching(e.target.checked)}
-                  className="rounded border-gray-350 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-gray-350 text-primary-600 focus:ring-primary-500"
                 />
                 <div className="text-sm">
                   <span className="block font-medium text-gray-900 dark:text-white">Enable Page Caching</span>
@@ -263,7 +263,7 @@ export default function WordPressSettingsPage(props: PageProps) {
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-semibold text-white transition-colors disabled:opacity-40"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-sm font-semibold text-white transition-colors disabled:opacity-40"
             >
               {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               Save Configuration

@@ -39,7 +39,7 @@ async function api(url: string, opts?: RequestInit) {
 const BADGE: Record<string, string> = {
   QUEUED: 'bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400',
   BUILDING: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-  DEPLOYING: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400',
+  DEPLOYING: 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400',
   LIVE: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
   FAILED: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
   CANCELLED: 'bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400',
@@ -68,7 +68,7 @@ const LOG_COLORS: Record<string, string> = {
   INFO: 'text-gray-400', WARN: 'text-amber-400', ERROR: 'text-red-400', DEBUG: 'text-blue-400', SUCCESS: 'text-emerald-400',
 };
 const SOURCE_COLORS: Record<string, string> = {
-  BUILD: 'bg-blue-500/20 text-blue-400', DEPLOY: 'bg-indigo-500/20 text-indigo-400', HEALTH: 'bg-emerald-500/20 text-emerald-400',
+  BUILD: 'bg-blue-500/20 text-blue-400', DEPLOY: 'bg-primary-500/20 text-primary-400', HEALTH: 'bg-emerald-500/20 text-emerald-400',
 };
 
 /* ════════════════════════════════════════════ */
@@ -149,7 +149,7 @@ export default function DeploymentDetailPage() {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <AlertCircle className="w-12 h-12 text-red-400" />
       <p className="text-gray-600 dark:text-gray-400">{error || 'Not found'}</p>
-      <Link href={`/projects/${projectId}`} className="text-indigo-600 hover:underline">← Back to Project</Link>
+      <Link href={`/projects/${projectId}`} className="text-primary-600 hover:underline">← Back to Project</Link>
     </div>
   );
 
@@ -166,7 +166,7 @@ export default function DeploymentDetailPage() {
           <div>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Deployment <code className="text-lg font-mono text-indigo-600 dark:text-indigo-400">#{dep.id.slice(0, 8)}</code>
+                Deployment <code className="text-lg font-mono text-primary-600 dark:text-primary-400">#{dep.id.slice(0, 8)}</code>
               </h1>
               <span className={cn('px-3 py-1 rounded-full text-xs font-semibold', BADGE[dep.status])}>{dep.status}</span>
             </div>
@@ -182,7 +182,7 @@ export default function DeploymentDetailPage() {
               <span className="flex items-center gap-1"><TI className="w-3.5 h-3.5" />{dep.triggerType.replace('_', ' ')}</span>
               {dep.triggeredBy && (
                 <span className="flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[8px] font-bold text-white">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-primary-400 to-violet-500 flex items-center justify-center text-[8px] font-bold text-white">
                     {initials(dep.triggeredBy.firstName, dep.triggeredBy.lastName)}
                   </span>
                   {dep.triggeredBy.firstName} {dep.triggeredBy.lastName}
@@ -213,7 +213,7 @@ export default function DeploymentDetailPage() {
         <div className="flex items-center justify-between relative">
           {/* Connecting line */}
           <div className="absolute top-5 left-8 right-8 h-0.5 bg-gray-200 dark:bg-gray-700" />
-          <div className="absolute top-5 left-8 h-0.5 bg-indigo-500 transition-all duration-500" style={{
+          <div className="absolute top-5 left-8 h-0.5 bg-primary-500 transition-all duration-500" style={{
             width: `${Math.max(0, (STEPS.indexOf(dep.status as typeof STEPS[number]) / (STEPS.length - 1)) * 100)}%`,
             maxWidth: 'calc(100% - 4rem)'
           }} />
@@ -224,7 +224,7 @@ export default function DeploymentDetailPage() {
               <div key={step} className="flex flex-col items-center gap-2 relative z-10">
                 <div className={cn('w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all',
                   state === 'done' ? 'bg-emerald-500 border-emerald-500' :
-                  state === 'active' ? 'bg-indigo-500 border-indigo-500 shadow-lg shadow-indigo-500/30 animate-pulse' :
+                  state === 'active' ? 'bg-primary-500 border-primary-500 shadow-lg shadow-primary-500/30 animate-pulse' :
                   state === 'failed' ? 'bg-red-500 border-red-500' :
                   state === 'cancelled' ? 'bg-gray-400 border-gray-400' :
                   'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600')}>
@@ -234,7 +234,7 @@ export default function DeploymentDetailPage() {
                   {state === 'cancelled' && <Minus className="w-5 h-5 text-white" />}
                   {state === 'pending' && <Circle className="w-5 h-5 text-gray-400 dark:text-gray-500" />}
                 </div>
-                <span className={cn('text-xs font-medium', state === 'active' ? 'text-indigo-600 dark:text-indigo-400' : state === 'done' ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-400')}>
+                <span className={cn('text-xs font-medium', state === 'active' ? 'text-primary-600 dark:text-primary-400' : state === 'done' ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-400')}>
                   {step}
                 </span>
               </div>

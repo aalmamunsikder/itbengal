@@ -120,7 +120,7 @@ export default function WordPressDatabasePage(props: PageProps) {
         <Link href={`/wordpress/${params.id}/file-manager`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           File Manager
         </Link>
-        <Link href={`/wordpress/${params.id}/db-manager`} className="border-b-2 border-indigo-500 pb-4 text-indigo-500">
+        <Link href={`/wordpress/${params.id}/db-manager`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           Database
         </Link>
         <Link href={`/wordpress/${params.id}/backups`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
@@ -133,21 +133,21 @@ export default function WordPressDatabasePage(props: PageProps) {
 
       {loading ? (
         <div className="flex h-64 items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
         </div>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* Tables Sidebar */}
           <aside className="w-full lg:w-64 shrink-0 bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-4 space-y-4">
             <h3 className="font-semibold text-sm text-gray-900 dark:text-white flex items-center gap-2">
-              <Database className="h-4 w-4 text-indigo-500" /> Database Tables
+              <Database className="h-4 w-4 text-primary-500" /> Database Tables
             </h3>
             <ul className="space-y-1 overflow-y-auto max-h-[400px] font-mono text-xs pr-1">
               {tables.map((t) => (
                 <li key={t}>
                   <button
                     onClick={() => selectTableName(t)}
-                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-500 dark:hover:text-indigo-400 flex items-center gap-1.5 transition-colors"
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-500 dark:hover:text-primary-400 flex items-center gap-1.5 transition-colors"
                   >
                     <Table className="h-3.5 w-3.5" /> {t}
                   </button>
@@ -160,7 +160,7 @@ export default function WordPressDatabasePage(props: PageProps) {
           <div className="flex-1 space-y-6">
             <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4 shadow-sm">
               <h3 className="font-semibold text-sm text-gray-900 dark:text-white flex items-center gap-2">
-                <Terminal className="h-4 w-4 text-indigo-500" /> SQL Query Editor
+                <Terminal className="h-4 w-4 text-primary-500" /> SQL Query Editor
               </h3>
               <form onSubmit={handleRunQuery} className="space-y-4">
                 <textarea
@@ -173,7 +173,7 @@ export default function WordPressDatabasePage(props: PageProps) {
                   <button
                     type="submit"
                     disabled={runningQuery}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-semibold text-white transition-colors disabled:opacity-40"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-sm font-semibold text-white transition-colors disabled:opacity-40"
                   >
                     {runningQuery ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
                     Run Query (SQL)

@@ -88,7 +88,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
   if (loading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
       </div>
     );
   }
@@ -97,7 +97,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
     return (
       <div className="max-w-2xl mx-auto text-center space-y-4 p-12">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">WordPress Installation Not Found</h2>
-        <Link href="/wordpress" className="text-indigo-500 hover:underline">Back to installations</Link>
+        <Link href="/wordpress" className="text-primary-500 hover:underline">Back to installations</Link>
       </div>
     );
   }
@@ -133,7 +133,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
             </span>
           </div>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Managed WordPress on docker stack | <span className="font-semibold text-indigo-500">{site.domain}</span>
+            Managed WordPress on docker stack | <span className="font-semibold text-primary-500">{site.domain}</span>
           </p>
         </div>
 
@@ -169,7 +169,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
             <button
               disabled={!!loadingAction}
               onClick={() => handleAction('start')}
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-500 transition-colors"
             >
               {loadingAction === 'start' && <Loader2 className="h-4 w-4 animate-spin" />}
               Start
@@ -180,7 +180,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
 
       {/* Tabs list */}
       <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
-        <Link href={`/wordpress/${site.id}`} className="border-b-2 border-indigo-500 pb-4 text-indigo-500">
+        <Link href={`/wordpress/${site.id}`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           Overview
         </Link>
         <Link href={`/wordpress/${site.id}/file-manager`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
@@ -202,7 +202,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
         {/* Core Specs Card */}
         <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
-            <Activity className="h-5 w-5 text-indigo-500" /> Platform Info
+            <Activity className="h-5 w-5 text-primary-500" /> Platform Info
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
@@ -227,12 +227,12 @@ export default function WordPressSiteDetailPage(props: PageProps) {
         {/* Database Connection Card */}
         <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
-            <Database className="h-5 w-5 text-indigo-500" /> Database Access
+            <Database className="h-5 w-5 text-primary-500" /> Database Access
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Host (Docker)</span>
-              <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-indigo-400">
+              <code className="text-xs bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-primary-400">
                 itbengal-wp-db-{site.id.slice(0, 8)}
               </code>
             </div>
@@ -265,7 +265,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
         {/* Resource Usage Card */}
         <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
-            <Cpu className="h-5 w-5 text-indigo-500" /> Container Health
+            <Cpu className="h-5 w-5 text-primary-500" /> Container Health
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">

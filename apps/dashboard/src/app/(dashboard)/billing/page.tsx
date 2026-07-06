@@ -192,7 +192,7 @@ export default function BillingPage() {
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/30 p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400">
+                <div className="p-3 rounded-xl bg-primary-50 dark:bg-primary-950/50 text-primary-600 dark:text-primary-400">
                   <CreditCard className="h-6 w-6" />
                 </div>
                 <div>
@@ -225,7 +225,7 @@ export default function BillingPage() {
           {/* Pricing Tiers Grid */}
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <Layers className="h-5 w-5 text-indigo-500" /> Choose WordPress Tier
+              <Layers className="h-5 w-5 text-primary-500" /> Choose WordPress Tier
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {plans
@@ -236,14 +236,14 @@ export default function BillingPage() {
                     <div
                       key={plan.id}
                       className={cn(
-                        'relative rounded-2xl border bg-white dark:bg-gray-900/40 p-6 flex flex-col justify-between transition-all hover:border-indigo-500/40',
+                        'relative rounded-2xl border bg-white dark:bg-gray-900/40 p-6 flex flex-col justify-between transition-all hover:border-primary-500/40',
                         isCurrent
-                          ? 'border-indigo-500 ring-2 ring-indigo-500/20'
+                          ? 'border-primary-500 ring-2 ring-primary-500/20'
                           : 'border-gray-200 dark:border-gray-800'
                       )}
                     >
                       {isCurrent && (
-                        <span className="absolute -top-3 right-4 rounded-full bg-indigo-600 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider">
+                        <span className="absolute -top-3 right-4 rounded-full bg-primary-600 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider">
                           Current Plan
                         </span>
                       )}
@@ -255,19 +255,19 @@ export default function BillingPage() {
                         </div>
                         <ul className="mt-6 space-y-3.5 text-sm text-gray-600 dark:text-gray-400">
                           <li className="flex items-center gap-2.5">
-                            <Check className="h-4.5 w-4.5 text-indigo-500" />
+                            <Check className="h-4.5 w-4.5 text-primary-500" />
                             <span>{plan.cpu} vCPU Core</span>
                           </li>
                           <li className="flex items-center gap-2.5">
-                            <Check className="h-4.5 w-4.5 text-indigo-500" />
+                            <Check className="h-4.5 w-4.5 text-primary-500" />
                             <span>{plan.memoryMb / 1024} GB RAM</span>
                           </li>
                           <li className="flex items-center gap-2.5">
-                            <Check className="h-4.5 w-4.5 text-indigo-500" />
+                            <Check className="h-4.5 w-4.5 text-primary-500" />
                             <span>{plan.storageMb / 1024} GB SSD Storage</span>
                           </li>
                           <li className="flex items-center gap-2.5">
-                            <Check className="h-4.5 w-4.5 text-indigo-500" />
+                            <Check className="h-4.5 w-4.5 text-primary-500" />
                             <span>Up to {plan.maxProjects} WP Installations</span>
                           </li>
                         </ul>
@@ -279,8 +279,8 @@ export default function BillingPage() {
                         className={cn(
                           'mt-8 w-full rounded-xl py-3 text-sm font-bold transition-all',
                           isCurrent
-                            ? 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 cursor-not-allowed'
-                            : 'bg-indigo-600 text-white hover:bg-indigo-500'
+                            ? 'bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 cursor-not-allowed'
+                            : 'bg-primary-600 text-white hover:bg-primary-500'
                         )}
                       >
                         {isCurrent ? 'Active Plan' : 'Select Plan'}
@@ -295,11 +295,11 @@ export default function BillingPage() {
           {activeInvoiceId && (
             <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 max-w-lg">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <Send className="h-5 w-5 text-indigo-500" /> bKash Manual Payment
+                <Send className="h-5 w-5 text-primary-500" /> bKash Manual Payment
               </h2>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 Please cash-in/send-money of <strong>৳{bkashAmount}</strong> to our merchant bKash number: 
-                <span className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded ml-1 font-semibold text-indigo-600 dark:text-indigo-400">
+                <span className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded ml-1 font-semibold text-primary-600 dark:text-primary-400">
                   +880 1700 000000
                 </span>. Enter payment claims details below to activate.
               </p>
@@ -315,7 +315,7 @@ export default function BillingPage() {
                     placeholder="e.g. 01712345678"
                     value={bkashSender}
                     onChange={(e) => setBkashSender(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
                   />
                 </div>
 
@@ -329,7 +329,7 @@ export default function BillingPage() {
                     placeholder="e.g. BK8910A2CD"
                     value={bkashTrxId}
                     onChange={(e) => setBkashTrxId(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
                   />
                 </div>
 
@@ -349,7 +349,7 @@ export default function BillingPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full flex justify-center items-center gap-2 rounded-xl bg-indigo-600 py-3 text-sm font-bold text-white hover:bg-indigo-500 transition-all"
+                  className="w-full flex justify-center items-center gap-2 rounded-xl bg-primary-600 py-3 text-sm font-bold text-white hover:bg-primary-500 transition-all"
                 >
                   {submitting ? 'Submitting...' : 'Submit Payment Claim'}
                 </button>
@@ -360,7 +360,7 @@ export default function BillingPage() {
           {/* Invoices List */}
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-indigo-500" /> Invoice & Payment History
+              <RefreshCw className="h-5 w-5 text-primary-500" /> Invoice & Payment History
             </h2>
             <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/30">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">

@@ -198,7 +198,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
         <Link href={`/wordpress/${params.id}`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Overview
         </Link>
-        <Link href={`/wordpress/${params.id}/file-manager`} className="border-b-2 border-indigo-500 pb-4 text-indigo-500">
+        <Link href={`/wordpress/${params.id}/file-manager`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           File Manager
         </Link>
         <Link href={`/wordpress/${params.id}/db-manager`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
@@ -235,7 +235,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
           )}
           <button
             onClick={() => setShowNewModal(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-sm font-semibold text-white transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-600 hover:bg-primary-500 text-sm font-semibold text-white transition-colors"
           >
             <Plus className="h-4 w-4" /> New File/Folder
           </button>
@@ -251,7 +251,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
               <button
                 disabled={saving}
                 onClick={handleSaveFile}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-40 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-600 text-sm font-semibold text-white hover:bg-primary-500 disabled:opacity-40 transition-colors"
               >
                 {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
                 Save Changes
@@ -273,7 +273,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
         </div>
       ) : loading ? (
         <div className="flex h-64 items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
@@ -293,14 +293,14 @@ export default function WordPressFileManagerPage(props: PageProps) {
                     {file.type === 'directory' ? (
                       <button
                         onClick={() => handleFolderClick(file.name)}
-                        className="inline-flex items-center gap-2 font-semibold text-indigo-500 hover:underline"
+                        className="inline-flex items-center gap-2 font-semibold text-primary-500 hover:underline"
                       >
                         <Folder className="h-4.5 w-4.5" /> {file.name}
                       </button>
                     ) : (
                       <button
                         onClick={() => handleFileClick(file.name)}
-                        className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-indigo-500"
+                        className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary-500"
                       >
                         <FileText className="h-4.5 w-4.5 text-gray-400" /> {file.name}
                       </button>
@@ -371,7 +371,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-500"
+                  className="px-4 py-2 rounded-xl bg-primary-600 text-sm font-semibold text-white hover:bg-primary-500"
                 >
                   Create
                 </button>

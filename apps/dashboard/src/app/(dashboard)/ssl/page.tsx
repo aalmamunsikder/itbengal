@@ -202,13 +202,13 @@ export default function SslPage() {
                 className={cn(
                   'w-full text-left p-3 rounded-xl transition-all text-sm font-medium flex items-center justify-between',
                   selectedSiteId === site.id
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
                 )}
               >
                 <div className="truncate max-w-[140px]">
                   <span className="block font-bold">{site.wordpressSite?.siteTitle || site.project?.name || 'General Application'}</span>
-                  <span className={cn('text-xs block', selectedSiteId === site.id ? 'text-indigo-200' : 'text-gray-400')}>
+                  <span className={cn('text-xs block', selectedSiteId === site.id ? 'text-primary-200' : 'text-gray-400')}>
                     {site.domain}
                   </span>
                 </div>
@@ -265,7 +265,7 @@ export default function SslPage() {
                         <button
                           onClick={() => handleProvision(selectedSite.domain)}
                           disabled={runningAction || checkingDns || selectedSite.sslStatus === 'ACTIVE'}
-                          className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-bold hover:bg-indigo-500 transition-all"
+                          className="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-primary-500 transition-all"
                         >
                           Provision SSL
                         </button>
@@ -290,7 +290,7 @@ export default function SslPage() {
                           <button
                             onClick={() => handleProvision(selectedSite.customDomain!)}
                             disabled={runningAction || checkingDns}
-                            className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-bold hover:bg-indigo-500 transition-all"
+                            className="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-primary-500 transition-all"
                           >
                             Provision SSL
                           </button>
@@ -344,7 +344,7 @@ export default function SslPage() {
                       >
                         <div className="flex justify-between items-start gap-4">
                           <div>
-                            <span className="text-xs font-semibold text-indigo-500 flex items-center gap-1">
+                            <span className="text-xs font-semibold text-primary-500 flex items-center gap-1">
                               <Key className="h-3.5 w-3.5" /> Let's Encrypt (RSA-2048)
                             </span>
                             <h4 className="font-bold text-gray-800 dark:text-white mt-1">{cert.domainName}</h4>

@@ -73,7 +73,7 @@ export default function InstallWordPressPage() {
       <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-indigo-500" /> Install WordPress
+            <Sparkles className="h-6 w-6 text-primary-500" /> Install WordPress
           </h1>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Configure your managed WordPress site. We will handle container provisioning, MariaDB attachment, and wp-config setting.
@@ -107,7 +107,7 @@ export default function InstallWordPressPage() {
                 placeholder="My WordPress Site"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
 
@@ -145,7 +145,7 @@ export default function InstallWordPressPage() {
                 placeholder="My Business Blog"
                 value={siteTitle}
                 onChange={(e) => setSiteTitle(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
 
@@ -159,7 +159,7 @@ export default function InstallWordPressPage() {
                   required
                   value={adminUsername}
                   onChange={(e) => setAdminUsername(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
                 />
               </div>
 
@@ -173,7 +173,7 @@ export default function InstallWordPressPage() {
                   placeholder="admin@example.com"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
                 />
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function InstallWordPressPage() {
                 placeholder="••••••••••••"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function InstallWordPressPage() {
               <select
                 value={phpVersion}
                 onChange={(e) => setPhpVersion(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               >
                 <option value="8.1">PHP 8.1</option>
                 <option value="8.2">PHP 8.2 (Recommended)</option>
@@ -217,7 +217,7 @@ export default function InstallWordPressPage() {
               <select
                 value={wpVersion}
                 onChange={(e) => setWpVersion(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               >
                 <option value="latest">Latest Stable (v6.6.x)</option>
                 <option value="6.5">WordPress 6.5</option>
@@ -229,7 +229,7 @@ export default function InstallWordPressPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-505 transition-all disabled:opacity-40"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-505 transition-all disabled:opacity-40"
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
             {loading ? 'Installing WordPress...' : 'Install WordPress Site'}

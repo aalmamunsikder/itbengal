@@ -837,7 +837,7 @@ function StepReview({
                 Source Type
               </p>
               <p className="mt-1 flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
-                <Upload className="h-4 w-4 text-indigo-500" /> ZIP Archive Upload
+                <Upload className="h-4 w-4 text-primary-500" /> ZIP Archive Upload
               </p>
             </div>
           )}

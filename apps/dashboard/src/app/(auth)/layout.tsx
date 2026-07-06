@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ShieldCheck, Cpu, HardDrive, RefreshCw } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Sign In | ITBengal',
+  title: 'Authentication | ITBengal',
 };
 
 export default function AuthLayout({
@@ -9,60 +12,75 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const benefits = [
+    {
+      title: 'Isolated Container Sandboxing',
+      desc: 'Separate Apache/PHP and MariaDB container boundaries ensure isolated resource allocations.',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Gen4 NVMe SSD Storage',
+      desc: 'Over 3,000MB/s execution throughput speeds to eradicate disk read/write bottlenecks.',
+      icon: HardDrive,
+    },
+    {
+      title: 'Git-Triggered Auto Deployments',
+      desc: 'Push code changes to GitHub or GitLab to automatically rebuild and launch your updates.',
+      icon: Cpu,
+    },
+    {
+      title: 'bKash BDT Local Billing',
+      desc: 'Convenient local billing channels with automated payment verification and invoice records.',
+      icon: RefreshCw,
+    },
+  ];
+
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-primary-950 to-gray-950" />
+    <div className="relative min-h-screen bg-slate-50 flex flex-col justify-between selection:bg-primary/20 selection:text-primary-600">
+      <Header />
 
-      {/* Animated grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      {/* Floating gradient orbs */}
-      <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary-500/20 blur-[100px]" />
-      <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-accent-500/20 blur-[100px]" />
-      <div className="absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-600/10 blur-[80px]" />
-
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-md px-4 py-8 animate-fade-in-up">
-        {/* Brand */}
-        <div className="mb-8 text-center">
-          <div className="mb-3 inline-flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 shadow-lg shadow-primary-500/25">
-              <svg
-                className="h-6 w-6 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z"
-                />
-              </svg>
+      <main className="flex-grow py-12 px-6 max-w-7xl mx-auto w-full flex items-center justify-center">
+        <div className="grid gap-12 lg:grid-cols-12 w-full items-stretch">
+          {/* Left Column: Form Wrapper */}
+          <div className="lg:col-span-6 flex items-center justify-center">
+            <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+              {children}
             </div>
-            <span className="text-2xl font-bold text-white">
-              IT<span className="text-primary-400">Bengal</span>
-            </span>
           </div>
-          <p className="text-sm text-gray-400">
-            Modern hosting platform for your projects
-          </p>
-        </div>
 
-        {/* Glassmorphism card */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 shadow-2xl backdrop-blur-xl">
-          {children}
+          {/* Right Column: Premium Brand Benefits */}
+          <div className="lg:col-span-6 hidden lg:flex flex-col justify-center space-y-6 pl-8 border-l border-slate-200">
+            <div className="space-y-2">
+              <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Enterprise Hosting</span>
+              <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                High-Performance Compute Platform
+              </h2>
+              <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
+                Join thousands of developers and agencies hosting their React apps, APIs, and WordPress projects on ITBengal.
+              </p>
+            </div>
+
+            <div className="grid gap-4">
+              {benefits.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="flex gap-4 p-4 border border-slate-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div className="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center text-primary-600 shrink-0">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800">{item.title}</h4>
+                      <p className="text-slate-500 text-[11px] leading-relaxed mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

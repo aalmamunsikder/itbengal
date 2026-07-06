@@ -53,7 +53,7 @@ const BADGE: Record<string, string> = {
   ARCHIVED: 'bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400',
   QUEUED: 'bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400',
   BUILDING: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-  DEPLOYING: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400',
+  DEPLOYING: 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400',
   LIVE: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
   FAILED: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
   CANCELLED: 'bg-gray-100 text-gray-600 dark:bg-gray-700/30 dark:text-gray-400',
@@ -107,7 +107,7 @@ export default function ProjectDetailPage() {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <AlertCircle className="w-12 h-12 text-red-400" />
       <p className="text-gray-600 dark:text-gray-400">{error || 'Not found'}</p>
-      <Link href="/projects" className="text-indigo-600 hover:underline">← Back to Projects</Link>
+      <Link href="/projects" className="text-primary-600 hover:underline">← Back to Projects</Link>
     </div>
   );
 
@@ -138,7 +138,7 @@ export default function ProjectDetailPage() {
               <span className={cn('px-2.5 py-1 rounded-full text-xs font-semibold', BADGE[project.status])}>{project.status}</span>
             </div>
             {domain && (
-              <a href={`https://${domain}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-indigo-600 flex items-center gap-1 mt-1">
+              <a href={`https://${domain}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-primary-600 flex items-center gap-1 mt-1">
                 {domain} <ExternalLink className="w-3 h-3" />
               </a>
             )}
@@ -146,7 +146,7 @@ export default function ProjectDetailPage() {
         </div>
         <div className="flex items-center gap-3">
           <button onClick={deploy} disabled={deploying}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-medium shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:brightness-110 transition-all disabled:opacity-60">
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-violet-600 text-white font-medium shadow-lg shadow-primary-500/25 hover:shadow-xl hover:brightness-110 transition-all disabled:opacity-60">
             {deploying ? <Loader2 className="w-4 h-4 animate-spin" /> : <Rocket className="w-4 h-4" />} Deploy
           </button>
           <button onClick={() => setTab('settings')} className="p-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
@@ -161,7 +161,7 @@ export default function ProjectDetailPage() {
           {tabs.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
               className={cn('pb-3 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
-                tab === t.id ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300')}>
+                tab === t.id ? 'border-primary-600 text-primary-600 dark:text-primary-400 dark:border-primary-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300')}>
               {t.label}
             </button>
           ))}
@@ -221,7 +221,7 @@ function OverviewTab({ project }: { project: Project }) {
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Project Info</h3>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
           {project.gitRepoUrl && (
-            <div><dt className="text-gray-500">Repository</dt><dd className="mt-1"><a href={project.gitRepoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline flex items-center gap-1">{project.gitRepoUrl.replace('https://github.com/', '')} <ExternalLink className="w-3 h-3" /></a></dd></div>
+            <div><dt className="text-gray-500">Repository</dt><dd className="mt-1"><a href={project.gitRepoUrl} target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline flex items-center gap-1">{project.gitRepoUrl.replace('https://github.com/', '')} <ExternalLink className="w-3 h-3" /></a></dd></div>
           )}
           <div><dt className="text-gray-500">Branch</dt><dd className="mt-1 flex items-center gap-1 text-gray-900 dark:text-white"><GitBranch className="w-3.5 h-3.5" /> {project.gitBranch}</dd></div>
           <div><dt className="text-gray-500">Build Command</dt><dd className="mt-1 font-mono text-xs bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded inline-block">{project.buildCommand || '—'}</dd></div>
@@ -269,7 +269,7 @@ function DeploymentsTab({ projectId }: { projectId: string }) {
         const TI = TRIGGER_ICON[d.triggerType] || Play;
         return (
           <button key={d.id} onClick={() => router.push(`/projects/${projectId}/deployments/${d.id}`)}
-            className="w-full bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/50 p-4 flex items-center justify-between hover:border-indigo-300 dark:hover:border-indigo-600 transition-colors text-left">
+            className="w-full bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/50 p-4 flex items-center justify-between hover:border-primary-300 dark:hover:border-primary-600 transition-colors text-left">
             <div className="flex items-center gap-4 min-w-0">
               <span className={cn('px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap', BADGE[d.status])}>{d.status}</span>
               <div className="min-w-0">
@@ -287,7 +287,7 @@ function DeploymentsTab({ projectId }: { projectId: string }) {
               {d.buildDurationMs != null && <span>{dur(d.buildDurationMs)}</span>}
               <span>{ago(d.createdAt)}</span>
               {d.triggeredBy && (
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[10px] font-bold text-white">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-400 to-violet-500 flex items-center justify-center text-[10px] font-bold text-white">
                   {initials(d.triggeredBy.firstName, d.triggeredBy.lastName)}
                 </div>
               )}
@@ -348,7 +348,7 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
     setShowBulk(false); setBulkText(''); load();
   };
 
-  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
+  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
     <div className="space-y-6">
@@ -356,7 +356,7 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
       <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Add Variable</h3>
-          <button onClick={() => setShowBulk(true)} className="text-sm text-indigo-600 hover:underline flex items-center gap-1"><Upload className="w-3.5 h-3.5" /> Bulk Import</button>
+          <button onClick={() => setShowBulk(true)} className="text-sm text-primary-600 hover:underline flex items-center gap-1"><Upload className="w-3.5 h-3.5" /> Bulk Import</button>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <input value={key} onChange={e => setKey(e.target.value.toUpperCase())} placeholder="KEY_NAME" className={cn(ic, 'flex-1 font-mono')} />
@@ -367,7 +367,7 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
           <select value={target} onChange={e => setTarget(e.target.value)} className={cn(ic, 'w-auto')}>
             <option value="ALL">All</option><option value="PRODUCTION">Production</option><option value="PREVIEW">Preview</option>
           </select>
-          <button onClick={add} disabled={saving || !key || !val} className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-40 transition-colors flex items-center gap-2 whitespace-nowrap">
+          <button onClick={add} disabled={saving || !key || !val} className="px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 disabled:opacity-40 transition-colors flex items-center gap-2 whitespace-nowrap">
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />} Add
           </button>
         </div>
@@ -402,7 +402,7 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
             <textarea value={bulkText} onChange={e => setBulkText(e.target.value)} rows={10} className={cn(ic, 'font-mono resize-none')} placeholder={'DATABASE_URL=postgres://...\nAPI_KEY=sk_live_...'} />
             <div className="flex justify-end gap-3 mt-4">
               <button onClick={() => setShowBulk(false)} className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">Cancel</button>
-              <button onClick={bulk} className="px-5 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">Import</button>
+              <button onClick={bulk} className="px-5 py-2 rounded-xl bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors">Import</button>
             </div>
           </div>
         </div>
@@ -433,7 +433,7 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
   };
   const doDelete = async () => { await api(`/api/v1/projects/${project.id}`, { method: 'DELETE' }); router.push('/projects'); };
 
-  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
+  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
   const F = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>{children}</div>
   );
@@ -467,18 +467,18 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
       {/* Git */}
       <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Git</h3>
-        <F label="Repository">{project.gitRepoUrl ? <a href={project.gitRepoUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-600 text-sm hover:underline">{project.gitRepoUrl}</a> : <span className="text-sm text-gray-400">Not connected</span>}</F>
+        <F label="Repository">{project.gitRepoUrl ? <a href={project.gitRepoUrl} target="_blank" rel="noopener noreferrer" className="text-primary-600 text-sm hover:underline">{project.gitRepoUrl}</a> : <span className="text-sm text-gray-400">Not connected</span>}</F>
         <F label="Branch"><input value={form.gitBranch} onChange={e => setForm(f => ({ ...f, gitBranch: e.target.value }))} className={ic} /></F>
         <div className="flex items-center justify-between">
           <div><p className="text-sm font-medium text-gray-700 dark:text-gray-300">Auto-Deploy</p><p className="text-xs text-gray-500">Deploy on push to branch</p></div>
-          <button onClick={() => setForm(f => ({ ...f, autoDeployEnabled: !f.autoDeployEnabled }))} className="text-indigo-600">
+          <button onClick={() => setForm(f => ({ ...f, autoDeployEnabled: !f.autoDeployEnabled }))} className="text-primary-600">
             {form.autoDeployEnabled ? <ToggleRight className="w-10 h-10" /> : <ToggleLeft className="w-10 h-10 text-gray-400" />}
           </button>
         </div>
       </section>
 
       <div className="flex justify-end">
-        <button onClick={save} disabled={saving} className="px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2 transition-colors">
+        <button onClick={save} disabled={saving} className="px-6 py-2.5 rounded-xl bg-primary-600 text-white font-medium hover:bg-primary-700 disabled:opacity-50 flex items-center gap-2 transition-colors">
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />} Save Changes
         </button>
       </div>

@@ -196,7 +196,7 @@ export default function UsagePage() {
                     </div>
                   ) : metricsLoading ? (
                     <div className="py-8 flex flex-col items-center justify-center gap-2 border-t border-gray-100 dark:border-gray-800 mt-4">
-                      <RefreshCw className="h-6 w-6 animate-spin text-indigo-500" />
+                      <RefreshCw className="h-6 w-6 animate-spin text-primary-500" />
                       <span className="text-xs text-gray-400">Fetching Docker container stats...</span>
                     </div>
                   ) : !metrics ? (
@@ -219,7 +219,7 @@ export default function UsagePage() {
                                 ? 'bg-red-500'
                                 : metrics.cpuUsagePercent > 50
                                   ? 'bg-amber-500'
-                                  : 'bg-indigo-500'
+                                  : 'bg-primary-500'
                             )}
                             style={{ width: `${Math.min(100, metrics.cpuUsagePercent)}%` }}
                           />

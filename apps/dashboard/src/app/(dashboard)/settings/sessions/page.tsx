@@ -96,7 +96,7 @@ export default function SessionsSettingsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Monitor className="w-5 h-5 text-indigo-500" /> Active Sessions
+            <Monitor className="w-5 h-5 text-primary-500" /> Active Sessions
           </h2>
           <p className="text-sm text-gray-500 mt-1">Manage and revoke your active sessions on other devices</p>
         </div>

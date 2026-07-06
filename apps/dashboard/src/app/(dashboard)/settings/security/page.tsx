@@ -116,7 +116,7 @@ export default function SecuritySettingsPage() {
     setTimeout(() => setCopiedCodes(false), 2000);
   };
 
-  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
+  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
     <div className="space-y-6">
@@ -124,7 +124,7 @@ export default function SecuritySettingsPage() {
       <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Key className="w-5 h-5 text-indigo-500" /> Change Password
+            <Key className="w-5 h-5 text-primary-500" /> Change Password
           </h2>
           <p className="text-sm text-gray-500 mt-1">Ensure your account is using a long, random password</p>
         </div>
@@ -160,7 +160,7 @@ export default function SecuritySettingsPage() {
           </div>
 
           <div className="flex justify-end pt-2">
-            <button type="submit" disabled={pwSaving || !currentPassword || !newPassword || !confirmPassword} className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-medium text-sm flex items-center gap-2 transition-all">
+            <button type="submit" disabled={pwSaving || !currentPassword || !newPassword || !confirmPassword} className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 disabled:opacity-40 text-white font-medium text-sm flex items-center gap-2 transition-all">
               {pwSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />} Update Password
             </button>
           </div>
@@ -171,7 +171,7 @@ export default function SecuritySettingsPage() {
       <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Shield className="w-5 h-5 text-indigo-500" /> Two-Factor Authentication
+            <Shield className="w-5 h-5 text-primary-500" /> Two-Factor Authentication
           </h2>
           <p className="text-sm text-gray-500 mt-1">Add an extra layer of security to your account</p>
         </div>
@@ -197,7 +197,7 @@ export default function SecuritySettingsPage() {
               When two-factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's authenticator application.
             </p>
             <div className="pt-2">
-              <button onClick={setup2fa} disabled={tfaLoading} className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm flex items-center gap-2 disabled:opacity-40 transition-all">
+              <button onClick={setup2fa} disabled={tfaLoading} className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm flex items-center gap-2 disabled:opacity-40 transition-all">
                 {tfaLoading && <Loader2 className="w-4 h-4 animate-spin" />} Enable 2FA
               </button>
             </div>
@@ -231,7 +231,7 @@ export default function SecuritySettingsPage() {
             <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-4">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Backup Codes</span>
-                <button onClick={copyBackupCodes} className="text-xs text-indigo-600 hover:underline flex items-center gap-1">
+                <button onClick={copyBackupCodes} className="text-xs text-primary-600 hover:underline flex items-center gap-1">
                   {copiedCodes ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />} {copiedCodes ? 'Copied' : 'Copy All'}
                 </button>
               </div>
@@ -249,7 +249,7 @@ export default function SecuritySettingsPage() {
                 <input value={verificationCode} onChange={e => setVerificationCode(e.target.value)} placeholder="000000" className={cn(inputClass, 'font-mono text-center max-w-[150px] tracking-[0.25em] text-lg')} maxLength={6} required />
               </div>
               <div className="flex gap-3">
-                <button type="submit" disabled={tfaLoading || verificationCode.length < 6} className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm flex items-center gap-2 transition-all">
+                <button type="submit" disabled={tfaLoading || verificationCode.length < 6} className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm flex items-center gap-2 transition-all">
                   {tfaLoading && <Loader2 className="w-4 h-4 animate-spin" />} Verify & Activate
                 </button>
                 <button type="button" onClick={() => setTfaSetupData(null)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Cancel</button>

@@ -133,7 +133,7 @@ export default function AdminBillingPage() {
           className={cn(
             'py-3 px-6 font-semibold text-sm border-b-2 -mb-[2px] transition-all',
             filterType === 'PENDING_CLAIMS'
-              ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
           )}
         >
@@ -149,7 +149,7 @@ export default function AdminBillingPage() {
           className={cn(
             'py-3 px-6 font-semibold text-sm border-b-2 -mb-[2px] transition-all',
             filterType === 'ALL'
-              ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
           )}
         >
@@ -214,7 +214,7 @@ export default function AdminBillingPage() {
                     <td className="px-6 py-4">
                       {pendingPayment ? (
                         <div className="text-xs space-y-0.5">
-                          <span className="block font-semibold text-indigo-600 dark:text-indigo-400">
+                          <span className="block font-semibold text-primary-600 dark:text-primary-400">
                             bKash: {pendingPayment.gatewayTransactionId}
                           </span>
                           <span className="block text-gray-400">
@@ -244,7 +244,7 @@ export default function AdminBillingPage() {
                         <button
                           onClick={() => handleApprove(pendingPayment.id)}
                           disabled={approvingId === pendingPayment.id}
-                          className="inline-flex items-center gap-1.5 rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-indigo-500 transition-all disabled:opacity-50"
+                          className="inline-flex items-center gap-1.5 rounded-xl bg-primary-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-primary-500 transition-all disabled:opacity-50"
                         >
                           {approvingId === pendingPayment.id ? (
                             <RefreshCw className="h-3 w-3 animate-spin" />

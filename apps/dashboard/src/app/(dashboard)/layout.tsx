@@ -170,25 +170,32 @@ export default function DashboardLayout({
       >
         {/* Sidebar header */}
         <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
-          <Link href="/dashboard" className="flex items-center gap-2 overflow-hidden">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500">
-              <svg
-                className="h-5 w-5 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z"
-                />
-              </svg>
-            </div>
+          <Link href="/dashboard" className="flex items-center gap-1.5 overflow-hidden group select-none">
+            <svg viewBox="0 0 100 100" className="h-8 w-8 shrink-0 group-hover:scale-105 transition-transform duration-350">
+              {/* Isometric Server Blades */}
+              <path d="M50 20 L75 30 L50 40 L25 30 Z" fill="#0066ff" />
+              <path d="M25 30 L50 40 L50 48 L25 38 Z" fill="#0052cc" />
+              <path d="M50 40 L75 30 L75 38 L50 48 Z" fill="#003d99" />
+              
+              <path d="M25 44 L50 54 L50 62 L25 52 Z" fill="#0052cc" />
+              <path d="M50 54 L75 44 L75 52 L50 62 Z" fill="#003d99" />
+              
+              <path d="M25 58 L50 68 L50 76 L25 66 Z" fill="#0052cc" />
+              <path d="M50 68 L75 58 L75 66 L50 76 Z" fill="#003d99" />
+
+              {/* Hexagonal curved arrows */}
+              <path d="M54 15 C66 15, 78 23, 83 35 C88 47, 85 61, 77 71" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M72 67 L77 71 L81 66" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+
+              <path d="M71 77 C59 84, 45 85, 32 79 C19 73, 12 59, 13 45" fill="none" stroke="#0052cc" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M18 49 L13 45 L11 50" fill="none" stroke="#0052cc" strokeWidth="4.5" strokeLinecap="round" />
+
+              <path d="M18 36 C24 23, 36 15, 48 14" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M43 11 L48 14 L45 19" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+            </svg>
             {!isCollapsed && (
-              <span className="text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap">
-                IT<span className="text-primary-500">Bengal</span>
+              <span className="text-base font-black tracking-tight uppercase text-gray-900 dark:text-white whitespace-nowrap">
+                IT<span className="text-[#0066ff]">Bengal</span>
               </span>
             )}
           </Link>

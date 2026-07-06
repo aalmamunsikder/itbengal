@@ -44,13 +44,13 @@ export default function ProfileSettingsPage() {
     }
   };
 
-  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent';
+  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
     <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
       <div>
         <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-          <User className="w-5 h-5 text-indigo-500" /> Profile Information
+          <User className="w-5 h-5 text-primary-500" /> Profile Information
         </h2>
         <p className="text-sm text-gray-500 mt-1">Update your name and profile avatar</p>
       </div>
@@ -93,7 +93,7 @@ export default function ProfileSettingsPage() {
         </div>
 
         <div className="flex justify-end pt-2">
-          <button type="submit" disabled={saving || !firstName.trim() || !lastName.trim()} className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-medium text-sm flex items-center gap-2 transition-all">
+          <button type="submit" disabled={saving || !firstName.trim() || !lastName.trim()} className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 disabled:opacity-40 text-white font-medium text-sm flex items-center gap-2 transition-all">
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />} Save Changes
           </button>
         </div>

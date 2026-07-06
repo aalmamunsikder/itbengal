@@ -97,7 +97,7 @@ export default function AdminMonitoringPage() {
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Hypervisor Engine</span>
             <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-indigo-500" />
+              <Activity className="h-5 w-5 text-primary-500" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">Docker CE</span>
             </div>
             <span className="text-xs text-gray-400 block">v{dockerStats.docker.serverVersion}</span>
@@ -106,7 +106,7 @@ export default function AdminMonitoringPage() {
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Host Kernels</span>
             <div className="flex items-center gap-2">
-              <Cpu className="h-5 w-5 text-indigo-500" />
+              <Cpu className="h-5 w-5 text-primary-500" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">{dockerStats.docker.ncpu} Cores</span>
             </div>
             <span className="text-xs text-gray-400 block font-mono">{dockerStats.docker.kernelVersion.slice(0, 16)}</span>
@@ -115,7 +115,7 @@ export default function AdminMonitoringPage() {
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">RAM Allocation</span>
             <div className="flex items-center gap-2">
-              <Database className="h-5 w-5 text-indigo-500" />
+              <Database className="h-5 w-5 text-primary-500" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">{dockerStats.docker.memTotalGb} GB</span>
             </div>
             <span className="text-xs text-gray-400 block">{dockerStats.docker.operatingSystem}</span>
@@ -124,7 +124,7 @@ export default function AdminMonitoringPage() {
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Containers (Local)</span>
             <div className="flex items-center gap-2">
-              <Server className="h-5 w-5 text-indigo-500" />
+              <Server className="h-5 w-5 text-primary-500" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">{dockerStats.containers.total} total</span>
             </div>
             <span className="text-xs text-emerald-500 font-bold">{dockerStats.containers.running} running / {dockerStats.containers.stopped} stopped</span>
@@ -162,7 +162,7 @@ export default function AdminMonitoringPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-500">
+                      <div className="p-2.5 rounded-xl bg-primary-50 dark:bg-primary-950/50 text-primary-500">
                         <Server className="h-5 w-5" />
                       </div>
                       <div>
@@ -195,7 +195,7 @@ export default function AdminMonitoringPage() {
                       </div>
                       <div className="h-2 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
                         <div
-                          className="h-full bg-indigo-500 rounded-full transition-all duration-500"
+                          className="h-full bg-primary-500 rounded-full transition-all duration-500"
                           style={{ width: `${cpuUsagePct}%` }}
                         />
                       </div>
@@ -209,7 +209,7 @@ export default function AdminMonitoringPage() {
                       </div>
                       <div className="h-2 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
                         <div
-                          className="h-full bg-indigo-500 rounded-full transition-all duration-500"
+                          className="h-full bg-primary-500 rounded-full transition-all duration-500"
                           style={{ width: `${memoryUsagePct}%` }}
                         />
                       </div>
@@ -223,7 +223,7 @@ export default function AdminMonitoringPage() {
                       </div>
                       <div className="h-2 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
                         <div
-                          className="h-full bg-indigo-500 rounded-full transition-all duration-500"
+                          className="h-full bg-primary-500 rounded-full transition-all duration-500"
                           style={{ width: `${storageUsagePct}%` }}
                         />
                       </div>

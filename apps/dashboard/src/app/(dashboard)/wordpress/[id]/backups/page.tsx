@@ -156,7 +156,7 @@ export default function WordPressBackupsPage(props: PageProps) {
         <Link href={`/wordpress/${params.id}/db-manager`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Database
         </Link>
-        <Link href={`/wordpress/${params.id}/backups`} className="border-b-2 border-indigo-500 pb-4 text-indigo-500">
+        <Link href={`/wordpress/${params.id}/backups`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           Backups
         </Link>
         <Link href={`/wordpress/${params.id}/settings`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
@@ -166,14 +166,14 @@ export default function WordPressBackupsPage(props: PageProps) {
 
       {loading ? (
         <div className="flex h-64 items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-3">
           {/* Creator Widget */}
           <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4 shadow-sm h-fit">
             <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
-              <History className="h-5 w-5 text-indigo-500" /> Take New Backup
+              <History className="h-5 w-5 text-primary-500" /> Take New Backup
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Create an encrypted backup of your database tables or file structure. Archives are retained for 7 days.
@@ -186,7 +186,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                 <select
                   value={backupType}
                   onChange={(e: any) => setBackupType(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm outline-none focus:border-indigo-500"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm outline-none focus:border-primary-500"
                 >
                   <option value="FULL">Full Backup (DB + Files)</option>
                   <option value="DATABASE_ONLY">Database Only</option>
@@ -197,7 +197,7 @@ export default function WordPressBackupsPage(props: PageProps) {
               <button
                 type="submit"
                 disabled={creating}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors disabled:opacity-40"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 transition-colors disabled:opacity-40"
               >
                 {creating && <Loader2 className="h-4 w-4 animate-spin" />}
                 {creating ? 'Creating Backup...' : 'Backup Now'}
@@ -233,7 +233,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                     className="flex flex-col sm:flex-row sm:items-center justify-between rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-4 shadow-xs hover:shadow-sm transition-all gap-4"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400">
+                      <div className="p-2.5 rounded-lg bg-primary-500/10 text-primary-400">
                         {b.type === 'DATABASE_ONLY' ? (
                           <Database className="h-5 w-5" />
                         ) : b.type === 'FILES_ONLY' ? (
@@ -267,7 +267,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                           <button
                             disabled={restoringId === b.id}
                             onClick={() => handleRestore(b.id)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/10 text-xs font-semibold text-indigo-400 hover:bg-indigo-600 hover:text-white transition-all disabled:opacity-40"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-500/10 text-xs font-semibold text-primary-400 hover:bg-primary-600 hover:text-white transition-all disabled:opacity-40"
                           >
                             {restoringId === b.id && <Loader2 className="h-3 w-3 animate-spin" />}
                             Restore
@@ -284,7 +284,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                           <AlertCircle className="h-4 w-4" /> Failed
                         </span>
                       ) : (
-                        <span className="text-xs text-indigo-400 font-semibold flex items-center gap-1.5">
+                        <span className="text-xs text-primary-400 font-semibold flex items-center gap-1.5">
                           <Loader2 className="h-3.5 w-3.5 animate-spin" /> In Progress
                         </span>
                       )}
