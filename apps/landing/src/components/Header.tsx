@@ -50,12 +50,32 @@ export default function Header() {
       <header className="w-full bg-white border-b border-slate-100 relative">
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 rounded-lg bg-primaryBlue flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300">
-              <Cloud className="h-4.5 w-4.5 text-white" />
-            </div>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900">
-              ITBENGAL
+          <Link href="/" className="flex items-center gap-1.5 group select-none">
+            <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+              {/* Isometric Server Blades */}
+              <path d="M50 20 L75 30 L50 40 L25 30 Z" fill="#0066ff" />
+              <path d="M25 30 L50 40 L50 48 L25 38 Z" fill="#0052cc" />
+              <path d="M50 40 L75 30 L75 38 L50 48 Z" fill="#003d99" />
+              
+              <path d="M25 44 L50 54 L50 62 L25 52 Z" fill="#0052cc" />
+              <path d="M50 54 L75 44 L75 52 L50 62 Z" fill="#003d99" />
+              
+              <path d="M25 58 L50 68 L50 76 L25 66 Z" fill="#0052cc" />
+              <path d="M50 68 L75 58 L75 66 L50 76 Z" fill="#003d99" />
+
+              {/* Hexagonal curved arrows */}
+              <path d="M54 15 C66 15, 78 23, 83 35 C88 47, 85 61, 77 71" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M72 67 L77 71 L81 66" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+
+              <path d="M71 77 C59 84, 45 85, 32 79 C19 73, 12 59, 13 45" fill="none" stroke="#0052cc" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M18 49 L13 45 L11 50" fill="none" stroke="#0052cc" strokeWidth="4.5" strokeLinecap="round" />
+
+              <path d="M18 36 C24 23, 36 15, 48 14" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M43 11 L48 14 L45 19" fill="none" stroke="#0066ff" strokeWidth="4.5" strokeLinecap="round" />
+            </svg>
+            <span className="text-base font-black tracking-tight uppercase">
+              <span className="text-primaryBlue">IT</span>
+              <span className="text-slate-800">Bengal</span>
             </span>
           </Link>
 
