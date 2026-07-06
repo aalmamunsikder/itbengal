@@ -64,10 +64,10 @@ export default function AdminDashboardPage() {
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-black text-slate-800 tracking-tight dark:text-white">
           Admin Dashboard
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider dark:text-gray-400">
           Platform overview and system health monitoring
         </p>
       </div>
@@ -80,37 +80,28 @@ export default function AdminDashboardPage() {
             <div
               key={stat.label}
               className={cn(
-                'group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200',
-                'hover:border-gray-300 hover:shadow-card-hover',
+                'group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-5 transition-all duration-300',
+                'hover:border-[#0066ff]/20 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)]',
                 'dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700',
               )}
             >
-              <div
-                className={cn(
-                  'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-                  stat.bgGradient,
-                )}
-              />
               <div className="relative flex items-start justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <p className="text-xs font-bold text-slate-400 dark:text-gray-400 uppercase tracking-wider">
                     {stat.label}
                   </p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
+                  <p className="mt-2 text-3xl font-black text-slate-800 dark:text-white">
                     {stat.value}
                   </p>
-                  <p className="mt-1 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-                    <TrendingUp className="h-3 w-3" />
+                  <p className="mt-2.5 flex items-center gap-1 text-[10px] font-bold text-slate-400 dark:text-gray-400">
+                    <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
                     {stat.change}
                   </p>
                 </div>
                 <div
-                  className={cn(
-                    'flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm',
-                    stat.gradient,
-                  )}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#0066ff] dark:bg-blue-950/50 dark:text-[#0066ff] shrink-0"
                 >
-                  <Icon className="h-5 w-5 text-white" />
+                  <Icon className="h-5 w-5" />
                 </div>
               </div>
             </div>
@@ -121,35 +112,35 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* System Health */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-            <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 dark:border-gray-800">
+          <div className="rounded-xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-gray-800">
               <div className="flex items-center gap-2">
-                <Activity className="h-5 w-5 text-primary-500" />
-                <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+                <Activity className="h-5 w-5 text-[#0066ff]" />
+                <h2 className="text-sm font-bold text-slate-800 dark:text-white">
                   System Health
                 </h2>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-success-50 px-3 py-1 dark:bg-success-500/10">
-                <CheckCircle2 className="h-3.5 w-3.5 text-success-600 dark:text-success-400" />
-                <span className="text-xs font-medium text-success-700 dark:text-success-400">
+              <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 dark:bg-emerald-500/10">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
                   All systems operational
                 </span>
               </div>
             </div>
 
-            <div className="divide-y divide-gray-100 dark:divide-gray-800">
+            <div className="divide-y divide-slate-50 dark:divide-gray-800">
               {SERVICES.map((service) => (
                 <div
                   key={service.name}
                   className="flex items-center justify-between px-5 py-3.5"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-2 w-2 rounded-full bg-success-500" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <div className="h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="text-xs font-bold text-slate-700 dark:text-gray-300">
                       {service.name}
                     </span>
                   </div>
-                  <span className="text-xs font-medium capitalize text-success-600 dark:text-success-400">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                     {service.status}
                   </span>
                 </div>
@@ -161,29 +152,29 @@ export default function AdminDashboardPage() {
         {/* Recent Activity & Alerts */}
         <div className="space-y-6">
           {/* Alerts */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-warning-500" />
-              <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+              <AlertTriangle className="h-5 w-5 text-amber-500" />
+              <h2 className="text-sm font-bold text-slate-800 dark:text-white">
                 Alerts
               </h2>
             </div>
             <div className="mt-4 flex flex-col items-center justify-center py-8 text-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                <CheckCircle2 className="h-6 w-6 text-success-500" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 dark:bg-gray-800">
+                <CheckCircle2 className="h-6 w-6 text-[#0066ff]" />
               </div>
-              <p className="mt-3 text-sm font-medium text-gray-900 dark:text-white">
+              <p className="mt-3 text-xs font-bold text-slate-800 dark:text-white">
                 No active alerts
               </p>
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-1 text-[11px] text-slate-400 dark:text-gray-400">
                 Everything is running smoothly
               </p>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Quick Links
             </h2>
             <div className="mt-4 space-y-2">
@@ -196,10 +187,10 @@ export default function AdminDashboardPage() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                  className="group flex items-center justify-between rounded-xl px-3 py-2.5 text-xs font-bold text-slate-500 transition-all hover:bg-slate-50 hover:text-[#0066ff] dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                 >
-                  {link.label}
-                  <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="h-4 w-4 text-slate-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#0066ff] transition-all" />
                 </a>
               ))}
             </div>

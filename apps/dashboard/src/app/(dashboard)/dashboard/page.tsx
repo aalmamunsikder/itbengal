@@ -214,31 +214,30 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Welcome banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 p-6 text-white shadow-lg lg:p-8">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0052cc] via-[#0066ff] to-[#004099] p-6 text-white shadow-md lg:p-8">
         {/* Decorative elements */}
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-2xl" />
-        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-accent-500/10 blur-2xl" />
+        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-blue-500/10 blur-2xl" />
         <div className="absolute right-8 top-8 hidden h-24 w-24 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm lg:block" />
 
         <div className="relative">
-          <h1 className="text-2xl font-bold lg:text-3xl">
+          <h1 className="text-2xl font-black lg:text-3xl tracking-tight">
             Welcome back, {firstName} 👋
           </h1>
-          <p className="mt-2 max-w-lg text-primary-100/80">
-            Your hosting dashboard is ready. Deploy projects, manage domains, and
-            monitor your applications from one place.
+          <p className="mt-2 max-w-lg text-blue-100/90 text-sm leading-relaxed">
+            Your hosting dashboard is active. Deploy new code updates, manage custom domains, and monitor isolated container sandboxes.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/projects/new"
-              className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-4.5 py-2.5 text-xs font-bold text-[#0052cc] hover:bg-blue-50 transition-all shadow-sm"
             >
               <Plus className="h-4 w-4" />
               New Project
             </Link>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white/80 transition-all hover:bg-white/10 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4.5 py-2.5 text-xs font-bold text-white transition-all hover:bg-white/10"
             >
               View Projects
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -258,35 +257,24 @@ export default function DashboardPage() {
               <div
                 key={stat.label}
                 className={cn(
-                  'group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200',
-                  'hover:border-gray-300 hover:shadow-card-hover',
+                  'group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-5 transition-all duration-300',
+                  'hover:border-[#0066ff]/20 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)]',
                   'dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700',
                 )}
               >
-                {/* Background gradient */}
-                <div
-                  className={cn(
-                    'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-                    stat.bgGradient,
-                  )}
-                />
-
                 <div className="relative flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <p className="text-xs font-bold text-slate-400 dark:text-gray-400 uppercase tracking-wider">
                       {stat.label}
                     </p>
-                    <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
+                    <p className="mt-2 text-3xl font-black text-slate-800 dark:text-white">
                       {stat.value}
                     </p>
                   </div>
                   <div
-                    className={cn(
-                      'flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm',
-                      stat.gradient,
-                    )}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[#0066ff] dark:bg-blue-950/50 dark:text-[#0066ff] shrink-0"
                   >
-                    <Icon className="h-5 w-5 text-white" />
+                    <Icon className="h-5 w-5" />
                   </div>
                 </div>
               </div>
@@ -298,14 +286,14 @@ export default function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Recent Deployments */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-            <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 dark:border-gray-800">
-              <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+          <div className="rounded-xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-gray-800">
+              <h2 className="text-sm font-bold text-slate-800 dark:text-white">
                 Recent Deployments
               </h2>
               <Link
                 href="/projects"
-                className="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
+                className="text-xs font-bold text-[#0066ff] hover:text-[#0052cc] dark:text-[#0066ff]"
               >
                 View all
               </Link>
@@ -316,33 +304,32 @@ export default function DashboardPage() {
             ) : recentDeployments.length === 0 ? (
               /* Empty state */
               <div className="flex flex-col items-center justify-center px-5 py-16 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                  <Rocket className="h-7 w-7 text-gray-400 dark:text-gray-500" />
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 dark:bg-gray-800">
+                  <Rocket className="h-7 w-7 text-[#0066ff] dark:text-gray-500" />
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">
+                <h3 className="mt-4 text-sm font-bold text-slate-800 dark:text-white">
                   No deployments yet
                 </h3>
-                <p className="mt-1.5 max-w-xs text-sm text-gray-500 dark:text-gray-400">
-                  Deploy your first project to see deployment history and status
-                  updates here.
+                <p className="mt-1.5 max-w-xs text-xs text-slate-400 dark:text-gray-400">
+                  Deploy your first project to see deployment history and status updates here.
                 </p>
                 <Link
                   href="/projects/new"
-                  className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-700 shadow-sm"
+                  className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#0066ff] px-4.5 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#0052cc] shadow-sm"
                 >
                   <Plus className="h-4 w-4" />
                   Deploy a project
                 </Link>
               </div>
             ) : (
-              <div className="divide-y divide-gray-100 dark:divide-gray-800">
+              <div className="divide-y divide-slate-50 dark:divide-gray-800">
                 {recentDeployments.map((deployment) => {
                   const statusStyle = DEPLOY_STATUS_STYLES[deployment.status];
                   return (
                     <Link
                       key={deployment.id}
                       href={`/projects/${deployment.project.id}/deployments/${deployment.id}`}
-                      className="group flex items-center gap-4 px-5 py-3.5 transition-all hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                      className="group flex items-center gap-4 px-5 py-3.5 transition-all hover:bg-slate-50/50 dark:hover:bg-gray-800/50"
                     >
                       {/* Status dot */}
                       <div className={cn('h-2.5 w-2.5 shrink-0 rounded-full', statusStyle.dotColor)} />
@@ -350,25 +337,25 @@ export default function DashboardPage() {
                       {/* Info */}
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-gray-900 group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400 transition-colors">
+                          <span className="text-xs font-bold text-slate-800 group-hover:text-[#0066ff] dark:text-white dark:group-hover:text-primary-400 transition-colors">
                             {deployment.project.name}
                           </span>
-                          <span className={cn('text-xs font-semibold', statusStyle.className)}>
+                          <span className={cn('text-[10px] font-bold px-2 py-0.5 rounded bg-slate-50 dark:bg-slate-800', statusStyle.className)}>
                             {statusStyle.label}
                           </span>
                         </div>
-                        <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+                        <div className="mt-1 flex items-center gap-3 text-xs text-slate-400 dark:text-gray-500">
                           {deployment.commitSha && (
                             <span className="inline-flex items-center gap-1">
                               <GitCommit className="h-3 w-3" />
-                              <code className="font-mono">{deployment.commitSha.slice(0, 7)}</code>
+                              <code className="font-mono text-[10px]">{deployment.commitSha.slice(0, 7)}</code>
                             </span>
                           )}
                           {deployment.commitMessage && (
-                            <span className="truncate">{truncate(deployment.commitMessage, 40)}</span>
+                            <span className="truncate max-w-[200px] text-[11px]">{truncate(deployment.commitMessage, 40)}</span>
                           )}
                           {deployment.branch && (
-                            <span className="inline-flex items-center gap-1">
+                            <span className="inline-flex items-center gap-1 text-[11px]">
                               <GitBranch className="h-3 w-3" />
                               {deployment.branch}
                             </span>
@@ -377,7 +364,7 @@ export default function DashboardPage() {
                       </div>
 
                       {/* Time */}
-                      <div className="flex shrink-0 items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                      <div className="flex shrink-0 items-center gap-1.5 text-xs text-slate-400 dark:text-gray-500">
                         <Clock className="h-3 w-3" />
                         {formatRelativeTime(new Date(deployment.createdAt))}
                       </div>
@@ -392,8 +379,8 @@ export default function DashboardPage() {
         {/* Right column */}
         <div className="space-y-6">
           {/* Quick Actions */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Quick Actions
             </h2>
             <div className="mt-4 space-y-3">
@@ -403,25 +390,22 @@ export default function DashboardPage() {
                   <Link
                     key={action.label}
                     href={action.href}
-                    className="group flex w-full items-center gap-3 rounded-lg border border-gray-200 p-3 text-left transition-all hover:border-gray-300 hover:shadow-sm dark:border-gray-800 dark:hover:border-gray-700"
+                    className="group flex w-full items-center gap-3 rounded-xl border border-slate-100 p-3 text-left transition-all hover:border-[#0066ff]/20 hover:shadow-[0_4px_12px_rgba(0,102,255,0.04)] dark:border-gray-800 dark:hover:border-gray-700"
                   >
                     <div
-                      className={cn(
-                        'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm',
-                        action.gradient,
-                      )}
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-[#0066ff]"
                     >
-                      <Icon className="h-4 w-4 text-white" />
+                      <Icon className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      <p className="text-xs font-bold text-slate-800 dark:text-white">
                         {action.label}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-[10px] text-slate-400 dark:text-gray-400 mt-0.5">
                         {action.description}
                       </p>
                     </div>
-                    <ArrowUpRight className="ml-auto h-4 w-4 text-gray-300 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gray-400 dark:text-gray-600" />
+                    <ArrowUpRight className="ml-auto h-4 w-4 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#0066ff] dark:text-gray-600" />
                   </Link>
                 );
               })}
@@ -429,43 +413,43 @@ export default function DashboardPage() {
           </div>
 
           {/* Server Status */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Server Status
             </h2>
             <div className="mt-4 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Server className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">API Server</span>
+                  <Server className="h-4 w-4 text-slate-400" />
+                  <span className="text-xs font-bold text-slate-500 dark:text-gray-400">API Server</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-success-500" />
-                  <span className="text-sm font-medium text-success-600 dark:text-success-400">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                     Operational
                   </span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Server className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Build Server</span>
+                  <Server className="h-4 w-4 text-slate-400" />
+                  <span className="text-xs font-bold text-slate-500 dark:text-gray-400">Build Server</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-success-500" />
-                  <span className="text-sm font-medium text-success-600 dark:text-success-400">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                     Operational
                   </span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">DNS</span>
+                  <Globe className="h-4 w-4 text-slate-400" />
+                  <span className="text-xs font-bold text-slate-500 dark:text-gray-400">DNS</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-success-500" />
-                  <span className="text-sm font-medium text-success-600 dark:text-success-400">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                     Operational
                   </span>
                 </div>
