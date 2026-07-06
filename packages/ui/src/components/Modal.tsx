@@ -197,7 +197,7 @@ function ModalRoot({
                   'text-gray-400 hover:text-gray-600 hover:bg-gray-100',
                   'dark:hover:text-gray-300 dark:hover:bg-gray-700',
                   'transition-colors duration-150',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500',
                 )}
                 aria-label="Close modal"
               >

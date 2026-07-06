@@ -46,9 +46,9 @@ function AuthLoadingSkeleton() {
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-950">
       {/* Sidebar skeleton */}
-      <aside className="hidden lg:flex w-[260px] flex-col border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+      <aside className="hidden lg:flex w-[260px] flex-col border-r border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900">
         {/* Header */}
-        <div className="flex h-16 items-center gap-2 border-b border-gray-200 px-4 dark:border-gray-800">
+        <div className="flex h-16 items-center gap-2 border-b border-slate-100 px-4 dark:border-gray-800">
           <div className="h-8 w-8 rounded-lg shimmer" />
           <div className="h-5 w-24 rounded shimmer" />
         </div>
@@ -66,7 +66,7 @@ function AuthLoadingSkeleton() {
       {/* Main area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Header skeleton */}
-        <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 dark:border-gray-800 dark:bg-gray-900 lg:px-6">
+        <header className="flex h-16 items-center justify-between border-b border-slate-100 bg-white px-4 dark:border-gray-800 dark:bg-gray-900 lg:px-6">
           <div className="h-9 w-64 rounded-lg shimmer" />
           <div className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-lg shimmer" />
@@ -162,14 +162,14 @@ export default function DashboardLayout({
       {/* ===== Sidebar ===== */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 flex flex-col border-r border-gray-200 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-900',
+          'fixed inset-y-0 left-0 z-50 flex flex-col border-r border-slate-100 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-900',
           'lg:relative lg:z-auto',
           isCollapsed ? 'lg:w-20' : 'lg:w-[260px]',
           isMobileOpen ? 'w-[260px] translate-x-0' : '-translate-x-full lg:translate-x-0',
         )}
       >
         {/* Sidebar header */}
-        <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
+        <div className="flex h-16 items-center justify-between border-b border-slate-100 px-4 dark:border-gray-800">
           <Link href="/dashboard" className="flex items-center gap-1.5 overflow-hidden group select-none">
             <svg viewBox="0 0 100 100" className="h-8 w-8 shrink-0 group-hover:scale-105 transition-transform duration-350">
               {/* Isometric Server Blades */}
@@ -249,7 +249,7 @@ export default function DashboardLayout({
         </nav>
 
         {/* Sidebar footer */}
-        <div className="border-t border-gray-200 p-3 dark:border-gray-800">
+        <div className="border-t border-slate-100 p-3 dark:border-gray-800">
           {/* Theme toggle */}
           <button
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
@@ -293,7 +293,7 @@ export default function DashboardLayout({
           {/* User info */}
           <div
             className={cn(
-              'mt-2 flex items-center gap-3 rounded-lg border border-gray-200 p-3 dark:border-gray-800',
+              'mt-2 flex items-center gap-3 rounded-lg border border-slate-100 p-3 dark:border-gray-800',
               isCollapsed && 'lg:justify-center lg:p-2',
             )}
           >
@@ -324,7 +324,7 @@ export default function DashboardLayout({
       {/* ===== Main content area ===== */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top header bar */}
-        <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 dark:border-gray-800 dark:bg-gray-900 lg:px-6">
+        <header className="flex h-16 items-center justify-between border-b border-slate-100 bg-white px-4 dark:border-gray-800 dark:bg-gray-900 lg:px-6">
           {/* Left: mobile menu + search */}
           <div className="flex items-center gap-3">
             <button
@@ -339,7 +339,7 @@ export default function DashboardLayout({
               <input
                 type="text"
                 placeholder="Search projects, domains..."
-                className="w-64 rounded-lg border border-gray-200 bg-gray-50 py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:w-80 focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:bg-gray-800"
+                className="w-64 rounded-lg border border-slate-100 bg-gray-50 py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:w-80 focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:bg-gray-800"
               />
             </div>
           </div>

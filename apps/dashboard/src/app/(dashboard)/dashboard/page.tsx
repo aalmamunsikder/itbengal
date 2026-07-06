@@ -103,7 +103,7 @@ function StatsGridSkeleton() {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
+          className="relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
         >
           <div className="flex items-start justify-between animate-pulse">
             <div className="space-y-3">
@@ -257,7 +257,7 @@ export default function DashboardPage() {
               <div
                 key={stat.label}
                 className={cn(
-                  'group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-5 transition-all duration-300',
+                  'group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300',
                   'hover:border-[#0066ff]/20 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)]',
                   'dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700',
                 )}
@@ -286,7 +286,7 @@ export default function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Recent Deployments */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-gray-800">
               <h2 className="text-sm font-bold text-slate-800 dark:text-white">
                 Recent Deployments
@@ -379,7 +379,7 @@ export default function DashboardPage() {
         {/* Right column */}
         <div className="space-y-6">
           {/* Quick Actions */}
-          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Quick Actions
             </h2>
@@ -413,7 +413,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Server Status */}
-          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Server Status
             </h2>

@@ -70,7 +70,7 @@ export default function InstallWordPressPage() {
         <ArrowLeft className="h-4 w-4" /> Back to installations
       </Link>
 
-      <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm space-y-6">
+      <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 p-8 shadow-sm space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-primary-500" /> Install WordPress
@@ -107,7 +107,7 @@ export default function InstallWordPressPage() {
                 placeholder="My WordPress Site"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
 
@@ -115,7 +115,7 @@ export default function InstallWordPressPage() {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Domain Name *
               </label>
-              <div className="flex rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 overflow-hidden">
+              <div className="flex rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 overflow-hidden">
                 <input
                   type="text"
                   required
@@ -124,7 +124,7 @@ export default function InstallWordPressPage() {
                   onChange={(e) => setSubdomain(e.target.value.replace(/[^a-zA-Z0-9-]/g, ''))}
                   className="w-full bg-transparent px-4 py-2.5 text-sm outline-none"
                 />
-                <span className="bg-gray-100 dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 px-4 py-2.5 text-sm text-gray-400 font-medium flex items-center">
+                <span className="bg-gray-100 dark:bg-gray-900 border-l border-slate-100 dark:border-gray-800 px-4 py-2.5 text-sm text-gray-400 font-medium flex items-center">
                   .itbengal.xyz
                 </span>
               </div>
@@ -132,7 +132,7 @@ export default function InstallWordPressPage() {
           </div>
 
           {/* WordPress Metadata */}
-          <div className="border-t border-gray-200 dark:border-gray-800 pt-6 space-y-4">
+          <div className="border-t border-slate-100 dark:border-gray-800 pt-6 space-y-4">
             <h3 className="text-md font-semibold text-gray-900 dark:text-white">WordPress Site Details</h3>
             
             <div className="space-y-2">
@@ -145,7 +145,7 @@ export default function InstallWordPressPage() {
                 placeholder="My Business Blog"
                 value={siteTitle}
                 onChange={(e) => setSiteTitle(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
 
@@ -159,7 +159,7 @@ export default function InstallWordPressPage() {
                   required
                   value={adminUsername}
                   onChange={(e) => setAdminUsername(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                  className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
                 />
               </div>
 
@@ -173,7 +173,7 @@ export default function InstallWordPressPage() {
                   placeholder="admin@example.com"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                  className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
                 />
               </div>
             </div>
@@ -188,13 +188,13 @@ export default function InstallWordPressPage() {
                 placeholder="••••••••••••"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               />
             </div>
           </div>
 
           {/* Engine specifications */}
-          <div className="grid gap-6 sm:grid-cols-2 border-t border-gray-200 dark:border-gray-800 pt-6">
+          <div className="grid gap-6 sm:grid-cols-2 border-t border-slate-100 dark:border-gray-800 pt-6">
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 PHP Version
@@ -202,7 +202,7 @@ export default function InstallWordPressPage() {
               <select
                 value={phpVersion}
                 onChange={(e) => setPhpVersion(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               >
                 <option value="8.1">PHP 8.1</option>
                 <option value="8.2">PHP 8.2 (Recommended)</option>
@@ -217,7 +217,7 @@ export default function InstallWordPressPage() {
               <select
                 value={wpVersion}
                 onChange={(e) => setWpVersion(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               >
                 <option value="latest">Latest Stable (v6.6.x)</option>
                 <option value="6.5">WordPress 6.5</option>

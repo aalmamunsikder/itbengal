@@ -111,7 +111,7 @@ export function Pagination({
     'inline-flex items-center justify-center rounded-lg text-sm font-medium',
     'h-9 min-w-[36px] px-2',
     'transition-all duration-150',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500',
   );
 
   return (
@@ -149,7 +149,7 @@ export function Pagination({
             className={cn(
               buttonBase,
               page === currentPage
-                ? 'bg-indigo-600 text-white shadow-sm dark:bg-indigo-500'
+                ? 'bg-primary-600 text-white shadow-sm dark:bg-primary-500'
                 : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700',
             )}
           >

@@ -115,7 +115,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
       </Link>
 
       {/* Header bar */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 dark:border-gray-800 pb-6">
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
@@ -143,7 +143,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
             href={`http://${site.domain}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
           >
             Visit Site <ExternalLink className="h-4 w-4" />
           </a>
@@ -151,7 +151,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
             href={`http://${site.domain}/wp-admin`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
           >
             WP Admin <ExternalLink className="h-4 w-4" />
           </a>
@@ -179,7 +179,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
+      <div className="flex border-b border-slate-100 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
         <Link href={`/wordpress/${site.id}`} className="border-b-2 border-primary-500 pb-4 text-primary-500">
           Overview
         </Link>
@@ -200,7 +200,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
       {/* Overview Cards */}
       <div className="grid gap-6 md:grid-cols-3">
         {/* Core Specs Card */}
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
+        <div className="rounded-2xl border border-slate-100 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
             <Activity className="h-5 w-5 text-primary-500" /> Platform Info
           </h3>
@@ -225,7 +225,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
         </div>
 
         {/* Database Connection Card */}
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
+        <div className="rounded-2xl border border-slate-100 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
             <Database className="h-5 w-5 text-primary-500" /> Database Access
           </h3>
@@ -263,7 +263,7 @@ export default function WordPressSiteDetailPage(props: PageProps) {
         </div>
 
         {/* Resource Usage Card */}
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
+        <div className="rounded-2xl border border-slate-100 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 space-y-4 shadow-sm">
           <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
             <Cpu className="h-5 w-5 text-primary-500" /> Container Health
           </h3>

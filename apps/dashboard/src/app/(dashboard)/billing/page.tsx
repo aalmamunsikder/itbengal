@@ -183,13 +183,13 @@ export default function BillingPage() {
 
       {loading ? (
         <div className="space-y-6">
-          <div className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 shimmer" />
-          <div className="h-64 rounded-2xl bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 shimmer" />
+          <div className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 shimmer" />
+          <div className="h-64 rounded-2xl bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 shimmer" />
         </div>
       ) : (
         <>
           {/* Active Subscription Summary */}
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/30 p-6">
+          <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/30 p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-xl bg-primary-50 dark:bg-primary-950/50 text-primary-600 dark:text-primary-400">
@@ -239,7 +239,7 @@ export default function BillingPage() {
                         'relative rounded-2xl border bg-white dark:bg-gray-900/40 p-6 flex flex-col justify-between transition-all hover:border-primary-500/40',
                         isCurrent
                           ? 'border-primary-500 ring-2 ring-primary-500/20'
-                          : 'border-gray-200 dark:border-gray-800'
+                          : 'border-slate-100 dark:border-gray-800'
                       )}
                     >
                       {isCurrent && (
@@ -293,7 +293,7 @@ export default function BillingPage() {
 
           {/* bKash Payment Form */}
           {activeInvoiceId && (
-            <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 max-w-lg">
+            <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 max-w-lg">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                 <Send className="h-5 w-5 text-primary-500" /> bKash Manual Payment
               </h2>
@@ -315,7 +315,7 @@ export default function BillingPage() {
                     placeholder="e.g. 01712345678"
                     value={bkashSender}
                     onChange={(e) => setBkashSender(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                    className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
                   />
                 </div>
 
@@ -329,7 +329,7 @@ export default function BillingPage() {
                     placeholder="e.g. BK8910A2CD"
                     value={bkashTrxId}
                     onChange={(e) => setBkashTrxId(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                    className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
                   />
                 </div>
 
@@ -342,7 +342,7 @@ export default function BillingPage() {
                     required
                     disabled
                     value={bkashAmount}
-                    className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 px-4 py-2.5 text-sm text-gray-500 cursor-not-allowed outline-none"
+                    className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 px-4 py-2.5 text-sm text-gray-500 cursor-not-allowed outline-none"
                   />
                 </div>
 
@@ -362,7 +362,7 @@ export default function BillingPage() {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               <RefreshCw className="h-5 w-5 text-primary-500" /> Invoice & Payment History
             </h2>
-            <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/30">
+            <div className="overflow-hidden rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/30">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
                 <thead className="bg-gray-50 dark:bg-gray-900/50 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   <tr>

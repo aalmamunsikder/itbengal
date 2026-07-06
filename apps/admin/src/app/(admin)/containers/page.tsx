@@ -110,7 +110,7 @@ export default function AdminContainersPage() {
           </h1>
           <p className="text-sm text-gray-500 mt-1">Monitor running docker engines and system resources</p>
         </div>
-        <button onClick={load} className="p-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+        <button onClick={load} className="p-2.5 rounded-xl border border-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>
@@ -160,7 +160,7 @@ export default function AdminContainersPage() {
               const isManaged = c.labels['itbengal.managed'] === 'true';
               return (
                 <div key={c.id} className={cn('p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all',
-                  isManaged ? 'border-primary-150 dark:border-primary-900/40 bg-primary-50/5 dark:bg-primary-950/5' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30')}>
+                  isManaged ? 'border-primary-150 dark:border-primary-900/40 bg-primary-50/5 dark:bg-primary-950/5' : 'border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-800/30')}>
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
@@ -186,10 +186,10 @@ export default function AdminContainersPage() {
                       {isManaged ? '✨ ITBengal Managed' : 'Docker Host App'}
                     </span>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => fetchLogs(c.id)} className="p-1.5 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-gray-500 transition-colors" title="Logs">
+                      <button onClick={() => fetchLogs(c.id)} className="p-1.5 border border-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-gray-500 transition-colors" title="Logs">
                         <FileText className="w-4 h-4" />
                       </button>
-                      <button onClick={() => restart(c.id)} disabled={actionId === c.id} className="p-1.5 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-gray-500 transition-colors" title="Restart">
+                      <button onClick={() => restart(c.id)} disabled={actionId === c.id} className="p-1.5 border border-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-gray-500 transition-colors" title="Restart">
                         {actionId === c.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <RotateCcw className="w-4 h-4" />}
                       </button>
                     </div>

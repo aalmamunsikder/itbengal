@@ -39,7 +39,7 @@ const LINE_COLORS: Record<CodeLineType, string> = {
   error: 'text-red-400',
   warn: 'text-amber-400',
   success: 'text-emerald-400',
-  system: 'text-indigo-400',
+  system: 'text-primary-400',
 };
 
 /* ------------------------------------------------------------------ */

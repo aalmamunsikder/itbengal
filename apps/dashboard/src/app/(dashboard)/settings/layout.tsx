@@ -48,7 +48,7 @@ export default function SettingsLayout({
       <div className="flex flex-col gap-6 lg:flex-row">
         {/* Sidebar Navigation */}
         <aside className="w-full lg:w-56 shrink-0">
-          <nav className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-2">
+          <nav className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-2">
             <ul className="space-y-0.5">
               {SETTINGS_NAV.map((item) => {
                 const isActive = item.exact

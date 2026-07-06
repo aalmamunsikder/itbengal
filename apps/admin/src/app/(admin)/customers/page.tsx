@@ -79,7 +79,7 @@ export default function AdminCustomersPage() {
         <button
           onClick={fetchCustomers}
           disabled={loading}
-          className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+          className="inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
         >
           <RefreshCw className={cn('h-4 w-4', loading && 'animate-spin')} />
           Refresh
@@ -89,11 +89,11 @@ export default function AdminCustomersPage() {
       {loading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 shimmer" />
+            <div key={i} className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 shimmer" />
           ))}
         </div>
       ) : organizations.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
           <Users className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No organizations found</h3>
           <p className="mt-1 text-sm text-gray-500">There are no customer tenant accounts registered in the database.</p>
@@ -108,7 +108,7 @@ export default function AdminCustomersPage() {
             return (
               <div
                 key={org.id}
-                className="rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all"
+                className="rounded-2xl border border-slate-100 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all"
               >
                 <div>
                   <div className="flex items-start justify-between">

@@ -181,9 +181,9 @@ export default function SslPage() {
       )}
 
       {loadingSites ? (
-        <div className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 shimmer" />
+        <div className="h-48 rounded-2xl bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 shimmer" />
       ) : sites.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
           <Globe className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No active instances</h3>
           <p className="mt-1 text-sm text-gray-500">
@@ -193,7 +193,7 @@ export default function SslPage() {
       ) : (
         <div className="grid gap-6 md:grid-cols-3">
           {/* Sidebar selector */}
-          <div className="md:col-span-1 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-4 space-y-3">
+          <div className="md:col-span-1 rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-4 space-y-3">
             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Select site</h3>
             {sites.map((site) => (
               <button
@@ -227,7 +227,7 @@ export default function SslPage() {
             {selectedSite && (
               <>
                 {/* Domain & Certificate Status card */}
-                <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-4">
+                <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">SSL Configuration</h3>
                     <span
@@ -258,7 +258,7 @@ export default function SslPage() {
                         <button
                           onClick={() => handleDnsCheck(selectedSite.domain)}
                           disabled={checkingDns || runningAction}
-                          className="px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg text-xs font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1"
+                          className="px-3 py-1.5 border border-slate-100 dark:border-gray-800 rounded-lg text-xs font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1"
                         >
                           <RefreshCw className={cn('h-3 w-3', checkingDns && 'animate-spin')} /> DNS Check
                         </button>
@@ -283,7 +283,7 @@ export default function SslPage() {
                           <button
                             onClick={() => handleDnsCheck(selectedSite.customDomain!)}
                             disabled={checkingDns || runningAction}
-                            className="px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg text-xs font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1"
+                            className="px-3 py-1.5 border border-slate-100 dark:border-gray-800 rounded-lg text-xs font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1"
                           >
                             <RefreshCw className={cn('h-3 w-3', checkingDns && 'animate-spin')} /> DNS Check
                           </button>
@@ -331,7 +331,7 @@ export default function SslPage() {
                 <div className="space-y-4">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">Certificates History</h3>
                   {loadingCerts ? (
-                    <div className="h-24 rounded-2xl bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 shimmer" />
+                    <div className="h-24 rounded-2xl bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 shimmer" />
                   ) : certificates.length === 0 ? (
                     <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/30 p-6 text-center text-sm text-gray-400">
                       No active certificates registered for this installation yet.
@@ -340,7 +340,7 @@ export default function SslPage() {
                     certificates.map((cert) => (
                       <div
                         key={cert.id}
-                        className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-4"
+                        className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-4"
                       >
                         <div className="flex justify-between items-start gap-4">
                           <div>

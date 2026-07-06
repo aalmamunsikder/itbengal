@@ -179,7 +179,7 @@ function StepSource({
         <button
           onClick={() => setMode('github')}
           className={cn(
-            'group relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white p-8 text-left transition-all duration-200',
+            'group relative overflow-hidden rounded-2xl border-2 border-slate-100 bg-white p-8 text-left transition-all duration-200',
             'hover:border-primary-300 hover:shadow-lg',
             'dark:border-gray-700 dark:bg-gray-900 dark:hover:border-primary-600',
           )}
@@ -202,7 +202,7 @@ function StepSource({
         <button
           onClick={() => setMode('zip')}
           className={cn(
-            'group relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white p-8 text-left transition-all duration-200',
+            'group relative overflow-hidden rounded-2xl border-2 border-slate-100 bg-white p-8 text-left transition-all duration-200',
             'hover:border-primary-300 hover:shadow-lg',
             'dark:border-gray-700 dark:bg-gray-900 dark:hover:border-primary-600',
           )}
@@ -225,7 +225,7 @@ function StepSource({
         <button
           onClick={() => setMode('template')}
           className={cn(
-            'group relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white p-8 text-left transition-all duration-200',
+            'group relative overflow-hidden rounded-2xl border-2 border-slate-100 bg-white p-8 text-left transition-all duration-200',
             'hover:border-accent-300 hover:shadow-lg',
             'dark:border-gray-700 dark:bg-gray-900 dark:hover:border-accent-600',
           )}
@@ -261,7 +261,7 @@ function StepSource({
           Upload ZIP Package
         </h3>
         
-        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-gray-200 bg-white py-12 text-center dark:border-gray-700 dark:bg-gray-900">
+        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-slate-100 bg-white py-12 text-center dark:border-gray-700 dark:bg-gray-900">
           <Upload className="h-10 w-10 text-gray-400 animate-bounce mb-3" />
           <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">Select project ZIP file to upload</p>
           <p className="text-xs text-gray-400 mt-1 mb-5">Supported formats: .zip (max 50MB)</p>
@@ -322,7 +322,7 @@ function StepSource({
               key={key}
               onClick={() => onSelectTemplate(key as Framework)}
               className={cn(
-                'group flex flex-col items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white p-6 transition-all duration-200',
+                'group flex flex-col items-center gap-3 rounded-2xl border-2 border-slate-100 bg-white p-6 transition-all duration-200',
                 'hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5',
                 'dark:border-gray-700 dark:bg-gray-900 dark:hover:border-primary-600',
               )}
@@ -349,7 +349,7 @@ function StepSource({
       </button>
 
       {githubRepos.length === 0 && !isLoadingGitHub ? (
-        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-gray-200 bg-white py-16 text-center dark:border-gray-700 dark:bg-gray-900">
+        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-slate-100 bg-white py-16 text-center dark:border-gray-700 dark:bg-gray-900">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-900 dark:bg-white">
             <Github className="h-8 w-8 text-white dark:text-gray-900" />
           </div>
@@ -376,7 +376,7 @@ function StepSource({
               placeholder="Search repositories..."
               value={repoSearch}
               onChange={(e) => setRepoSearch(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+              className="w-full rounded-2xl border border-slate-100 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
             />
           </div>
 
@@ -393,7 +393,7 @@ function StepSource({
                   key={repo.id}
                   onClick={() => onSelectRepo(repo)}
                   className={cn(
-                    'flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left transition-all',
+                    'flex w-full items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 text-left transition-all',
                     'hover:border-primary-300 hover:bg-primary-50/50',
                     'dark:border-gray-700 dark:bg-gray-900 dark:hover:border-primary-600 dark:hover:bg-primary-500/5',
                   )}
@@ -487,7 +487,7 @@ function StepConfigure({
           value={config.name}
           onChange={(e) => onChange({ name: e.target.value })}
           placeholder="my-awesome-project"
-          className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+          className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
         />
       </div>
 
@@ -501,7 +501,7 @@ function StepConfigure({
             <select
               value={config.framework}
               onChange={(e) => handleFrameworkChange(e.target.value as Framework)}
-              className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+              className="w-full appearance-none rounded-2xl border border-slate-100 bg-white px-4 py-2.5 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
             >
               {Object.entries(FRAMEWORK_DEFAULTS).map(([key, fw]) => (
                 <option key={key} value={key}>
@@ -524,7 +524,7 @@ function StepConfigure({
               <select
                 value={config.branch}
                 onChange={(e) => onChange({ branch: e.target.value })}
-                className="w-full appearance-none rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                className="w-full appearance-none rounded-2xl border border-slate-100 bg-white py-2.5 pl-10 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
               >
                 {githubBranches.map((b) => (
                   <option key={b.name} value={b.name}>
@@ -538,7 +538,7 @@ function StepConfigure({
                 value={config.branch}
                 onChange={(e) => onChange({ branch: e.target.value })}
                 placeholder="main"
-                className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+                className="w-full rounded-2xl border border-slate-100 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
               />
             )}
             <ChevronDown className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -557,7 +557,7 @@ function StepConfigure({
             value={config.buildCommand}
             onChange={(e) => onChange({ buildCommand: e.target.value })}
             placeholder="npm run build"
-            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
 
@@ -571,7 +571,7 @@ function StepConfigure({
             value={config.installCommand}
             onChange={(e) => onChange({ installCommand: e.target.value })}
             placeholder="npm install"
-            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
       </div>
@@ -587,7 +587,7 @@ function StepConfigure({
             value={config.outputDirectory}
             onChange={(e) => onChange({ outputDirectory: e.target.value })}
             placeholder="dist"
-            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
 
@@ -600,7 +600,7 @@ function StepConfigure({
             <select
               value={config.nodeVersion}
               onChange={(e) => onChange({ nodeVersion: e.target.value })}
-              className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+              className="w-full appearance-none rounded-2xl border border-slate-100 bg-white px-4 py-2.5 pr-10 text-sm text-gray-900 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
             >
               {NODE_VERSIONS.map((v) => (
                 <option key={v} value={v}>Node {v} LTS</option>
@@ -620,7 +620,7 @@ function StepConfigure({
             value={config.rootDirectory}
             onChange={(e) => onChange({ rootDirectory: e.target.value })}
             placeholder="."
-            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-2.5 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
       </div>
@@ -674,7 +674,7 @@ function StepEnvironment({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowImport(!showImport)}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-100 px-3 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
           >
             <Upload className="h-4 w-4" />
             Import .env
@@ -700,7 +700,7 @@ function StepEnvironment({
             onChange={(e) => setImportText(e.target.value)}
             placeholder={'DATABASE_URL=postgres://...\nAPI_KEY=sk-...'}
             rows={6}
-            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white px-4 py-3 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
           <div className="mt-3 flex justify-end gap-2">
             <button
@@ -725,26 +725,26 @@ function StepEnvironment({
           {envVars.map((envVar, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-900"
+              className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3 dark:border-gray-700 dark:bg-gray-900"
             >
               <input
                 type="text"
                 placeholder="KEY"
                 value={envVar.key}
                 onChange={(e) => onChange(index, 'key', e.target.value)}
-                className="w-1/3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+                className="w-1/3 rounded-lg border border-slate-100 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
               />
               <input
                 type="text"
                 placeholder="value"
                 value={envVar.value}
                 onChange={(e) => onChange(index, 'value', e.target.value)}
-                className="flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+                className="flex-1 rounded-lg border border-slate-100 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
               />
               <select
                 value={envVar.target}
                 onChange={(e) => onChange(index, 'target', e.target.value)}
-                className="w-32 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                className="w-32 rounded-lg border border-slate-100 bg-gray-50 px-3 py-2 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
               >
                 <option value="ALL">All</option>
                 <option value="PRODUCTION">Production</option>
@@ -760,7 +760,7 @@ function StepEnvironment({
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center rounded-xl border-2 border-dashed border-gray-200 py-12 text-center dark:border-gray-700">
+        <div className="flex flex-col items-center rounded-xl border-2 border-dashed border-slate-100 py-12 text-center dark:border-gray-700">
           <FileText className="h-8 w-8 text-gray-300 dark:text-gray-600" />
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
             No environment variables added yet.
@@ -796,7 +796,7 @@ function StepReview({
   return (
     <div className="space-y-6">
       {/* Summary card */}
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+      <div className="rounded-2xl border border-slate-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           Deployment Summary
         </h3>
@@ -1111,7 +1111,7 @@ export default function NewProjectPage() {
       )}
 
       {/* Step Content */}
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900 sm:p-8">
+      <div className="rounded-2xl border border-slate-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900 sm:p-8">
         {step === 1 && (
           <StepSource
             onSelectRepo={handleSelectRepo}
@@ -1152,7 +1152,7 @@ export default function NewProjectPage() {
           <button
             onClick={() => setStep((s) => s - 1)}
             disabled={isDeploying}
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-100 px-5 py-2.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
           >
             <ArrowLeft className="h-4 w-4" />
             Back

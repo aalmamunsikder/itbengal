@@ -209,7 +209,7 @@ export default function DeploymentDetailPage() {
       </div>
 
       {/* ── Pipeline Timeline ── */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6">
         <div className="flex items-center justify-between relative">
           {/* Connecting line */}
           <div className="absolute top-5 left-8 right-8 h-0.5 bg-gray-200 dark:bg-gray-700" />
@@ -311,7 +311,7 @@ export default function DeploymentDetailPage() {
 
         {/* ── Sidebar Metadata ── */}
         <div className="space-y-4">
-          <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 space-y-4">
+          <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-5 space-y-4">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Details</h3>
             <dl className="space-y-3 text-sm">
               <div><dt className="text-gray-500">Build Duration</dt><dd className="font-semibold text-gray-900 dark:text-white mt-0.5">{dur(dep.buildDurationMs)}</dd></div>
@@ -329,7 +329,7 @@ export default function DeploymentDetailPage() {
             </div>
           )}
 
-          <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 space-y-3">
+          <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-5 space-y-3">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Timing</h3>
             <dl className="space-y-2 text-sm">
               <div><dt className="text-gray-500">Created</dt><dd className="text-gray-900 dark:text-white mt-0.5">{new Date(dep.createdAt).toLocaleString()}</dd></div>

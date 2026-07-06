@@ -84,7 +84,7 @@ export default function AdminMonitoringPage() {
         <button
           onClick={fetchData}
           disabled={loading}
-          className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+          className="inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
         >
           <RefreshCw className={cn('h-4 w-4', loading && 'animate-spin')} />
           Refresh Stats
@@ -94,7 +94,7 @@ export default function AdminMonitoringPage() {
       {/* Docker Daemon Stats card */}
       {dockerStats && (
         <div className="grid gap-6 md:grid-cols-4">
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
+          <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Hypervisor Engine</span>
             <div className="flex items-center gap-2">
               <Activity className="h-5 w-5 text-primary-500" />
@@ -103,7 +103,7 @@ export default function AdminMonitoringPage() {
             <span className="text-xs text-gray-400 block">v{dockerStats.docker.serverVersion}</span>
           </div>
 
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
+          <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Host Kernels</span>
             <div className="flex items-center gap-2">
               <Cpu className="h-5 w-5 text-primary-500" />
@@ -112,7 +112,7 @@ export default function AdminMonitoringPage() {
             <span className="text-xs text-gray-400 block font-mono">{dockerStats.docker.kernelVersion.slice(0, 16)}</span>
           </div>
 
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
+          <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">RAM Allocation</span>
             <div className="flex items-center gap-2">
               <Database className="h-5 w-5 text-primary-500" />
@@ -121,7 +121,7 @@ export default function AdminMonitoringPage() {
             <span className="text-xs text-gray-400 block">{dockerStats.docker.operatingSystem}</span>
           </div>
 
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
+          <div className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-5 space-y-2">
             <span className="text-[10px] uppercase text-gray-400 font-bold block">Containers (Local)</span>
             <div className="flex items-center gap-2">
               <Server className="h-5 w-5 text-primary-500" />
@@ -139,11 +139,11 @@ export default function AdminMonitoringPage() {
         {loading ? (
           <div className="space-y-4">
             {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="h-32 bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 rounded-xl shimmer" />
+              <div key={i} className="h-32 bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 rounded-xl shimmer" />
             ))}
           </div>
         ) : nodes.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+          <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
             <ShieldAlert className="mx-auto h-12 w-12 text-gray-400" />
             <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No nodes active</h3>
             <p className="mt-1 text-sm text-gray-500">There are no server nodes registered on the cluster database.</p>
@@ -158,7 +158,7 @@ export default function AdminMonitoringPage() {
               return (
                 <div
                   key={node.id}
-                  className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-6"
+                  className="rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-6 space-y-6"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">

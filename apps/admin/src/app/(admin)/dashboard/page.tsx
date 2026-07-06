@@ -80,7 +80,7 @@ export default function AdminDashboardPage() {
             <div
               key={stat.label}
               className={cn(
-                'group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-5 transition-all duration-300',
+                'group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300',
                 'hover:border-[#0066ff]/20 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)]',
                 'dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700',
               )}
@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* System Health */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-gray-800">
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-[#0066ff]" />
@@ -152,7 +152,7 @@ export default function AdminDashboardPage() {
         {/* Recent Activity & Alerts */}
         <div className="space-y-6">
           {/* Alerts */}
-          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-amber-500" />
               <h2 className="text-sm font-bold text-slate-800 dark:text-white">
@@ -173,7 +173,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Quick Links */}
-          <div className="rounded-xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
+          <div className="rounded-2xl border border-slate-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 shadow-sm">
             <h2 className="text-sm font-bold text-slate-800 dark:text-white">
               Quick Links
             </h2>

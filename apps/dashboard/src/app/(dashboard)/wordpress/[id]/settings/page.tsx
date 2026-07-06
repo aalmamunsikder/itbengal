@@ -149,7 +149,7 @@ export default function WordPressSettingsPage(props: PageProps) {
       </Link>
 
       {/* Header */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 dark:border-gray-800 pb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
             {siteTitle}
@@ -161,7 +161,7 @@ export default function WordPressSettingsPage(props: PageProps) {
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
+      <div className="flex border-b border-slate-100 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
         <Link href={`/wordpress/${params.id}`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Overview
         </Link>
@@ -182,7 +182,7 @@ export default function WordPressSettingsPage(props: PageProps) {
       {/* Panels */}
       <div className="space-y-6">
         {/* Core Config form */}
-        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm">
+        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 p-8 shadow-sm">
           <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center gap-2 mb-4">
             <Settings className="h-5 w-5 text-primary-500" /> Site Configurations
           </h3>
@@ -197,7 +197,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                 required
                 value={siteTitle}
                 onChange={(e) => setSiteTitle(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
               />
             </div>
 
@@ -210,7 +210,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                 placeholder="my-blog.com"
                 value={customDomain}
                 onChange={(e) => setCustomDomain(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
               />
               <p className="text-[11px] text-gray-400">
                 Point your domain&apos;s CNAME record to <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-primary-400">itbengal.xyz</code> to activate SSL.
@@ -224,7 +224,7 @@ export default function WordPressSettingsPage(props: PageProps) {
               <select
                 value={phpVersion}
                 onChange={(e) => setPhpVersion(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm outline-none"
               >
                 <option value="8.1">PHP 8.1</option>
                 <option value="8.2">PHP 8.2</option>
@@ -232,7 +232,7 @@ export default function WordPressSettingsPage(props: PageProps) {
               </select>
             </div>
 
-            <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-gray-800">
               <label className="flex items-center gap-3">
                 <input
                   type="checkbox"

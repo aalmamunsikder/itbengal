@@ -149,14 +149,14 @@ export default function ProjectDetailPage() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-violet-600 text-white font-medium shadow-lg shadow-primary-500/25 hover:shadow-xl hover:brightness-110 transition-all disabled:opacity-60">
             {deploying ? <Loader2 className="w-4 h-4 animate-spin" /> : <Rocket className="w-4 h-4" />} Deploy
           </button>
-          <button onClick={() => setTab('settings')} className="p-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+          <button onClick={() => setTab('settings')} className="p-2.5 rounded-xl border border-slate-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
             <Settings className="w-5 h-5 text-gray-500" />
           </button>
         </div>
       </div>
 
       {/* ── Tabs ── */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
+      <div className="border-b border-slate-100 dark:border-gray-700">
         <nav className="flex gap-6 -mb-px overflow-x-auto">
           {tabs.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
@@ -185,7 +185,7 @@ function OverviewTab({ project }: { project: Project }) {
   return (
     <div className="space-y-6">
       {/* Latest deployment */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Latest Deployment</h3>
         {dep ? (
           <Link href={`/projects/${project.id}/deployments/${dep.id}`} className="flex items-center justify-between group hover:bg-gray-50 dark:hover:bg-gray-800/50 -mx-2 px-2 py-2 rounded-xl transition-colors">
@@ -209,7 +209,7 @@ function OverviewTab({ project }: { project: Project }) {
           { label: 'Framework', value: FW[project.framework]?.label || project.framework },
           { label: 'Node Version', value: `v${project.nodeVersion}` },
         ].map(s => (
-          <div key={s.label} className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5">
+          <div key={s.label} className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-5">
             <p className="text-sm text-gray-500">{s.label}</p>
             <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{s.value}</p>
           </div>
@@ -217,7 +217,7 @@ function OverviewTab({ project }: { project: Project }) {
       </div>
 
       {/* Project info */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Project Info</h3>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
           {project.gitRepoUrl && (
@@ -269,7 +269,7 @@ function DeploymentsTab({ projectId }: { projectId: string }) {
         const TI = TRIGGER_ICON[d.triggerType] || Play;
         return (
           <button key={d.id} onClick={() => router.push(`/projects/${projectId}/deployments/${d.id}`)}
-            className="w-full bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/50 p-4 flex items-center justify-between hover:border-primary-300 dark:hover:border-primary-600 transition-colors text-left">
+            className="w-full bg-white dark:bg-gray-800/50 rounded-xl border border-slate-100 dark:border-gray-700/50 p-4 flex items-center justify-between hover:border-primary-300 dark:hover:border-primary-600 transition-colors text-left">
             <div className="flex items-center gap-4 min-w-0">
               <span className={cn('px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap', BADGE[d.status])}>{d.status}</span>
               <div className="min-w-0">
@@ -297,9 +297,9 @@ function DeploymentsTab({ projectId }: { projectId: string }) {
       })}
       {totalPages > 1 && (
         <div className="flex justify-center gap-2 pt-4">
-          <button disabled={page <= 1} onClick={() => setPage(p => p - 1)} className="px-3 py-1.5 rounded-lg text-sm border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Previous</button>
+          <button disabled={page <= 1} onClick={() => setPage(p => p - 1)} className="px-3 py-1.5 rounded-lg text-sm border border-slate-100 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Previous</button>
           <span className="px-3 py-1.5 text-sm text-gray-500">{page} / {totalPages}</span>
-          <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} className="px-3 py-1.5 rounded-lg text-sm border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Next</button>
+          <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} className="px-3 py-1.5 rounded-lg text-sm border border-slate-100 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Next</button>
         </div>
       )}
     </div>
@@ -348,12 +348,12 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
     setShowBulk(false); setBulkText(''); load();
   };
 
-  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
+  const ic = 'w-full px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
     <div className="space-y-6">
       {/* Add form */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Add Variable</h3>
           <button onClick={() => setShowBulk(true)} className="text-sm text-primary-600 hover:underline flex items-center gap-1"><Upload className="w-3.5 h-3.5" /> Bulk Import</button>
@@ -374,7 +374,7 @@ function EnvironmentTab({ projectId }: { projectId: string }) {
       </div>
 
       {/* List */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 divide-y divide-gray-100 dark:divide-gray-700/50">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 divide-y divide-gray-100 dark:divide-gray-700/50">
         {loading ? [...Array(3)].map((_, i) => <div key={i} className="h-14 animate-pulse bg-gray-50 dark:bg-gray-800" />) :
           !vars.length ? <div className="p-8 text-center text-gray-500">No environment variables set.</div> :
           vars.map(v => (
@@ -433,7 +433,7 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
   };
   const doDelete = async () => { await api(`/api/v1/projects/${project.id}`, { method: 'DELETE' }); router.push('/projects'); };
 
-  const ic = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
+  const ic = 'w-full px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
   const F = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>{children}</div>
   );
@@ -441,7 +441,7 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
   return (
     <div className="space-y-6">
       {/* General */}
-      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-4">
+      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">General</h3>
         <F label="Project Name"><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={ic} /></F>
         <F label="Description"><textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} className={ic} /></F>
@@ -449,7 +449,7 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
       </section>
 
       {/* Build */}
-      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-4">
+      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Build & Deploy</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <F label="Build Command"><input value={form.buildCommand} onChange={e => setForm(f => ({ ...f, buildCommand: e.target.value }))} className={cn(ic, 'font-mono')} /></F>
@@ -465,7 +465,7 @@ function SettingsTab({ project, onUpdate }: { project: Project; onUpdate: () => 
       </section>
 
       {/* Git */}
-      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-4">
+      <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Git</h3>
         <F label="Repository">{project.gitRepoUrl ? <a href={project.gitRepoUrl} target="_blank" rel="noopener noreferrer" className="text-primary-600 text-sm hover:underline">{project.gitRepoUrl}</a> : <span className="text-sm text-gray-400">Not connected</span>}</F>
         <F label="Branch"><input value={form.gitBranch} onChange={e => setForm(f => ({ ...f, gitBranch: e.target.value }))} className={ic} /></F>

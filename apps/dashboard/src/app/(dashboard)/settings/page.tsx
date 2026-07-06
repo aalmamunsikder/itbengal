@@ -44,10 +44,10 @@ export default function ProfileSettingsPage() {
     }
   };
 
-  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
+  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
-    <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
+    <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-6">
       <div>
         <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
           <User className="w-5 h-5 text-primary-500" /> Profile Information

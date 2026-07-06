@@ -42,7 +42,7 @@ const VARIANT_STYLES: Record<BadgeVariant, string> = {
   neutral:
     'bg-gray-100 text-gray-700 ring-gray-500/20 dark:bg-gray-700 dark:text-gray-300 dark:ring-gray-500/30',
   primary:
-    'bg-indigo-50 text-indigo-700 ring-indigo-600/20 dark:bg-indigo-500/10 dark:text-indigo-400 dark:ring-indigo-500/30',
+    'bg-primary-50 text-primary-700 ring-primary-600/20 dark:bg-primary-500/10 dark:text-primary-400 dark:ring-primary-500/30',
 };
 
 const DOT_COLORS: Record<BadgeVariant, string> = {
@@ -51,7 +51,7 @@ const DOT_COLORS: Record<BadgeVariant, string> = {
   error: 'bg-red-500',
   info: 'bg-blue-500',
   neutral: 'bg-gray-500',
-  primary: 'bg-indigo-500',
+  primary: 'bg-primary-500',
 };
 
 const SIZE_STYLES: Record<BadgeSize, string> = {

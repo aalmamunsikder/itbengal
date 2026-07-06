@@ -186,7 +186,7 @@ function ProjectsSkeleton() {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white px-6 py-20 text-center dark:border-gray-700 dark:bg-gray-900">
+    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-100 bg-white px-6 py-20 text-center dark:border-gray-700 dark:bg-gray-900">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10">
         <FolderGit2 className="h-8 w-8 text-primary-500" />
       </div>
@@ -300,40 +300,40 @@ export default function ProjectsPage() {
       {/* Stats Bar */}
       {stats && (
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-card-hover dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300 hover:border-primary-200 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-primary-800 hover:-translate-y-0.5">
             <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="relative flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 shadow-sm">
-                <FolderGit2 className="h-5 w-5 text-white" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-primary-600 shadow-sm dark:bg-primary-500/10 dark:text-primary-400">
+                <FolderGit2 className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Total Projects</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Projects</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalProjects}</p>
               </div>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-card-hover dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300 hover:border-primary-200 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-primary-800 hover:-translate-y-0.5">
             <div className="absolute inset-0 bg-gradient-to-br from-success-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="relative flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-success-500 to-success-600 shadow-sm">
-                <Rocket className="h-5 w-5 text-white" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm dark:bg-emerald-500/10 dark:text-emerald-400">
+                <Rocket className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Active</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Active</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.activeProjects}</p>
               </div>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-gray-300 hover:shadow-card-hover dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700">
+          <div className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300 hover:border-primary-200 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-primary-800 hover:-translate-y-0.5">
             <div className="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="relative flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-accent-500 to-accent-600 shadow-sm">
-                <Filter className="h-5 w-5 text-white" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600 shadow-sm dark:bg-orange-500/10 dark:text-orange-400">
+                <Filter className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Frameworks</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Frameworks</p>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {Object.entries(stats.byFramework)
                     .filter(([, count]) => count > 0)
@@ -364,7 +364,7 @@ export default function ProjectsPage() {
             placeholder="Search projects..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+            className="w-full rounded-2xl border border-slate-100 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
 
@@ -372,7 +372,7 @@ export default function ProjectsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as ProjectStatus | '')}
-          className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          className="rounded-2xl border border-slate-100 bg-white px-4 py-2.5 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
         >
           <option value="">All Statuses</option>
           {Object.entries(PROJECT_STATUSES).map(([key, value]) => (
@@ -386,7 +386,7 @@ export default function ProjectsPage() {
         <select
           value={frameworkFilter}
           onChange={(e) => setFrameworkFilter(e.target.value as Framework | '')}
-          className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          className="rounded-2xl border border-slate-100 bg-white px-4 py-2.5 text-sm text-gray-700 transition-all focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
         >
           <option value="">All Frameworks</option>
           {Object.entries(FRAMEWORKS).map(([key, value]) => (
@@ -400,7 +400,7 @@ export default function ProjectsPage() {
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 px-3 py-2.5 text-sm text-gray-500 transition-all hover:bg-gray-50 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-100 px-3 py-2.5 text-sm text-gray-500 transition-all hover:bg-gray-50 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
           >
             <X className="h-3.5 w-3.5" />
             Clear
@@ -428,8 +428,8 @@ export default function ProjectsPage() {
                   key={project.id}
                   href={`/projects/${project.id}`}
                   className={cn(
-                    'group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-200',
-                    'hover:border-primary-200 hover:shadow-card-hover hover:-translate-y-0.5',
+                    'group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-300',
+                    'hover:border-primary-200 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] hover:-translate-y-0.5',
                     'dark:border-gray-800 dark:bg-gray-900 dark:hover:border-primary-800',
                   )}
                   style={{ animationDelay: `${index * 50}ms` }}
@@ -527,7 +527,7 @@ export default function ProjectsPage() {
 
           {/* Pagination */}
           {pagination.totalPages > 1 && (
-            <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900">
+            <div className="flex items-center justify-between rounded-2xl border border-slate-100 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900">
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Showing <span className="font-medium text-gray-900 dark:text-white">{projects.length}</span> of{' '}
                 <span className="font-medium text-gray-900 dark:text-white">{pagination.total}</span> projects
@@ -536,7 +536,7 @@ export default function ProjectsPage() {
                 <button
                   onClick={() => loadProjects(pagination.page - 1)}
                   disabled={pagination.page <= 1}
-                  className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+                  className="inline-flex items-center gap-1 rounded-lg border border-slate-100 px-3 py-1.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   Prev
@@ -547,7 +547,7 @@ export default function ProjectsPage() {
                 <button
                   onClick={() => loadProjects(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages}
-                  className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+                  className="inline-flex items-center gap-1 rounded-lg border border-slate-100 px-3 py-1.5 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
                 >
                   Next
                   <ChevronRight className="h-4 w-4" />

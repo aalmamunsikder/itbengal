@@ -101,10 +101,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               'w-full appearance-none rounded-lg border bg-white font-normal',
               'transition-all duration-200 ease-out cursor-pointer',
               // Focus
-              'focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500',
+              'focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500',
               // Dark
               'dark:bg-gray-800 dark:text-gray-100',
-              'dark:focus:ring-indigo-400/40 dark:focus:border-indigo-400',
+              'dark:focus:ring-primary-400/40 dark:focus:border-primary-400',
               // Size
               SIZE_STYLES[size],
               // Error

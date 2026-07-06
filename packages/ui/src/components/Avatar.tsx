@@ -37,7 +37,7 @@ const SIZE_CLASSES: Record<AvatarSize, string> = {
 /** Generates a deterministic background color from a string */
 function getInitialsColor(text: string): string {
   const colors = [
-    'bg-indigo-500',
+    'bg-primary-500',
     'bg-emerald-500',
     'bg-amber-500',
     'bg-rose-500',

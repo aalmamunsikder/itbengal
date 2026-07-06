@@ -107,7 +107,7 @@ export function Table<T extends Record<string, unknown>>({
           className={cn(
             'transition-colors',
             isActive && sortState?.direction === 'asc'
-              ? 'text-indigo-600 dark:text-indigo-400'
+              ? 'text-primary-600 dark:text-primary-400'
               : 'text-gray-300 dark:text-gray-600',
           )}
         />
@@ -116,7 +116,7 @@ export function Table<T extends Record<string, unknown>>({
           className={cn(
             'transition-colors',
             isActive && sortState?.direction === 'desc'
-              ? 'text-indigo-600 dark:text-indigo-400'
+              ? 'text-primary-600 dark:text-primary-400'
               : 'text-gray-300 dark:text-gray-600',
           )}
         />
@@ -127,7 +127,7 @@ export function Table<T extends Record<string, unknown>>({
   return (
     <div
       className={cn(
-        'overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700',
+        'overflow-x-auto rounded-2xl border border-slate-100 dark:border-gray-800/80',
         className,
       )}
     >

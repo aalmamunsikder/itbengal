@@ -105,7 +105,7 @@ export default function AdminBillingPage() {
         <button
           onClick={fetchInvoices}
           disabled={loading}
-          className="inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+          className="inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
         >
           <RefreshCw className={cn('h-4 w-4', loading && 'animate-spin')} />
           Refresh
@@ -127,7 +127,7 @@ export default function AdminBillingPage() {
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800">
+      <div className="flex border-b border-slate-100 dark:border-gray-800">
         <button
           onClick={() => setFilterType('PENDING_CLAIMS')}
           className={cn(
@@ -161,11 +161,11 @@ export default function AdminBillingPage() {
       {loading ? (
         <div className="space-y-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-16 bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800 rounded-xl shimmer" />
+            <div key={i} className="h-16 bg-white dark:bg-gray-900/30 border border-slate-100 dark:border-gray-800 rounded-xl shimmer" />
           ))}
         </div>
       ) : filteredInvoices.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
           <Layers className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No invoices found</h3>
           <p className="mt-1 text-sm text-gray-500">
@@ -175,7 +175,7 @@ export default function AdminBillingPage() {
           </p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/30">
+        <div className="overflow-hidden rounded-2xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/30">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
             <thead className="bg-gray-50 dark:bg-gray-900/50 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               <tr>

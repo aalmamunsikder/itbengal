@@ -116,12 +116,12 @@ export default function SecuritySettingsPage() {
     setTimeout(() => setCopiedCodes(false), 2000);
   };
 
-  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
+  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent';
 
   return (
     <div className="space-y-6">
       {/* Change Password Card */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
             <Key className="w-5 h-5 text-primary-500" /> Change Password
@@ -168,7 +168,7 @@ export default function SecuritySettingsPage() {
       </div>
 
       {/* Two-Factor Authentication Card */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
+      <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
             <Shield className="w-5 h-5 text-primary-500" /> Two-Factor Authentication
@@ -217,18 +217,18 @@ export default function SecuritySettingsPage() {
 
             <div className="flex flex-col sm:flex-row items-center gap-6">
               {tfaSetupData.qrCodeUrl && (
-                <div className="bg-white p-3 rounded-xl border border-gray-200 shrink-0">
+                <div className="bg-white p-3 rounded-xl border border-slate-100 shrink-0">
                   <img src={tfaSetupData.qrCodeUrl} alt="2FA QR Code" className="w-40 h-40" />
                 </div>
               )}
               <div className="space-y-3 w-full">
                 <p className="text-sm text-gray-600 dark:text-gray-400">Scan this QR code with Google Authenticator, Authy, or 1Password. If you cannot scan the code, enter the secret key manually:</p>
-                <code className="block bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-2.5 text-xs font-mono break-all text-gray-900 dark:text-white">{tfaSetupData.secret}</code>
+                <code className="block bg-gray-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 rounded-lg p-2.5 text-xs font-mono break-all text-gray-900 dark:text-white">{tfaSetupData.secret}</code>
               </div>
             </div>
 
             {/* Backup codes */}
-            <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-4">
+            <div className="bg-gray-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 rounded-2xl p-4">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Backup Codes</span>
                 <button onClick={copyBackupCodes} className="text-xs text-primary-600 hover:underline flex items-center gap-1">
@@ -252,7 +252,7 @@ export default function SecuritySettingsPage() {
                 <button type="submit" disabled={tfaLoading || verificationCode.length < 6} className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm flex items-center gap-2 transition-all">
                   {tfaLoading && <Loader2 className="w-4 h-4 animate-spin" />} Verify & Activate
                 </button>
-                <button type="button" onClick={() => setTfaSetupData(null)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Cancel</button>
+                <button type="button" onClick={() => setTfaSetupData(null)} className="px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Cancel</button>
               </div>
             </form>
           </div>
@@ -270,7 +270,7 @@ export default function SecuritySettingsPage() {
               <button type="submit" disabled={tfaLoading} className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium text-sm flex items-center gap-2 transition-all">
                 {tfaLoading && <Loader2 className="w-4 h-4 animate-spin" />} Disable 2FA
               </button>
-              <button type="button" onClick={() => setShowDisableForm(false)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Cancel</button>
+              <button type="button" onClick={() => setShowDisableForm(false)} className="px-4 py-2.5 rounded-xl border border-slate-100 dark:border-gray-700 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Cancel</button>
             </div>
           </form>
         )}

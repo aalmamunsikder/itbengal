@@ -42,7 +42,7 @@ const CardContext = createContext<CardContextValue>({ padding: 'md' });
 
 const VARIANT_STYLES: Record<CardVariant, string> = {
   default:
-    'bg-white border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700',
+    'bg-white border border-slate-100 shadow-sm dark:bg-gray-800 dark:border-gray-700/60',
   bordered:
     'bg-white border-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600',
   elevated:
@@ -88,12 +88,12 @@ function CardRoot({
     <CardContext.Provider value={{ padding }}>
       <div
         className={cn(
-          'rounded-xl overflow-hidden',
-          'transition-all duration-200 ease-out',
+          'rounded-2xl overflow-hidden',
+          'transition-all duration-300 ease-out',
           VARIANT_STYLES[variant],
           hoverable && [
-            'hover:shadow-md hover:-translate-y-0.5',
-            'dark:hover:shadow-black/30',
+            'hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] hover:-translate-y-0.5 hover:border-primary-200',
+            'dark:hover:shadow-primary-900/10 dark:hover:border-primary-800',
             'cursor-pointer',
           ],
           className,

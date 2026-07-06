@@ -182,7 +182,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
       </Link>
 
       {/* Header */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 dark:border-gray-800 pb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
             {siteTitle}
@@ -194,7 +194,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
+      <div className="flex border-b border-slate-100 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
         <Link href={`/wordpress/${params.id}`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Overview
         </Link>
@@ -213,7 +213,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
       </div>
 
       {/* Action Bar */}
-      <div className="flex items-center justify-between bg-white dark:bg-gray-900/40 p-4 rounded-xl border border-gray-200 dark:border-gray-800">
+      <div className="flex items-center justify-between bg-white dark:bg-gray-900/40 p-4 rounded-xl border border-slate-100 dark:border-gray-800">
         <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 font-mono">
           <span className="text-gray-400">/var/www/html</span>
           {currentPath.split('/').filter(Boolean).map((part, index) => (
@@ -244,8 +244,8 @@ export default function WordPressFileManagerPage(props: PageProps) {
 
       {/* Files List / Editor */}
       {editingFile ? (
-        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[500px]">
-          <div className="bg-gray-50 dark:bg-gray-900 px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 overflow-hidden flex flex-col h-[500px]">
+          <div className="bg-gray-50 dark:bg-gray-900 px-6 py-4 border-b border-slate-100 dark:border-gray-800 flex items-center justify-between">
             <span className="font-mono text-sm text-gray-700 dark:text-gray-300">{editingFile.path}</span>
             <div className="flex gap-2">
               <button
@@ -258,7 +258,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
               </button>
               <button
                 onClick={() => setEditingFile(null)}
-                className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className="p-1.5 rounded-lg border border-slate-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -276,7 +276,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
           <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 overflow-hidden shadow-sm">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800 text-sm text-left">
             <thead className="bg-gray-50 dark:bg-gray-900 text-xs font-semibold text-gray-500 uppercase tracking-wider">
               <tr>
@@ -330,7 +330,7 @@ export default function WordPressFileManagerPage(props: PageProps) {
       {/* New File/Folder Modal */}
       {showNewModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 max-w-sm w-full space-y-4 shadow-xl">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-100 dark:border-gray-800 p-6 max-w-sm w-full space-y-4 shadow-xl">
             <h3 className="font-bold text-lg text-gray-900 dark:text-white">Create New Item</h3>
             <form onSubmit={handleCreatePath} className="space-y-4">
               <div className="flex gap-4">
@@ -358,14 +358,14 @@ export default function WordPressFileManagerPage(props: PageProps) {
                 placeholder={newPathType === 'file' ? 'index.php' : 'my-plugin'}
                 value={newPathName}
                 onChange={(e) => setNewPathName(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2 text-sm outline-none"
               />
 
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowNewModal(false)}
-                  className="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-800 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="px-4 py-2 rounded-xl border border-slate-100 dark:border-gray-800 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
                   Cancel
                 </button>

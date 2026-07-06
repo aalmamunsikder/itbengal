@@ -81,7 +81,7 @@ export function authenticate(
     req.user = user;
     
     // Automatically inject the organization ID header if not provided by the client
-    if (user.organizationId && !req.headers['x-organization-id']) {
+    if (user && user.organizationId && !req.headers['x-organization-id']) {
       req.headers['x-organization-id'] = user.organizationId;
     }
     

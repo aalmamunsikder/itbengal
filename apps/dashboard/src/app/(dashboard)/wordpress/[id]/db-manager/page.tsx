@@ -101,7 +101,7 @@ export default function WordPressDatabasePage(props: PageProps) {
       </Link>
 
       {/* Header */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 dark:border-gray-800 pb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
             {siteTitle}
@@ -113,7 +113,7 @@ export default function WordPressDatabasePage(props: PageProps) {
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
+      <div className="flex border-b border-slate-100 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
         <Link href={`/wordpress/${params.id}`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Overview
         </Link>
@@ -138,7 +138,7 @@ export default function WordPressDatabasePage(props: PageProps) {
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* Tables Sidebar */}
-          <aside className="w-full lg:w-64 shrink-0 bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-4 space-y-4">
+          <aside className="w-full lg:w-64 shrink-0 bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 p-4 space-y-4">
             <h3 className="font-semibold text-sm text-gray-900 dark:text-white flex items-center gap-2">
               <Database className="h-4 w-4 text-primary-500" /> Database Tables
             </h3>
@@ -158,7 +158,7 @@ export default function WordPressDatabasePage(props: PageProps) {
 
           {/* Main SQL Console */}
           <div className="flex-1 space-y-6">
-            <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4 shadow-sm">
+            <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 p-6 space-y-4 shadow-sm">
               <h3 className="font-semibold text-sm text-gray-900 dark:text-white flex items-center gap-2">
                 <Terminal className="h-4 w-4 text-primary-500" /> SQL Query Editor
               </h3>
@@ -184,7 +184,7 @@ export default function WordPressDatabasePage(props: PageProps) {
 
             {/* Query results panel */}
             {queryResult && (
-              <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
+              <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 overflow-hidden shadow-sm">
                 {queryResult.error ? (
                   <div className="p-4 bg-rose-500/10 border-b border-rose-500/20 text-rose-500 text-sm flex items-center gap-3">
                     <AlertCircle className="h-5 w-5 shrink-0" />

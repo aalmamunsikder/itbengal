@@ -134,7 +134,7 @@ export default function WordPressBackupsPage(props: PageProps) {
       </Link>
 
       {/* Header */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 dark:border-gray-800 pb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
             {siteTitle}
@@ -146,7 +146,7 @@ export default function WordPressBackupsPage(props: PageProps) {
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
+      <div className="flex border-b border-slate-100 dark:border-gray-800 gap-6 overflow-x-auto text-sm font-medium">
         <Link href={`/wordpress/${params.id}`} className="text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4">
           Overview
         </Link>
@@ -171,7 +171,7 @@ export default function WordPressBackupsPage(props: PageProps) {
       ) : (
         <div className="grid gap-6 md:grid-cols-3">
           {/* Creator Widget */}
-          <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4 shadow-sm h-fit">
+          <div className="bg-white dark:bg-gray-900/40 rounded-2xl border border-slate-100 dark:border-gray-800 p-6 space-y-4 shadow-sm h-fit">
             <h3 className="font-semibold text-md text-gray-900 dark:text-white flex items-center gap-2">
               <History className="h-5 w-5 text-primary-500" /> Take New Backup
             </h3>
@@ -186,7 +186,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                 <select
                   value={backupType}
                   onChange={(e: any) => setBackupType(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm outline-none focus:border-primary-500"
+                  className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-2.5 text-sm outline-none focus:border-primary-500"
                 >
                   <option value="FULL">Full Backup (DB + Files)</option>
                   <option value="DATABASE_ONLY">Database Only</option>
@@ -218,7 +218,7 @@ export default function WordPressBackupsPage(props: PageProps) {
             </div>
 
             {backups.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+              <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
                 <FileArchive className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No backups yet</h3>
                 <p className="mt-1 text-sm text-gray-500">
@@ -230,7 +230,7 @@ export default function WordPressBackupsPage(props: PageProps) {
                 {backups.map((b) => (
                   <div
                     key={b.id}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-4 shadow-xs hover:shadow-sm transition-all gap-4"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/40 p-4 shadow-xs hover:shadow-sm transition-all gap-4"
                   >
                     <div className="flex items-center gap-3">
                       <div className="p-2.5 rounded-lg bg-primary-500/10 text-primary-400">

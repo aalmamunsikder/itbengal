@@ -9,7 +9,7 @@ import { cn } from '../utils';
 /** Available button visual variants */
 const BUTTON_VARIANTS = {
   primary:
-    'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-500/25 hover:from-indigo-500 hover:to-indigo-400 hover:shadow-lg hover:shadow-indigo-500/30 active:from-indigo-700 active:to-indigo-600 dark:from-indigo-500 dark:to-indigo-400 dark:hover:from-indigo-400 dark:hover:to-indigo-300',
+    'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-md shadow-primary-500/25 hover:from-primary-500 hover:to-primary-400 hover:shadow-lg hover:shadow-primary-500/30 active:from-primary-700 active:to-primary-600 dark:from-primary-500 dark:to-primary-400 dark:hover:from-primary-400 dark:hover:to-primary-300',
   secondary:
     'border border-gray-300 bg-white text-gray-700 shadow-sm hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:border-gray-500',
   ghost:
@@ -22,9 +22,9 @@ const BUTTON_VARIANTS = {
 
 /** Available button sizes */
 const BUTTON_SIZES = {
-  sm: 'h-8 px-3 text-xs gap-1.5 rounded-md',
-  md: 'h-10 px-4 text-sm gap-2 rounded-lg',
-  lg: 'h-12 px-6 text-base gap-2.5 rounded-lg',
+  sm: 'h-8 px-3 text-xs gap-1.5 rounded-lg',
+  md: 'h-10 px-4 text-sm gap-2 rounded-xl',
+  lg: 'h-12 px-6 text-base gap-2.5 rounded-xl',
 } as const;
 
 /** Icon sizes mapped to button sizes */
@@ -96,7 +96,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           // Base styles
           'inline-flex items-center justify-center font-medium',
           'transition-all duration-200 ease-out',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
           'dark:focus-visible:ring-offset-gray-900',
           // Hover transform
           'hover:scale-[1.02] active:scale-[0.98]',

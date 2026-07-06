@@ -121,14 +121,14 @@ export default function WordPressPage() {
             placeholder="Search installations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 pl-10 pr-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+            className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 pl-10 pr-4 py-2.5 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
           />
         </div>
         <div className="flex items-center gap-2">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none"
+            className="rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 px-4 py-2.5 text-sm outline-none"
           >
             <option value="ALL">All Statuses</option>
             <option value="RUNNING">Running Only</option>
@@ -136,7 +136,7 @@ export default function WordPressPage() {
           </select>
           <button
             onClick={fetchSites}
-            className="p-2.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:bg-gray-55 hover:dark:bg-gray-800/50 transition-colors"
+            className="p-2.5 rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:bg-gray-55 hover:dark:bg-gray-800/50 transition-colors"
           >
             <RefreshCw className="h-4 w-4" />
           </button>
@@ -151,7 +151,7 @@ export default function WordPressPage() {
           ))}
         </div>
       ) : filteredSites.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-slate-100 dark:border-gray-800 p-12 text-center">
           <Globe className="mx-auto h-12 w-12 text-gray-400" />
           <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">No installations found</h3>
           <p className="mt-1 text-sm text-gray-500">
@@ -171,7 +171,7 @@ export default function WordPressPage() {
           {filteredSites.map((site) => (
             <div
               key={site.id}
-              className="group relative rounded-2xl border border-gray-200 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              className="group relative rounded-2xl border border-slate-100 dark:border-gray-800/80 bg-white dark:bg-gray-900/40 p-6 transition-all duration-300 hover:border-primary-200 hover:shadow-[0_4px_20px_-4px_rgba(0,102,255,0.08)] hover:-translate-y-0.5 flex flex-col justify-between"
             >
               <div>
                 {/* Title & Status */}
@@ -224,28 +224,28 @@ export default function WordPressPage() {
                   <Link
                     href={`/wordpress/${site.id}/file-manager`}
                     title="File Explorer"
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-950/30 transition-all"
+                    className="p-2 rounded-xl bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-blue-50 dark:hover:bg-primary-900/30 transition-all"
                   >
                     <FolderOpen className="h-4.5 w-4.5" />
                   </Link>
                   <Link
                     href={`/wordpress/${site.id}/db-manager`}
                     title="Database Explorer"
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-950/30 transition-all"
+                    className="p-2 rounded-xl bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-blue-50 dark:hover:bg-primary-900/30 transition-all"
                   >
                     <Database className="h-4.5 w-4.5" />
                   </Link>
                   <Link
                     href={`/wordpress/${site.id}/backups`}
                     title="Backups & Restoration"
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-950/30 transition-all"
+                    className="p-2 rounded-xl bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-blue-50 dark:hover:bg-primary-900/30 transition-all"
                   >
                     <History className="h-4.5 w-4.5" />
                   </Link>
                   <Link
                     href={`/wordpress/${site.id}/settings`}
                     title="Site Settings"
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-950/30 transition-all"
+                    className="p-2 rounded-xl bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-blue-50 dark:hover:bg-primary-900/30 transition-all"
                   >
                     <Settings className="h-4.5 w-4.5" />
                   </Link>

@@ -92,7 +92,7 @@ export default function SessionsSettingsPage() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 space-y-6">
+    <div className="bg-white dark:bg-gray-800/50 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-6 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
@@ -101,7 +101,7 @@ export default function SessionsSettingsPage() {
           <p className="text-sm text-gray-500 mt-1">Manage and revoke your active sessions on other devices</p>
         </div>
         <div className="flex items-center gap-3">
-          <button onClick={load} className="p-2 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 transition-colors" title="Reload sessions">
+          <button onClick={load} className="p-2 border border-slate-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 transition-colors" title="Reload sessions">
             <RefreshCw className="w-4 h-4" />
           </button>
           {sessions.length > 1 && (
@@ -154,7 +154,7 @@ export default function SessionsSettingsPage() {
               </div>
               
               {!s.isCurrent && (
-                <button onClick={() => revoke(s.id)} disabled={revokingId === s.id} className="p-2 border border-gray-200 dark:border-gray-700 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all">
+                <button onClick={() => revoke(s.id)} disabled={revokingId === s.id} className="p-2 border border-slate-100 dark:border-gray-700 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all">
                   {revokingId === s.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                 </button>
               )}
