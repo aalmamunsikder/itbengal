@@ -1,9 +1,12 @@
 'use client';
 
-import { CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { CheckCircle2, ShieldCheck, ArrowRight, Server, Database } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Features() {
+  const [activeTab, setActiveTab] = useState<'app' | 'db'>('app');
+
   const migrations = [
     { title: 'Free Website Migration', desc: 'Our technical experts migrate your sites with zero downtime.' },
     { title: 'Database Export & Import', desc: 'Automated transfers for WordPress PHP & MariaDB configurations.' },
@@ -160,37 +163,94 @@ export default function Features() {
           <div className="relative w-full max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-md overflow-hidden group">
             <div className="rounded-xl border border-slate-200 overflow-hidden bg-slate-950 p-3.5 text-left">
               {/* Header circles */}
-              <div className="flex items-center gap-1.5 mb-3 select-none">
-                <div className="w-2 h-2 rounded-full bg-red-500" />
-                <div className="w-2 h-2 rounded-full bg-yellow-500" />
-                <div className="w-2 h-2 rounded-full bg-green-500" />
-                <span className="text-[9px] text-slate-500 ml-2 font-mono">dashboard.itbengal.xyz/wordpress</span>
-              </div>
-              {/* Mockup layout */}
-              <div className="space-y-2.5 font-mono text-[11px] text-slate-400">
-                <p className="text-slate-500">// Managed WordPress Container State</p>
-                <div className="border border-slate-800 rounded-lg p-2.5 bg-slate-900 flex justify-between items-center">
-                  <div>
-                    <span className="font-bold text-white text-xs">wp-myblog-prod</span>
-                    <p className="text-[9px] text-slate-500">itbengal-wp-stack:v1</p>
-                  </div>
-                  <span className="bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded text-[9px] font-bold">RUNNING</span>
+              <div className="flex items-center justify-between mb-3 select-none">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-red-500" />
+                  <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="text-[9px] text-slate-550 ml-2 font-mono text-slate-500">dashboard.itbengal.xyz/wordpress</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
-                    <p className="text-[9px] text-slate-500">CPU Usage</p>
-                    <span className="font-bold text-white text-xs">1.2%</span>
-                  </div>
-                  <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
-                    <p className="text-[9px] text-slate-500">RAM Limit</p>
-                    <span className="font-bold text-white text-xs">256MB</span>
-                  </div>
-                  <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
-                    <p className="text-[9px] text-slate-500">Uptime</p>
-                    <span className="font-bold text-white text-xs">24d 12h</span>
-                  </div>
+
+                {/* Clickable Mockup Tabs */}
+                <div className="flex bg-slate-900 border border-slate-800 rounded p-0.5 font-mono text-[9px] font-bold text-slate-400">
+                  <button
+                    onClick={() => setActiveTab('app')}
+                    className={`px-2 py-0.5 rounded transition-all ${
+                      activeTab === 'app' ? 'bg-[#0052cc] text-white' : 'hover:text-white'
+                    }`}
+                  >
+                    App Stack
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('db')}
+                    className={`px-2 py-0.5 rounded transition-all ${
+                      activeTab === 'db' ? 'bg-[#0052cc] text-white' : 'hover:text-white'
+                    }`}
+                  >
+                    Database
+                  </button>
                 </div>
               </div>
+
+              {/* Tab: App Stack */}
+              {activeTab === 'app' ? (
+                <div className="space-y-2.5 font-mono text-[11px] text-slate-400 animate-fade-in">
+                  <p className="text-slate-550 text-slate-500">// Managed WordPress Container State</p>
+                  <div className="border border-slate-800 rounded-lg p-2.5 bg-slate-900 flex justify-between items-center">
+                    <div>
+                      <span className="font-bold text-white text-xs">wp-myblog-prod</span>
+                      <p className="text-[9px] text-slate-500 flex items-center gap-1">
+                        <Server className="h-2.5 w-2.5" />
+                        itbengal-wp-stack:v1
+                      </p>
+                    </div>
+                    <span className="bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded text-[9px] font-bold">RUNNING</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">CPU Usage</p>
+                      <span className="font-bold text-white text-xs">1.2%</span>
+                    </div>
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">RAM Limit</p>
+                      <span className="font-bold text-white text-xs">256MB</span>
+                    </div>
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">Uptime</p>
+                      <span className="font-bold text-white text-xs">24d 12h</span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Tab: Database */
+                <div className="space-y-2.5 font-mono text-[11px] text-slate-400 animate-fade-in">
+                  <p className="text-slate-550 text-slate-500">// Isolated MariaDB Database Instance</p>
+                  <div className="border border-slate-800 rounded-lg p-2.5 bg-slate-900 flex justify-between items-center">
+                    <div>
+                      <span className="font-bold text-white text-xs">mariadb-myblog-prod</span>
+                      <p className="text-[9px] text-slate-500 flex items-center gap-1">
+                        <Database className="h-2.5 w-2.5" />
+                        port-3306-isolated
+                      </p>
+                    </div>
+                    <span className="bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded text-[9px] font-bold">ONLINE</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">Size</p>
+                      <span className="font-bold text-white text-xs">12.5 MB</span>
+                    </div>
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">Active Conn</p>
+                      <span className="font-bold text-white text-xs">3 / 100</span>
+                    </div>
+                    <div className="border border-slate-800 rounded p-1.5 text-center bg-slate-900">
+                      <p className="text-[9px] text-slate-500">Backup S3</p>
+                      <span className="font-bold text-emerald-400 text-xs">SECURE</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

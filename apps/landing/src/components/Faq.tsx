@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, MessageSquare } from 'lucide-react';
+import { ChevronDown, MessageSquare, ShieldCheck, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Faq() {
@@ -24,7 +24,7 @@ export default function Faq() {
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-3 mb-12 text-slate-700">
+      <div className="space-y-3 mb-10 text-slate-700">
         {faqData.map((faq, index) => (
           <div
             key={index}
@@ -54,6 +54,28 @@ export default function Faq() {
         ))}
       </div>
 
+      {/* Local Support profile card (Adapted from Hostnin founder support) */}
+      <div className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm flex flex-col md:flex-row items-center gap-5 mb-10">
+        <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-50 border border-slate-100 flex items-center justify-center shrink-0 shadow-inner">
+          {/* Avatar representation or cloud engineer icon */}
+          <CloudIconRepresent />
+          <span className="absolute bottom-0 right-0 h-4 w-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-[8px] text-white">✓</span>
+        </div>
+        <div className="text-left space-y-1.5">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs font-bold text-slate-900">Al-Mamun Sikder</span>
+            <span className="text-[9px] font-bold text-[#0052cc] bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100/50 flex items-center gap-0.5">
+              <Heart className="h-2 w-2 fill-current" />
+              Founder Support
+            </span>
+          </div>
+          <h4 className="text-xs font-bold text-slate-650 text-slate-600">ITBengal Infrastructure Architect</h4>
+          <p className="text-slate-500 text-[11px] leading-relaxed">
+            The founder who still answers support tickets and monitors container clusters. We guarantee direct engineer access with no automated call centers or template responses.
+          </p>
+        </div>
+      </div>
+
       {/* Blue Banner: Have Questions About Hosting or Domains? */}
       <div className="w-full rounded-xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-6 text-center text-white relative overflow-hidden shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-left space-y-1">
@@ -71,6 +93,14 @@ export default function Faq() {
         </Link>
       </div>
     </section>
+  );
+}
+
+function CloudIconRepresent() {
+  return (
+    <div className="h-10 w-10 rounded-xl bg-[#0052cc] flex items-center justify-center shadow-md">
+      <ShieldCheck className="h-5 w-5 text-white" />
+    </div>
   );
 }
 

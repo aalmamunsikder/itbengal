@@ -6,6 +6,7 @@ import DomainSearch from '@/components/DomainSearch';
 import Features from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import Testimonials from '@/components/Testimonials';
+import Guides from '@/components/Guides';
 import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 
@@ -29,6 +30,9 @@ export default function LandingPage() {
 
       {/* Success Stories Testimonials */}
       <Testimonials />
+
+      {/* Comprehensive Guides */}
+      <Guides />
 
       {/* FAQs */}
       <Faq />

@@ -8,10 +8,10 @@ export default function DomainSearch() {
   const [domain, setDomain] = useState('');
 
   const badges = [
-    { ext: '.com.bd', price: '৳1,500/yr', badge: 'Local BD' },
-    { ext: '.com', price: '৳1,250/yr', badge: 'Popular' },
-    { ext: '.org', price: '৳1,550/yr', badge: 'Nonprofit' },
-    { ext: '.xyz', price: '৳290/yr', badge: 'Tech' },
+    { ext: '.com.bd', price: '৳1,500/yr', badge: '15% off', highlight: true },
+    { ext: '.com', price: '৳1,250/yr', badge: '35% off' },
+    { ext: '.org', price: '৳1,550/yr', badge: '10% off' },
+    { ext: '.xyz', price: '৳290/yr', badge: '66% off' },
   ];
 
   return (
@@ -52,10 +52,14 @@ export default function DomainSearch() {
         {badges.map((item, idx) => (
           <div
             key={idx}
-            className="border border-slate-200 rounded-xl p-3.5 bg-slate-55 text-center flex flex-col justify-between hover:border-[#0052cc]/30 hover:bg-slate-50 transition-all cursor-pointer relative"
+            className={`border rounded-xl p-3.5 text-center flex flex-col justify-between hover:bg-slate-50 transition-all cursor-pointer relative ${
+              item.highlight ? 'border-[#0052cc]/50 bg-blue-50/20' : 'border-slate-200 bg-slate-55'
+            }`}
           >
             {item.badge && (
-              <span className="absolute top-1.5 right-1.5 text-[8px] font-bold uppercase tracking-wider text-[#0052cc] bg-blue-50 px-1.5 py-0.5 rounded-full">
+              <span className={`absolute top-1.5 right-1.5 text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full ${
+                item.highlight ? 'bg-[#0052cc] text-white' : 'text-[#0052cc] bg-blue-50'
+              }`}>
                 {item.badge}
               </span>
             )}
