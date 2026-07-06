@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare, HardDrive } from 'lucide-react';
+import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare, HardDrive, Cpu, Users } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -94,7 +94,7 @@ export default function Header() {
                     </Link>
 
                     <Link
-                      href="/hosting/wordpress"
+                      href="/hosting/wordpress-hosting"
                       onClick={() => setHostingMenuOpen(false)}
                       className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
                     >
@@ -102,6 +102,30 @@ export default function Header() {
                       <div>
                         <h4 className="text-xs font-bold text-slate-800">Managed WordPress</h4>
                         <p className="text-[10px] text-slate-400">Sandboxed container boundaries with MariaDB.</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/hosting/nodejs-hosting"
+                      onClick={() => setHostingMenuOpen(false)}
+                      className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+                    >
+                      <Cpu className="h-5 w-5 text-primaryBlue mt-0.5" />
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Node.js Hosting</h4>
+                        <p className="text-[10px] text-slate-400">Isolated memory runner with PM2 process control.</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/hosting/reseller-hosting"
+                      onClick={() => setHostingMenuOpen(false)}
+                      className="flex gap-3 p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+                    >
+                      <Users className="h-5 w-5 text-primaryBlue mt-0.5" />
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Reseller Hosting</h4>
+                        <p className="text-[10px] text-slate-400">Launch your brand with white-label cPanel packages.</p>
                       </div>
                     </Link>
                   </div>
@@ -201,9 +225,9 @@ export default function Header() {
               )}
             </div>
 
-            <a href="#domains" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Domains</a>
+            <Link href="/domain" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Domains</Link>
             <a href="#features" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Features</a>
-            <a href="#pricing" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Pricing</a>
+            <Link href="/pricing" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Pricing</Link>
             <a href="#faq" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">FAQ</a>
             <Link href="/terms" className="text-xs font-bold text-slate-500 hover:text-primaryBlue transition-colors">Terms</Link>
           </nav>
@@ -234,8 +258,8 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 px-6 py-6 space-y-4 flex flex-col shadow-lg z-50">
             <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Features</a>
-            <a href="#domains" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Domains</a>
-            <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Pricing</a>
+            <Link href="/domain" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Domains</Link>
+            <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Pricing</Link>
             <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">FAQ</a>
             <Link href="/terms" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Terms</Link>
             <div className="pt-3 border-t border-slate-100 flex flex-col gap-3">

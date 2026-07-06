@@ -1,11 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { CheckCircle2, ShieldCheck, Database } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function WordPressHostingPage() {
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+
   const features = [
     { title: 'Isolated Container Sandbox', desc: 'Separate Apache/PHP and MariaDB container runners ensure high security and memory boundaries.' },
     { title: 'NVMe SSD Storage', desc: 'NVMe-backed disk storage speeds up database read/writes and dashboard operations.' },
@@ -14,9 +17,26 @@ export default function WordPressHostingPage() {
   ];
 
   const plans = [
-    { name: 'WP Lite', desc: 'Blogs, portfolios & personal sites', price: '৳1,500', features: ['1 Managed WordPress site', 'Isolated MariaDB container', '1 GB RAM / container', '10 GB SSD space', 'Daily automated backups'] },
-    { name: 'WP Professional', desc: 'Production corporate WordPress sites', price: '৳4,900', features: ['5 WordPress websites', 'Isolated MariaDB instances', '2 GB RAM & 30 GB SSD / site', 'Hourly automated S3 backups', 'Priority support channels'], popular: true },
+    {
+      name: 'WP Lite',
+      desc: 'Blogs, portfolios & personal sites',
+      monthlyPrice: 1500,
+      yearlyPrice: 1200,
+      specs: ['1 Managed WordPress site', 'Isolated MariaDB container', '1 GB RAM / container', '10 GB SSD space', 'Daily automated S3 backups'],
+    },
+    {
+      name: 'WP Professional',
+      desc: 'For production corporate WordPress sites',
+      monthlyPrice: 4900,
+      yearlyPrice: 3920,
+      specs: ['5 WordPress websites', 'Isolated MariaDB instances', '2 GB RAM & 30 GB SSD / site', 'Hourly automated S3 backups', 'Priority support channels'],
+      popular: true,
+    },
   ];
+
+  const formatPrice = (price: number) => {
+    return `৳${price.toLocaleString()}`;
+  };
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between selection:bg-primaryBlue/20 selection:text-[#0052cc]">
@@ -24,7 +44,7 @@ export default function WordPressHostingPage() {
 
       <main className="flex-grow py-12 px-6 max-w-7xl mx-auto w-full">
         {/* Hero Segment */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
+        <div className="text-center mb-10 max-w-2xl mx-auto">
           <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Managed WordPress</span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mt-1 mb-3 tracking-tight">
             Fully Isolated WordPress Containers
@@ -32,6 +52,29 @@ export default function WordPressHostingPage() {
           <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
             Experience the security of dedicated sandboxed environments combined with the speed of LiteSpeed caching. Build and scale your WordPress sites stress-free.
           </p>
+
+          {/* Billing Cycle Toggle */}
+          <div className="inline-flex rounded-xl bg-slate-200/60 p-0.5 mt-6 border border-slate-200">
+            <button
+              onClick={() => setBillingPeriod('monthly')}
+              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                billingPeriod === 'monthly' ? 'bg-[#0052cc] text-white shadow-sm' : 'text-slate-550 hover:text-slate-850'
+              }`}
+            >
+              Billed Monthly
+            </button>
+            <button
+              onClick={() => setBillingPeriod('yearly')}
+              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                billingPeriod === 'yearly' ? 'bg-[#0052cc] text-white shadow-sm' : 'text-slate-550 hover:text-slate-850'
+              }`}
+            >
+              Billed Yearly
+              <span className="bg-[#facc15] text-slate-900 text-[8px] font-extrabold px-1.5 py-0.5 rounded-full">
+                Save 20%
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Key Features Grid */}
@@ -49,56 +92,50 @@ export default function WordPressHostingPage() {
 
         {/* Pricing Cards */}
         <div className="mb-14">
-          <div className="text-center mb-6">
-            <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">
-              Select Your WordPress Plan
-            </h2>
-            <p className="text-slate-500 text-xs">
-              Fully optimized plans with local BDT payment options (bKash/Nagad).
-            </p>
-          </div>
-
           <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto">
-            {plans.map((plan, idx) => (
-              <div
-                key={idx}
-                className={`border rounded-xl p-5 flex flex-col justify-between hover:shadow transition-all relative ${
-                  plan.popular ? 'border-[#0052cc] bg-white shadow-sm' : 'border-slate-200 bg-white'
-                }`}
-              >
-                {plan.popular && (
-                  <span className="absolute top-0 right-4 -translate-y-1/2 bg-[#facc15] text-slate-900 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Best Value
-                  </span>
-                )}
-                <div>
-                  <h3 className="text-base font-bold text-slate-900">{plan.name}</h3>
-                  <p className="text-slate-400 text-[10px] mt-0.5">{plan.desc}</p>
-                  <div className="my-4">
-                    <span className="text-2xl font-extrabold text-[#0052cc]">{plan.price}</span>
-                    <span className="text-slate-400 text-[10px]"> / month</span>
-                  </div>
-                  <ul className="space-y-2 text-[11px] text-slate-500 mb-6 border-t border-slate-100 pt-3">
-                    {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-1.5">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Link
-                  href="https://dashboard.itbengal.xyz/register"
-                  className={`w-full py-2.5 rounded-lg text-center text-xs font-bold transition-all ${
-                    plan.popular
-                      ? 'bg-[#0052cc] text-white hover:bg-blue-700'
-                      : 'border border-slate-200 hover:bg-slate-55 text-[#0052cc]'
+            {plans.map((plan, idx) => {
+              const price = billingPeriod === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
+              return (
+                <div
+                  key={idx}
+                  className={`border rounded-xl p-5 flex flex-col justify-between hover:shadow transition-all relative ${
+                    plan.popular ? 'border-[#0052cc] bg-white shadow-sm' : 'border-slate-200 bg-white'
                   }`}
                 >
-                  Deploy Container
-                </Link>
-              </div>
-            ))}
+                  {plan.popular && (
+                    <span className="absolute top-0 right-4 -translate-y-1/2 bg-[#facc15] text-slate-900 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      Best Value
+                    </span>
+                  )}
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900">{plan.name}</h3>
+                    <p className="text-slate-400 text-[10px] mt-0.5">{plan.desc}</p>
+                    <div className="my-4">
+                      <span className="text-2xl font-extrabold text-[#0052cc]">{formatPrice(price)}</span>
+                      <span className="text-slate-400 text-[10px]"> / month</span>
+                    </div>
+                    <ul className="space-y-2 text-[11px] text-slate-500 mb-6 border-t border-slate-100 pt-3">
+                      {plan.specs.map((spec, sIdx) => (
+                        <li key={sIdx} className="flex items-center gap-1.5">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                          <span>{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Link
+                    href="https://dashboard.itbengal.xyz/register"
+                    className={`w-full py-2.5 rounded-lg text-center text-xs font-bold transition-all ${
+                      plan.popular
+                        ? 'bg-[#0052cc] text-white hover:bg-blue-700'
+                        : 'border border-slate-200 hover:bg-slate-55 text-[#0052cc]'
+                    }`}
+                  >
+                    Deploy Container
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
 
