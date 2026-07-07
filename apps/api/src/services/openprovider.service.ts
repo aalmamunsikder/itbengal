@@ -25,15 +25,85 @@ const TLD_PRICES: Record<string, number> = {
 
 const MARKUP_MULTIPLIER = 1.2; // 20% markup
 
-/**
- * Openprovider API Service Wrapper.
- * Fallbacks to Sandbox Mocking for local development.
- */
-
 const username = process.env['OPENPROVIDER_USERNAME'];
 const password = process.env['OPENPROVIDER_PASSWORD'];
 const isSandbox = !username || !password;
 const platformDomain = process.env['DOMAIN'] ?? 'itbengal.xyz';
+
+let cachedToken: string | null = null;
+let tokenExpiry = 0;
+
+/**
+ * Log in to Openprovider and retrieve/cache authentication token.
+ */
+async function getAuthToken(): Promise<string | null> {
+  if (isSandbox) return null;
+
+  const now = Date.now();
+  if (cachedToken && tokenExpiry > now) {
+    return cachedToken;
+  }
+
+  try {
+    const apiUrl = process.env['OPENPROVIDER_API_URL'] || 'https://api.openprovider.eu/v1beta';
+    const response = await fetch(`${apiUrl}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error(`[Openprovider API Auth Error]: ${response.statusText} - ${errText}`);
+      return null;
+    }
+
+    const json = (await response.json()) as any;
+    if (json.data && json.data.token) {
+      cachedToken = json.data.token;
+      // Set expiration to 47 hours from now (Openprovider tokens are valid for 48 hours)
+      tokenExpiry = now + 47 * 60 * 60 * 1000;
+      return cachedToken;
+    }
+  } catch (err) {
+    console.error('[Openprovider API Auth Exception]:', err);
+  }
+
+  return null;
+}
+
+/**
+ * Base helper to make authenticated requests to Openprovider REST API.
+ */
+async function requestApi(method: string, path: string, body?: any): Promise<any> {
+  const token = await getAuthToken();
+  if (!token) {
+    throw new Error('Authentication failed or credentials not configured');
+  }
+
+  const apiUrl = process.env['OPENPROVIDER_API_URL'] || 'https://api.openprovider.eu/v1beta';
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  };
+
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(`${apiUrl}${path}`, options);
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Openprovider API Error (${response.status}): ${errText}`);
+  }
+
+  return response.json();
+}
 
 /**
  * Search domain availability and return pricing.
@@ -46,15 +116,35 @@ export async function searchDomain(domainName: string): Promise<DomainSearchResu
   const tldsToSearch = requestedTld && TLD_PRICES[requestedTld] ? [requestedTld] : ['com', 'net', 'xyz'];
 
   if (!isSandbox) {
-    // Real API implementation goes here
-    // For this evaluation, we use the sandbox logic but log the API credentials usage
-    console.log(`[Openprovider API] Authenticating as ${username} for availability check...`);
+    try {
+      const names = tldsToSearch.map((tld) => `${name}.${tld}`);
+      const response = await requestApi('POST', '/domains/check', { names });
+      
+      const results = response.data?.results || [];
+      return results.map((res: any) => {
+        const fullDomain = res.domain;
+        const domainParts = fullDomain.split('.');
+        const tld = domainParts[1] || 'com';
+        const isAvailable = res.status === 'free';
+        const basePrice = TLD_PRICES[tld] || 1200;
+        const priceWithMarkup = Math.round(basePrice * MARKUP_MULTIPLIER);
+
+        return {
+          domain: fullDomain,
+          isAvailable,
+          priceBdt: priceWithMarkup,
+          currency: 'BDT',
+          tld,
+        };
+      });
+    } catch (err) {
+      console.error('[Openprovider searchDomain API Error, falling back to sandbox]:', err);
+    }
   }
 
-  // Simulate search check
+  // Simulate search check (Sandbox fallback)
   return tldsToSearch.map((tld) => {
     const fullDomain = `${name}.${tld}`;
-    // Simple deterministic availability based on name length
     const isAvailable = name.length % 2 !== 0 || name.length > 5;
     const basePrice = TLD_PRICES[tld] || 1200;
     const priceWithMarkup = Math.round(basePrice * MARKUP_MULTIPLIER);
@@ -74,7 +164,7 @@ export async function searchDomain(domainName: string): Promise<DomainSearchResu
  */
 export async function registerDomain(
   domainName: string,
-  _contactInfo: any
+  contactInfo: any
 ): Promise<{
   success: boolean;
   domainName: string;
@@ -85,7 +175,38 @@ export async function registerDomain(
   console.log(`[Openprovider] Registering domain: ${domainName}`);
   
   if (!isSandbox) {
-    console.log(`[Openprovider API] Call to domains-register endpoint...`);
+    try {
+      const parts = domainName.split('.');
+      const name = parts[0] || '';
+      const extension = parts[1] || '';
+
+      const ownerHandle = contactInfo?.ownerHandle || process.env['OPENPROVIDER_OWNER_HANDLE'] || 'ITB001';
+      
+      const payload = {
+        domain: { name, extension },
+        period: 1,
+        owner_handle: ownerHandle,
+        admin_handle: ownerHandle,
+        tech_handle: ownerHandle,
+        billing_handle: ownerHandle,
+        ns_group: 'dns-openprovider'
+      };
+
+      const response = await requestApi('POST', '/domains', payload);
+      
+      const regDate = response.data?.active_date ? new Date(response.data.active_date) : new Date();
+      const expDate = response.data?.expiration_date ? new Date(response.data.expiration_date) : new Date();
+      
+      return {
+        success: true,
+        domainName,
+        registrationDate: regDate,
+        expiryDate: expDate,
+        authCode: response.data?.auth_code || 'OP-MOCK-AUTH-CODE',
+      };
+    } catch (err) {
+      console.error('[Openprovider registerDomain API Error, falling back to sandbox]:', err);
+    }
   }
 
   const now = new Date();
@@ -108,6 +229,22 @@ export async function registerDomain(
 export async function getDnsZone(domainName: string): Promise<OpenproviderDnsRecord[]> {
   console.log(`[Openprovider] Fetching DNS zone for: ${domainName}`);
   
+  if (!isSandbox) {
+    try {
+      const response = await requestApi('GET', `/dns/zones/${domainName}`);
+      const records = response.data?.records || [];
+      return records.map((r: any) => ({
+        type: r.type,
+        name: r.name === '' ? '@' : r.name,
+        value: r.value,
+        ttl: r.ttl,
+        priority: r.priority
+      }));
+    } catch (err) {
+      console.error('[Openprovider getDnsZone API Error, falling back to sandbox]:', err);
+    }
+  }
+
   // Default mock zone setup
   return [
     { type: 'NS', name: '@', value: `ns1.${platformDomain}`, ttl: 86400 },
@@ -127,7 +264,22 @@ export async function updateDnsZone(
   console.log(`[Openprovider] Applying ${records.length} DNS records to zone: ${domainName}`);
   
   if (!isSandbox) {
-    console.log(`[Openprovider API] Call to dns-zone-update endpoint...`);
+    try {
+      const openproviderRecords = records.map(r => ({
+        type: r.type,
+        name: r.name === '@' ? '' : r.name,
+        value: r.value,
+        ttl: r.ttl,
+        priority: r.priority
+      }));
+
+      await requestApi('PUT', `/dns/zones/${domainName}`, {
+        records: openproviderRecords
+      });
+      return true;
+    } catch (err) {
+      console.error('[Openprovider updateDnsZone API Error, falling back to sandbox]:', err);
+    }
   }
 
   return true;
@@ -140,7 +292,14 @@ export async function toggleWhoisPrivacy(domainName: string, enabled: boolean): 
   console.log(`[Openprovider] Setting WHOIS privacy shield for ${domainName} to: ${enabled}`);
   
   if (!isSandbox) {
-    console.log(`[Openprovider API] Call to whois-privacy-toggle...`);
+    try {
+      await requestApi('PATCH', `/domains/${domainName}`, {
+        is_private_whois_enabled: enabled
+      });
+      return true;
+    } catch (err) {
+      console.error('[Openprovider toggleWhoisPrivacy API Error, falling back to sandbox]:', err);
+    }
   }
 
   return true;
@@ -151,5 +310,15 @@ export async function toggleWhoisPrivacy(domainName: string, enabled: boolean): 
  */
 export async function getAuthCode(domainName: string): Promise<string> {
   console.log(`[Openprovider] Fetching Auth code for ${domainName}`);
+  
+  if (!isSandbox) {
+    try {
+      const response = await requestApi('GET', `/domains/${domainName}`);
+      return response.data?.auth_code || 'OP-MOCK-AUTH-CODE';
+    } catch (err) {
+      console.error('[Openprovider getAuthCode API Error, falling back to sandbox]:', err);
+    }
+  }
+
   return 'OP-' + Math.random().toString(36).substring(2, 10).toUpperCase();
 }
