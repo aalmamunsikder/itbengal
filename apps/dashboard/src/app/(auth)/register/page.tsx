@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, User, Loader2, Check, X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { cn } from '@/lib/utils';
@@ -15,7 +16,8 @@ const PASSWORD_REQUIREMENTS = [
   { label: 'One special character', test: (p: string) => /[!@#$%^&*(),.?":{}|<>]/.test(p) },
 ] as const;
 
-export default function RegisterPage() {
+function RegisterForm() {
+  const searchParams = useSearchParams();
   const { register, isLoading, error, clearError } = useAuthStore();
 
   const [firstName, setFirstName] = useState('');
@@ -145,7 +147,7 @@ export default function RegisterPage() {
         </div>
 
         <Link
-          href="/login"
+          href={searchParams.get('redirect') ? `/login?redirect=${encodeURIComponent(searchParams.get('redirect')!)}` : '/login'}
           className={cn(
             'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
             'bg-gradient-to-r from-primary-600 to-primary-500',
@@ -467,5 +469,13 @@ export default function RegisterPage() {
         </Link>
       </p>
     </form>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center py-12"><Loader2 className="h-8 w-8 animate-spin text-primary-500" /></div>}>
+      <RegisterForm />
+    </Suspense>
   );
 }

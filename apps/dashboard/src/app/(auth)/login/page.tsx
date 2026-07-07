@@ -63,7 +63,8 @@ function LoginForm() {
 
     const success = await login(email, password);
     if (success) {
-      router.push('/dashboard');
+      const redirect = searchParams.get('redirect') || '/dashboard';
+      router.push(redirect);
     }
   }
 
@@ -81,7 +82,8 @@ function LoginForm() {
       code,
     );
     if (success) {
-      router.push('/dashboard');
+      const redirect = searchParams.get('redirect') || '/dashboard';
+      router.push(redirect);
     }
   }
 

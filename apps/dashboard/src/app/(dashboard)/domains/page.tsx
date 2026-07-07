@@ -107,6 +107,31 @@ export default function DomainsPage() {
             });
             if (res.success) {
               setSearchResults(res.data);
+              
+              const addToCart = params.get('add-to-cart') === 'true';
+              if (addToCart) {
+                const match = res.data.find(
+                  (r) => r.isAvailable && (r.domain === query || r.domain.startsWith(query + '.'))
+                );
+                if (match) {
+                  addItem({
+                    id: `domain:${match.domain}`,
+                    type: 'DOMAIN',
+                    name: match.domain,
+                    priceBdt: match.priceBdt,
+                    metadata: { tld: match.tld },
+                  });
+                  setMessage({
+                    type: 'success',
+                    text: `Added ${match.domain} to your shopping cart!`,
+                  });
+                }
+                // Strip parameter from history
+                const cleanQuery = window.location.search
+                  .replace(/([&?])add-to-cart=true&?/, '$1')
+                  .replace(/[?&]$/, '');
+                window.history.replaceState({}, '', window.location.pathname + cleanQuery);
+              }
             }
           } catch (err: any) {
             setMessage({ type: 'error', text: err.message || 'Domain search failed' });
