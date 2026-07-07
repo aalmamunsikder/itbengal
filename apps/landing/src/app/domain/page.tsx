@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Globe, Shield, Lock, Shuffle, CheckCircle2 } from 'lucide-react';
+import { Search, Globe, Shield, Lock, Shuffle, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+interface SearchResult {
+  domain: string;
+  isAvailable: boolean;
+  priceBdt: number;
+  currency: string;
+  tld: string;
+}
+
 export default function DomainPage() {
   const [domain, setDomain] = useState('');
+  const [searching, setSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const pricingList = [
     { ext: '.com.bd', type: 'Local BD', regPrice: '৳1,500', renPrice: '৳1,700', transPrice: '৳1,500' },
@@ -16,6 +29,131 @@ export default function DomainPage() {
     { ext: '.net', type: 'Network / IT', regPrice: '৳1,400', renPrice: '৳1,600', transPrice: '৳1,400' },
     { ext: '.xyz', type: 'Developer Standard', regPrice: '৳290', renPrice: '৳1,150', transPrice: '৳1,150' },
   ];
+
+  const getCookie = (name: string): string | null => {
+    if (typeof document === 'undefined') return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop()!.split(';').shift()!);
+    return null;
+  };
+
+  const setCookie = (name: string, value: string, days = 7) => {
+    if (typeof document === 'undefined') return;
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `; expires=${date.toUTCString()}`;
+    
+    let domainScope = '';
+    if (window.location.hostname.includes('itbengal.xyz')) {
+      domainScope = '; domain=.itbengal.xyz';
+    }
+    
+    document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=/${domainScope}`;
+  };
+
+  // Sync client cart count
+  useEffect(() => {
+    const rawCart = getCookie('itbengal_cart');
+    if (rawCart) {
+      try {
+        const parsed = JSON.parse(rawCart);
+        if (Array.isArray(parsed)) {
+          setCartItems(parsed);
+        }
+      } catch (e) {}
+    }
+  }, []);
+
+  // Parse query params and trigger auto-search on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('query') || params.get('search');
+      if (query) {
+        setDomain(query);
+        const autoSearch = async () => {
+          setSearching(true);
+          setError(null);
+          setSuccess(null);
+          try {
+            const apiUrl = window.location.hostname.includes('itbengal.xyz')
+              ? 'https://api.itbengal.xyz/api/v1'
+              : 'http://localhost:4000/api/v1';
+
+            const res = await fetch(`${apiUrl}/domains/search`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ domainName: query }),
+            });
+
+            if (!res.ok) throw new Error('Failed to query domain search service');
+            const json = await res.json();
+            if (json.success) {
+              setSearchResults(json.data);
+            }
+          } catch (err: any) {
+            setError(err.message || 'Domain check failed');
+          } finally {
+            setSearching(false);
+          }
+        };
+        autoSearch();
+      }
+    }
+  }, []);
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!domain) return;
+    setSearching(true);
+    setError(null);
+    setSuccess(null);
+    setSearchResults([]);
+
+    try {
+      const apiUrl = window.location.hostname.includes('itbengal.xyz')
+        ? 'https://api.itbengal.xyz/api/v1'
+        : 'http://localhost:4000/api/v1';
+
+      const res = await fetch(`${apiUrl}/domains/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domainName: domain }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to query domain search service');
+      }
+
+      const json = await res.json();
+      if (json.success) {
+        setSearchResults(json.data);
+      }
+    } catch (err: any) {
+      setError(err.message || 'Domain check failed');
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const handleAddToCart = (domainName: string, tld: string, priceBdt: number) => {
+    const newItem = {
+      id: `domain:${domainName}`,
+      type: 'DOMAIN',
+      name: domainName,
+      priceBdt,
+      metadata: { tld },
+    };
+
+    const updated = [...cartItems.filter((i) => i.id !== newItem.id), newItem];
+    setCartItems(updated);
+    setCookie('itbengal_cart', JSON.stringify(updated));
+    setSuccess(`Added ${domainName} to your cart successfully!`);
+    
+    // Dispatch event to update navbar cart count if present
+    window.dispatchEvent(new Event('cart-updated'));
+  };
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between selection:bg-primaryBlue/20 selection:text-[#0052cc]">
@@ -35,26 +173,90 @@ export default function DomainPage() {
           </p>
 
           {/* Big Search Input */}
-          <div className="bg-white border border-slate-200 rounded-xl p-1.5 flex items-center shadow-sm">
+          <form onSubmit={handleSearch} className="bg-white border border-slate-200 rounded-xl p-1.5 flex items-center shadow-sm mb-6">
             <div className="flex items-center pl-2 text-slate-400">
               <Globe className="h-5 w-5" />
             </div>
             <input
               type="text"
+              required
               placeholder="Search your ideal domain name (e.g. mycompany)..."
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               className="w-full bg-transparent border-0 outline-none text-slate-800 placeholder-slate-400 px-3 py-2 text-xs md:text-sm focus:ring-0"
             />
-            <Link
-              href={`https://dashboard.itbengal.xyz/domains?search=${encodeURIComponent(domain)}&add-to-cart=true`}
+            <button
+              type="submit"
+              disabled={searching}
               className="bg-[#0052cc] hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg text-xs md:text-sm transition-all shadow-sm active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
             >
-              <Search className="h-4 w-4" />
-              Check Domain
-            </Link>
-          </div>
+              {searching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+              {searching ? 'Checking...' : 'Check Domain'}
+            </button>
+          </form>
+
+          {/* Error Banner */}
+          {error && (
+            <div className="p-4 mb-4 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-semibold flex items-center gap-2">
+              <AlertCircle className="h-4.5 w-4.5" />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {/* Success Banner */}
+          {success && (
+            <div className="p-4 mb-4 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-semibold flex items-center gap-2">
+              <CheckCircle2 className="h-4.5 w-4.5" />
+              <span>{success}</span>
+            </div>
+          )}
         </div>
+
+        {/* Live Search Results Display */}
+        {searchResults.length > 0 && (
+          <div className="max-w-2xl mx-auto mb-14 border border-slate-200 bg-white rounded-xl p-6 space-y-4 shadow-sm animate-fade-in">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+              <h3 className="text-sm font-extrabold text-slate-900">Registry Availability Search</h3>
+              <Link
+                href="https://dashboard.itbengal.xyz/cart"
+                className="text-xs text-[#0052cc] font-bold hover:underline"
+              >
+                Go to Cart ({cartItems.length}) →
+              </Link>
+            </div>
+            <div className="divide-y divide-slate-150">
+              {searchResults.map((result, idx) => (
+                <div key={idx} className="py-3.5 flex items-center justify-between gap-4">
+                  <div>
+                    <span className="font-bold text-xs text-slate-900 block">{result.domain}</span>
+                    <span className={`text-[10px] font-bold ${result.isAvailable ? 'text-emerald-500' : 'text-rose-500'}`}>
+                      {result.isAvailable ? 'Available' : 'Unavailable'}
+                    </span>
+                  </div>
+                  {result.isAvailable ? (
+                    <div className="flex items-center gap-3">
+                      <span className="font-extrabold text-xs text-slate-900">৳{result.priceBdt}/yr</span>
+                      {cartItems.some((i) => i.id === `domain:${result.domain}`) ? (
+                        <span className="px-3.5 py-1.5 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-bold border border-emerald-100">
+                          Added to Cart
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => handleAddToCart(result.domain, result.tld, result.priceBdt)}
+                          className="px-3.5 py-1.5 bg-[#0052cc] text-white hover:bg-blue-700 rounded-lg text-[10px] font-bold transition-all"
+                        >
+                          Add to Cart
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <span className="text-[10px] text-slate-400 italic">Taken</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Extension Pricing Table */}
         <div className="mb-14">
@@ -150,7 +352,7 @@ export default function DomainPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="space-y-2 border-l-2 border-primaryBlue pl-4">
+            <div className="space-y-2 border-l-2 border-[#0052cc] pl-4">
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-bold bg-[#0052cc]/10 text-[#0052cc] h-5 w-5 rounded-full flex items-center justify-center">1</span>
                 <h4 className="text-xs font-bold text-slate-800">Request Auth (EPP) Code</h4>
@@ -160,7 +362,7 @@ export default function DomainPage() {
               </p>
             </div>
 
-            <div className="space-y-2 border-l-2 border-primaryBlue pl-4">
+            <div className="space-y-2 border-l-2 border-[#0052cc] pl-4">
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-bold bg-[#0052cc]/10 text-[#0052cc] h-5 w-5 rounded-full flex items-center justify-center">2</span>
                 <h4 className="text-xs font-bold text-slate-800">Unlock the Domain</h4>
@@ -170,7 +372,7 @@ export default function DomainPage() {
               </p>
             </div>
 
-            <div className="space-y-2 border-l-2 border-primaryBlue pl-4">
+            <div className="space-y-2 border-l-2 border-[#0052cc] pl-4">
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-bold bg-[#0052cc]/10 text-[#0052cc] h-5 w-5 rounded-full flex items-center justify-center">3</span>
                 <h4 className="text-xs font-bold text-slate-800">Initiate Transfer</h4>

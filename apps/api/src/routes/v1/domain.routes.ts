@@ -4,11 +4,13 @@ import * as domainController from '../../controllers/domain.controller.js';
 
 const router = Router();
 
-// Apply auth middleware
+// Public routes
+router.post('/search', domainController.searchDomains);
+
+// Apply auth middleware for other endpoints
 router.use(authenticate);
 
 router.get('/', domainController.listDomains);
-router.post('/search', domainController.searchDomains);
 router.post('/register', domainController.registerDomain);
 router.get('/:id', domainController.getDomainDetails);
 router.post('/:id/whois', domainController.toggleWhoisPrivacy);

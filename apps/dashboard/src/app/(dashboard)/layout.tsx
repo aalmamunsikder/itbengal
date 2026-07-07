@@ -129,6 +129,43 @@ export default function DashboardLayout({
     initTheme();
   }, [initSidebar, initTheme]);
 
+  // Sync landing page guest cart cookie to Zustand store on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const getCookie = (name: string): string | null => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return decodeURIComponent(parts.pop()!.split(';').shift()!);
+        return null;
+      };
+
+      const deleteCookie = (name: string) => {
+        let domainScope = '';
+        if (window.location.hostname.includes('itbengal.xyz')) {
+          domainScope = '; domain=.itbengal.xyz';
+        }
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/${domainScope}`;
+      };
+
+      const guestCartJson = getCookie('itbengal_cart');
+      if (guestCartJson) {
+        try {
+          const guestItems = JSON.parse(guestCartJson);
+          if (Array.isArray(guestItems)) {
+            guestItems.forEach((item) => {
+              // Add to store
+              useCartStore.getState().addItem(item);
+            });
+            // Clear cookie
+            deleteCookie('itbengal_cart');
+          }
+        } catch (e) {
+          console.error('[Cart Sync Error]:', e);
+        }
+      }
+    }
+  }, []);
+
   // Close mobile sidebar on route change
   useEffect(() => {
     setMobileOpen(false);

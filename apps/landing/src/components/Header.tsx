@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare, HardDrive, Cpu, Users } from 'lucide-react';
+import { Menu, X, ArrowRight, Cloud, Server, HelpCircle, MessageSquare, HardDrive, Cpu, Users, ShoppingCart } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,6 +11,7 @@ export default function Header() {
 
   // Live countdown timer state (hours, minutes, seconds)
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 0 });
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -22,13 +23,41 @@ export default function Header() {
         } else if (prev.hours > 0) {
           return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
         } else {
-          // Reset to 3 hours for demonstration loop
           return { hours: 3, minutes: 0, seconds: 0 };
         }
       });
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const getCookie = (name: string): string | null => {
+      if (typeof document === 'undefined') return null;
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return decodeURIComponent(parts.pop()!.split(';').shift()!);
+      return null;
+    };
+
+    const updateCartCount = () => {
+      const rawCart = getCookie('itbengal_cart');
+      if (rawCart) {
+        try {
+          const parsed = JSON.parse(rawCart);
+          if (Array.isArray(parsed)) {
+            setCartCount(parsed.length);
+            return;
+          }
+        } catch (e) {}
+      }
+      setCartCount(0);
+    };
+
+    updateCartCount();
+
+    window.addEventListener('cart-updated', updateCartCount);
+    return () => window.removeEventListener('cart-updated', updateCartCount);
   }, []);
 
   const formatNumber = (num: number) => String(num).padStart(2, '0');
@@ -254,6 +283,18 @@ export default function Header() {
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-6">
+            {cartCount > 0 && (
+              <Link
+                href="https://dashboard.itbengal.xyz/cart"
+                className="relative rounded-lg p-2 text-slate-500 hover:bg-slate-50 hover:text-primaryBlue transition-all flex items-center gap-1.5 mr-1"
+                title="Shopping Cart"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primaryBlue text-[9px] font-black text-white ring-2 ring-white">
+                  {cartCount}
+                </span>
+              </Link>
+            )}
             <Link href="https://dashboard.itbengal.xyz/login" className="text-xs font-bold text-slate-600 hover:text-primaryBlue transition-colors">
               Client Portal
             </Link>
@@ -283,6 +324,16 @@ export default function Header() {
             <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">FAQ</a>
             <Link href="/terms" onClick={() => setMobileMenuOpen(false)} className="text-base font-bold text-slate-700 hover:text-primaryBlue">Terms</Link>
             <div className="pt-3 border-t border-slate-100 flex flex-col gap-3">
+              {cartCount > 0 && (
+                <Link
+                  href="https://dashboard.itbengal.xyz/cart"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-all flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  View Cart ({cartCount})
+                </Link>
+              )}
               <Link href="https://dashboard.itbengal.xyz/login" className="w-full text-center py-2.5 rounded-lg text-xs font-bold text-slate-700 border border-slate-200">
                 Client Portal
               </Link>

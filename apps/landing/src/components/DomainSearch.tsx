@@ -39,7 +39,7 @@ export default function DomainSearch() {
           className="w-full bg-transparent border-0 outline-none text-slate-800 placeholder-slate-400 px-3 py-2 text-xs md:text-sm focus:ring-0"
         />
         <Link
-          href={`https://dashboard.itbengal.xyz/domains?search=${encodeURIComponent(domain)}&add-to-cart=true`}
+          href={`/domain?search=${encodeURIComponent(domain)}`}
           className="bg-[#0052cc] hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg text-xs md:text-sm transition-all shadow-sm active:scale-[0.98] flex items-center gap-1.5"
         >
           <Search className="h-3.5 w-3.5" />
