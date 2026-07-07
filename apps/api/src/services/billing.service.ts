@@ -1,6 +1,7 @@
 import { prisma, SubscriptionStatus, InvoiceStatus, PaymentStatus } from '@itbengal/database';
 import { NotFoundError, ForbiddenError } from '../middleware/errorHandler.js';
 import { activateDomain } from './domain.service.js';
+import { appConfig } from '../config/app.js';
 
 /**
  * Fetch all active hosting plans.
@@ -230,4 +231,144 @@ export async function approveBkashPayment(paymentId: string) {
   }
 
   return updatedPayment;
+}
+
+export interface CheckoutItemInput {
+  type: 'DOMAIN' | 'HOSTING' | 'ADDON';
+  name: string;
+  priceBdt: number;
+  metadata: {
+    tld?: string;
+    planId?: string;
+  };
+}
+
+/**
+ * Handle checkout for multiple cart items (consolidates into a single pending invoice).
+ */
+export async function checkoutCart(organizationId: string, items: CheckoutItemInput[]) {
+  if (!items || items.length === 0) {
+    throw new ForbiddenError('Cart is empty');
+  }
+
+  const now = new Date();
+  const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const invoiceNumber = `INV-${now.toISOString().slice(0, 10).replace(/-/g, '')}-${randomSuffix}`;
+
+  return prisma.$transaction(async (tx) => {
+    let totalAmount = 0;
+    const invoiceItemsData: any[] = [];
+    let linkedSubscriptionId: string | undefined;
+
+    for (const item of items) {
+      if (item.type === 'DOMAIN') {
+        // Validate domain uniqueness in DB
+        const existing = await tx.domain.findUnique({
+          where: { name: item.name },
+        });
+        if (existing) {
+          throw new ForbiddenError(`Domain ${item.name} is already registered or request is pending`);
+        }
+
+        // Create PENDING domain
+        const domain = await tx.domain.create({
+          data: {
+            organizationId,
+            name: item.name,
+            status: 'PENDING_PAYMENT',
+            autoRenew: true,
+            whoisPrivacy: false,
+          },
+        });
+
+        // Add default Nameservers
+        await tx.dnsRecord.createMany({
+          data: [
+            { domainId: domain.id, name: '@', type: 'NS', content: `ns1.${appConfig.domain}`, ttl: 86400 },
+            { domainId: domain.id, name: '@', type: 'NS', content: `ns2.${appConfig.domain}`, ttl: 86400 },
+          ],
+        });
+
+        const itemTotal = Number(item.priceBdt);
+        totalAmount += itemTotal;
+        invoiceItemsData.push({
+          description: `Domain Registration - ${item.name} (1 Year TLD: .${item.metadata.tld || 'com'})`,
+          quantity: 1,
+          unitPrice: itemTotal,
+          total: itemTotal,
+          type: 'DOMAIN' as any,
+        });
+
+      } else if (item.type === 'HOSTING') {
+        const plan = await tx.plan.findUnique({
+          where: { id: item.metadata.planId },
+        });
+        if (!plan) {
+          throw new NotFoundError(`Hosting plan not found: ${item.metadata.planId}`);
+        }
+
+        const existingSub = await tx.subscription.findFirst({
+          where: { organizationId },
+        });
+
+        const oneMonthFromNow = new Date();
+        oneMonthFromNow.setMonth(now.getMonth() + 1);
+
+        let subscription;
+        if (existingSub) {
+          subscription = await tx.subscription.update({
+            where: { id: existingSub.id },
+            data: {
+              planId: plan.id,
+              status: 'PAST_DUE',
+            },
+          });
+        } else {
+          subscription = await tx.subscription.create({
+            data: {
+              organizationId,
+              planId: plan.id,
+              status: 'PAST_DUE',
+              currentPeriodStart: now,
+              currentPeriodEnd: oneMonthFromNow,
+            },
+          });
+        }
+
+        linkedSubscriptionId = subscription.id;
+        const itemTotal = Number(item.priceBdt);
+        totalAmount += itemTotal;
+        invoiceItemsData.push({
+          description: `Hosting Subscription - ${plan.name} (Monthly)`,
+          quantity: 1,
+          unitPrice: itemTotal,
+          total: itemTotal,
+          type: 'HOSTING' as any,
+        });
+      }
+    }
+
+    // Create single unified invoice
+    const invoice = await tx.invoice.create({
+      data: {
+        organizationId,
+        subscriptionId: linkedSubscriptionId,
+        invoiceNumber,
+        status: 'PENDING',
+        subtotal: totalAmount,
+        total: totalAmount,
+        dueDate: now,
+      },
+    });
+
+    // Create all invoice items
+    await tx.invoiceItem.createMany({
+      data: invoiceItemsData.map((ii) => ({
+        ...ii,
+        invoiceId: invoice.id,
+      })),
+    });
+
+    return invoice;
+  });
 }

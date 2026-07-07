@@ -96,3 +96,22 @@ export async function approvePayment(req: Request, res: Response, next: NextFunc
     next(error);
   }
 }
+
+export async function checkoutCart(req: Request, res: Response, next: NextFunction) {
+  try {
+    const orgId = req.headers['x-organization-id'] as string;
+    const { items } = req.body;
+
+    if (!orgId) {
+      throw new ValidationError('Organization ID header is missing');
+    }
+    if (!items || !Array.isArray(items)) {
+      throw new ValidationError('Missing or invalid items array in request body');
+    }
+
+    const result = await billingService.checkoutCart(orgId, items);
+    res.status(201).json(successResponse(result, 'Checkout completed successfully, invoice generated'));
+  } catch (error) {
+    next(error);
+  }
+}

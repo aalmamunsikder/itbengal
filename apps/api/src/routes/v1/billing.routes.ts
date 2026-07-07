@@ -13,5 +13,6 @@ router.get('/invoices', billingController.getInvoices);
 router.post('/subscribe', billingController.subscribeToPlan);
 router.post('/pay-bkash', billingController.payManualBkash);
 router.post('/approve-bkash', billingController.approvePayment);
+router.post('/checkout', billingController.checkoutCart);
 
 export default router;

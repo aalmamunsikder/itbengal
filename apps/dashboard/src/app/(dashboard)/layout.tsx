@@ -21,12 +21,14 @@ import {
   LogOut,
   Activity,
   ShieldCheck,
+  ShoppingCart,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getInitials } from '@/lib/utils';
 import { useSidebarStore } from '@/stores/sidebarStore';
 import { useThemeStore } from '@/stores/themeStore';
 import { useAuthStore } from '@/stores/authStore';
+import { useCartStore } from '@/stores/cartStore';
 
 /** Sidebar navigation items */
 const NAV_ITEMS = [
@@ -101,6 +103,7 @@ export default function DashboardLayout({
   const { isCollapsed, isMobileOpen, toggle, setMobileOpen, initialize: initSidebar } = useSidebarStore();
   const { resolvedTheme, setTheme, initialize: initTheme } = useThemeStore();
   const { user, isAuthenticated, isLoading, logout, refreshUser } = useAuthStore();
+  const { items: cartItems } = useCartStore();
 
   const [authChecked, setAuthChecked] = useState(false);
 
@@ -346,6 +349,20 @@ export default function DashboardLayout({
 
           {/* Right: notifications + avatar */}
           <div className="flex items-center gap-2">
+            {/* Shopping Cart */}
+            <Link
+              href="/cart"
+              className="relative rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-all mr-1"
+              title="Shopping Cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-primary-600 text-[9px] font-black text-white ring-2 ring-white dark:ring-gray-900 animate-pulse">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
+
             {/* Notifications */}
             <button className="relative rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300">
               <Bell className="h-5 w-5" />

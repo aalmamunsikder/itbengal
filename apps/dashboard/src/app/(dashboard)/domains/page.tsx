@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import api from '@/lib/api';
 import { cn } from '@/lib/utils';
+import { useCartStore } from '@/stores/cartStore';
 
 interface DnsRecord {
   id: string;
@@ -45,6 +46,8 @@ interface SearchResult {
 }
 
 export default function DomainsPage() {
+  const { addItem, items: cartItems } = useCartStore();
+
   const [activeTab, setActiveTab] = useState<'MY_DOMAINS' | 'SEARCH'>('MY_DOMAINS');
   const [domains, setDomains] = useState<Domain[]>([]);
   const [loading, setLoading] = useState(true);
@@ -135,28 +138,21 @@ export default function DomainsPage() {
     }
   };
 
-  const handleRegister = async (domainName: string, tld: string) => {
-    setActionLoading(true);
-    setMessage(null);
-    try {
-      const res = await api.post<{ success: boolean; data: { domain: Domain } }>('/domains/register', {
-        domainName,
-        tld,
-      });
-      if (res.success) {
-        setMessage({
-          type: 'success',
-          text: `Registration request created for ${domainName}! Please approve the invoice in the Billing tab.`,
-        });
-        setActiveTab('MY_DOMAINS');
-        fetchDomains();
-      }
-    } catch (err: any) {
-      setMessage({ type: 'error', text: err.message || 'Registration failed' });
-    } finally {
-      setActionLoading(false);
-    }
+  const handleAddToCart = (domainName: string, tld: string, priceBdt: number) => {
+    addItem({
+      id: `domain:${domainName}`,
+      type: 'DOMAIN',
+      name: domainName,
+      priceBdt,
+      metadata: { tld },
+    });
+    setMessage({
+      type: 'success',
+      text: `Added ${domainName} to your shopping cart!`,
+    });
   };
+
+
 
   const handleToggleWhois = async (domainId: string, currentVal: boolean) => {
     setActionLoading(true);
@@ -680,13 +676,18 @@ export default function DomainsPage() {
                     {result.isAvailable ? (
                       <div className="flex items-center gap-4">
                         <span className="font-extrabold text-sm text-gray-900 dark:text-white">৳{result.priceBdt}/yr</span>
-                        <button
-                          onClick={() => handleRegister(result.domain, result.tld)}
-                          disabled={actionLoading}
-                          className="px-4 py-2 bg-primary-600 text-white hover:bg-primary-500 rounded-xl text-xs font-bold transition-all"
-                        >
-                          Buy Domain
-                        </button>
+                        {cartItems.some((item) => item.id === `domain:${result.domain}`) ? (
+                          <span className="px-4 py-2 bg-emerald-500/10 text-emerald-600 rounded-xl text-xs font-bold border border-emerald-500/20">
+                            Added to Cart
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => handleAddToCart(result.domain, result.tld, result.priceBdt)}
+                            className="px-4 py-2 bg-primary-600 text-white hover:bg-primary-500 rounded-xl text-xs font-bold transition-all"
+                          >
+                            Add to Cart
+                          </button>
+                        )}
                       </div>
                     ) : (
                       <span className="text-xs text-gray-400 italic">Taken</span>
