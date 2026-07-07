@@ -137,12 +137,12 @@ function LoginForm() {
   if (requiresVerification) {
     return (
       <div className="space-y-6 text-center animate-fade-in">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-warning-500/10 ring-1 ring-warning-500/20">
-          <Mail className="h-8 w-8 text-warning-400" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-50 ring-1 ring-amber-200">
+          <Mail className="h-8 w-8 text-amber-500" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Verify your email</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Verify your email</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             Your email address has not been verified yet. Please check your inbox
             for a verification link before signing in.
           </p>
@@ -155,9 +155,9 @@ function LoginForm() {
             });
           }}
           className={cn(
-            'flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5',
-            'text-sm font-medium text-gray-300',
-            'hover:bg-white/10 hover:border-white/20',
+            'flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5',
+            'text-xs font-bold text-slate-700',
+            'hover:bg-slate-100 hover:border-slate-300',
             'transition-all duration-200',
           )}
         >
@@ -175,18 +175,18 @@ function LoginForm() {
     return (
       <form onSubmit={handleTwoFactorSubmit} className="space-y-6 animate-fade-in">
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10 ring-1 ring-primary-500/20">
-            <ShieldCheck className="h-8 w-8 text-primary-400" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 ring-1 ring-blue-200">
+            <ShieldCheck className="h-8 w-8 text-[#0066ff]" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Two-factor authentication</h1>
-          <p className="mt-2 text-sm text-gray-400">
+          <h1 className="text-xl font-bold text-slate-900">Two-factor authentication</h1>
+          <p className="mt-2 text-xs text-slate-505">
             Enter the 6-digit code from your authenticator app
           </p>
         </div>
 
         {/* API error */}
         {error && (
-          <div className="animate-fade-in flex items-center gap-2 rounded-lg border border-danger-500/20 bg-danger-500/10 px-4 py-3 text-sm text-danger-400">
+          <div className="animate-fade-in flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-650">
             <AlertCircle className="h-4 w-4 shrink-0" />
             {error}
           </div>
@@ -206,10 +206,10 @@ function LoginForm() {
               onKeyDown={(e) => handleTwoFactorKeyDown(index, e)}
               autoFocus={index === 0}
               className={cn(
-                'h-12 w-11 rounded-lg border bg-white/5 text-center text-lg font-semibold text-white',
+                'h-12 w-11 rounded-xl border bg-slate-50 text-center text-lg font-bold text-slate-900',
                 'transition-all duration-200',
-                'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                'border-white/10 hover:border-white/20',
+                'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+                'border-slate-200 hover:border-slate-300',
               )}
               aria-label={`Digit ${index + 1}`}
             />
@@ -220,14 +220,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={isLoading || !codeComplete}
-          className={cn(
-            'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
@@ -235,9 +228,8 @@ function LoginForm() {
               Verifying…
             </span>
           ) : (
-            'Verify'
+            'Verify Code'
           )}
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
         </button>
 
         {/* Back */}
@@ -252,7 +244,7 @@ function LoginForm() {
             });
             setTwoFactorCode(['', '', '', '', '', '']);
           }}
-          className="flex w-full items-center justify-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+          className="flex w-full items-center justify-center gap-2 text-xs text-slate-450 hover:text-slate-600 transition-colors"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Use a different account
@@ -265,44 +257,44 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-white">Welcome back</h1>
-        <p className="mt-1.5 text-sm text-gray-400">
-          Sign in to your account to continue
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Welcome back</h1>
+        <p className="mt-2 text-xs text-slate-500">
+          Sign in to your dashboard console to manage containers
         </p>
       </div>
 
-      {/* Success messages from other flows */}
+      {/* Success messages */}
       {justRegistered && (
-        <div className="animate-fade-in rounded-lg border border-success-500/20 bg-success-500/10 px-4 py-3 text-sm text-success-400">
+        <div className="animate-fade-in rounded-xl border border-emerald-250 bg-emerald-50 px-4 py-3 text-xs text-emerald-700 leading-normal">
           🎉 Account created! Please check your email to verify your account, then sign in.
         </div>
       )}
       {passwordReset && (
-        <div className="animate-fade-in rounded-lg border border-success-500/20 bg-success-500/10 px-4 py-3 text-sm text-success-400">
+        <div className="animate-fade-in rounded-xl border border-emerald-250 bg-emerald-50 px-4 py-3 text-xs text-emerald-700">
           ✅ Password reset successfully. You can now sign in with your new password.
         </div>
       )}
       {emailVerified && (
-        <div className="animate-fade-in rounded-lg border border-success-500/20 bg-success-500/10 px-4 py-3 text-sm text-success-400">
+        <div className="animate-fade-in rounded-xl border border-emerald-250 bg-emerald-50 px-4 py-3 text-xs text-emerald-700">
           ✅ Email verified! You can now sign in to your account.
         </div>
       )}
 
       {/* API error */}
       {error && (
-        <div className="animate-fade-in flex items-center gap-2 rounded-lg border border-danger-500/20 bg-danger-500/10 px-4 py-3 text-sm text-danger-400">
+        <div className="animate-fade-in flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-655">
           <AlertCircle className="h-4 w-4 shrink-0" />
           {error}
         </div>
       )}
 
       {/* Email field */}
-      <div className="space-y-1.5">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+      <div className="space-y-2">
+        <label htmlFor="email" className="block text-xs font-bold text-slate-700">
           Email address
         </label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="email"
             type="email"
@@ -316,35 +308,35 @@ function LoginForm() {
             }}
             placeholder="you@example.com"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-4 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+              'w-full rounded-xl border bg-slate-50 py-3 pl-10.5 pr-4 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
               validationErrors.email
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+                ? 'border-red-300'
+                : 'border-slate-200 hover:border-slate-300',
             )}
           />
         </div>
         {validationErrors.email && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.email}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.email}</p>
         )}
       </div>
 
       {/* Password field */}
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="password" className="block text-xs font-bold text-slate-700">
             Password
           </label>
           <Link
             href="/forgot-password"
-            className="text-xs font-medium text-primary-400 hover:text-primary-300 transition-colors"
+            className="text-xs font-bold text-[#0066ff] hover:text-blue-700 transition-colors"
           >
             Forgot password?
           </Link>
         </div>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="password"
             type={showPassword ? 'text' : 'password'}
@@ -358,38 +350,38 @@ function LoginForm() {
             }}
             placeholder="••••••••"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+              'w-full rounded-xl border bg-slate-50 py-3 pl-10.5 pr-11 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
               validationErrors.password
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+                ? 'border-red-300'
+                : 'border-slate-200 hover:border-slate-300',
             )}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
             tabIndex={-1}
           >
             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {validationErrors.password && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.password}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.password}</p>
         )}
       </div>
 
       {/* Remember me */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 select-none">
         <input
           id="remember"
           type="checkbox"
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
-          className="h-4 w-4 rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-500/20 focus:ring-offset-0"
+          className="h-4 w-4 rounded border-slate-300 bg-slate-50 text-[#0066ff] focus:ring-[#0066ff]/20 focus:ring-offset-0 cursor-pointer"
         />
-        <label htmlFor="remember" className="text-sm text-gray-400">
+        <label htmlFor="remember" className="text-xs text-slate-500 font-medium cursor-pointer">
           Remember me for 30 days
         </label>
       </div>
@@ -398,14 +390,7 @@ function LoginForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className={cn(
-          'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-          'bg-gradient-to-r from-primary-600 to-primary-500',
-          'hover:from-primary-500 hover:to-primary-400',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-        )}
+        className="btn btn-primary w-full py-3.5"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
@@ -413,19 +398,17 @@ function LoginForm() {
             Signing in…
           </span>
         ) : (
-          'Sign in'
+          'Sign In'
         )}
-        {/* Shine effect */}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       </button>
 
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-white/10" />
+          <div className="w-full border-t border-slate-200" />
         </div>
-        <div className="relative flex justify-center text-xs">
-          <span className="bg-transparent px-4 text-gray-500">or continue with</span>
+        <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-wider">
+          <span className="bg-white px-4 text-slate-400">or continue with</span>
         </div>
       </div>
 
@@ -433,25 +416,24 @@ function LoginForm() {
       <button
         type="button"
         className={cn(
-          'flex w-full items-center justify-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5',
-          'text-sm font-medium text-gray-300',
-          'hover:bg-white/10 hover:border-white/20',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+          'flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3',
+          'text-xs font-bold text-slate-700',
+          'hover:bg-slate-50 hover:border-slate-300 focus:outline-none focus:ring-4 focus:ring-blue-50',
           'transition-all duration-200',
         )}
       >
-        <Github className="h-4 w-4" />
+        <Github className="h-4 w-4 text-slate-800" />
         GitHub
       </button>
 
       {/* Sign up link */}
-      <p className="text-center text-sm text-gray-400">
+      <p className="text-center text-xs text-slate-500">
         Don&apos;t have an account?{' '}
         <Link
           href="/register"
-          className="font-medium text-primary-400 hover:text-primary-300 transition-colors"
+          className="font-bold text-[#0066ff] hover:text-blue-700 transition-colors"
         >
-          Sign up
+          Sign Up
         </Link>
       </p>
     </form>
@@ -462,7 +444,7 @@ export default function LoginPage() {
   return (
     <Suspense fallback={
       <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-6 w-6 animate-spin text-primary-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#0066ff]" />
       </div>
     }>
       <LoginForm />

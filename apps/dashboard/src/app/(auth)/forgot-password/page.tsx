@@ -44,34 +44,34 @@ export default function ForgotPasswordPage() {
       <div className="space-y-6 text-center animate-fade-in">
         {/* Animated icon */}
         <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
-          <div className="absolute inset-0 rounded-full bg-success-500/20 animate-pulse-soft" />
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-success-500/10 ring-1 ring-success-500/30">
-            <CheckCircle2 className="h-8 w-8 text-success-400" />
+          <div className="absolute inset-0 rounded-full bg-emerald-50 animate-pulse-soft" />
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-250">
+            <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-white">Check your email</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Check your email</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             If an account exists for{' '}
-            <span className="font-medium text-white">{email}</span>,
+            <span className="font-extrabold text-slate-800">{email}</span>,
             we&apos;ve sent a password reset link.
           </p>
         </div>
 
-        <div className="rounded-lg border border-white/10 bg-white/[0.02] p-4 text-left">
-          <p className="text-xs font-medium text-gray-400 mb-2">Didn&apos;t receive the email?</p>
-          <ul className="space-y-1 text-xs text-gray-500">
+        <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 text-left">
+          <p className="text-[11px] font-bold text-slate-700 mb-2">Didn&apos;t receive the email?</p>
+          <ul className="space-y-1 text-[10px] text-slate-450">
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Check your spam or junk folder
             </li>
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Make sure you entered the correct email
             </li>
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Wait a few minutes and try again
             </li>
           </ul>
@@ -84,9 +84,9 @@ export default function ForgotPasswordPage() {
               setEmail('');
             }}
             className={cn(
-              'flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5',
-              'text-sm font-medium text-gray-300',
-              'hover:bg-white/10 hover:border-white/20',
+              'flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5',
+              'text-xs font-bold text-slate-700',
+              'hover:bg-slate-100 hover:border-slate-300',
               'transition-all duration-200',
             )}
           >
@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
 
           <Link
             href="/login"
-            className="flex w-full items-center justify-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+            className="flex w-full items-center justify-center gap-2 text-xs font-bold text-slate-500 hover:text-[#0066ff] transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to sign in
@@ -110,31 +110,31 @@ export default function ForgotPasswordPage() {
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <div className="text-center">
         {/* Icon */}
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10 ring-1 ring-primary-500/20">
-          <Mail className="h-8 w-8 text-primary-400" />
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 ring-1 ring-blue-200">
+          <Mail className="h-8 w-8 text-[#0066ff]" />
         </div>
 
-        <h1 className="text-2xl font-bold text-white">Forgot your password?</h1>
-        <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Forgot your password?</h1>
+        <p className="mt-2 text-xs text-slate-500 leading-relaxed">
           No worries. Enter your email and we&apos;ll send you a link to reset your password.
         </p>
       </div>
 
       {/* API error */}
       {error && (
-        <div className="animate-fade-in flex items-center gap-2 rounded-lg border border-danger-500/20 bg-danger-500/10 px-4 py-3 text-sm text-danger-400">
+        <div className="animate-fade-in flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-655">
           <AlertCircle className="h-4 w-4 shrink-0" />
           {error}
         </div>
       )}
 
       {/* Email field */}
-      <div className="space-y-1.5">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+      <div className="space-y-2">
+        <label htmlFor="email" className="block text-xs font-bold text-slate-700">
           Email address
         </label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="email"
             type="email"
@@ -147,17 +147,17 @@ export default function ForgotPasswordPage() {
             }}
             placeholder="you@example.com"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-4 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+              'w-full rounded-xl border bg-slate-50 py-3 pl-10 pr-4 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
               validationError
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+                ? 'border-red-300'
+                : 'border-slate-200 hover:border-slate-300',
             )}
           />
         </div>
         {validationError && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationError}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationError}</p>
         )}
       </div>
 
@@ -165,14 +165,7 @@ export default function ForgotPasswordPage() {
       <button
         type="submit"
         disabled={isLoading}
-        className={cn(
-          'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-          'bg-gradient-to-r from-primary-600 to-primary-500',
-          'hover:from-primary-500 hover:to-primary-400',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-        )}
+        className="btn btn-primary w-full py-3.5"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
@@ -180,15 +173,14 @@ export default function ForgotPasswordPage() {
             Sending…
           </span>
         ) : (
-          'Send reset link'
+          'Send Reset Link'
         )}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       </button>
 
       {/* Back to sign in */}
       <Link
         href="/login"
-        className="flex w-full items-center justify-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+        className="flex w-full items-center justify-center gap-2 text-xs font-bold text-slate-500 hover:text-[#0066ff] transition-colors"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         Back to sign in

@@ -16,12 +16,12 @@ function generateParticles(count: number) {
     duration: 1.5 + Math.random() * 1.5,
     size: 4 + Math.random() * 6,
     color: [
-      'bg-primary-400',
-      'bg-accent-400',
-      'bg-success-400',
-      'bg-warning-400',
-      'bg-primary-300',
-      'bg-accent-300',
+      'bg-blue-400',
+      'bg-[#0066ff]',
+      'bg-emerald-400',
+      'bg-amber-400',
+      'bg-blue-300',
+      'bg-[#0052cc]',
     ][Math.floor(Math.random() * 6)],
   }));
 }
@@ -56,27 +56,20 @@ function VerifyEmailForm() {
   if (!token) {
     return (
       <div className="space-y-6 text-center animate-fade-in">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-danger-500/10 ring-1 ring-danger-500/20">
-          <AlertCircle className="h-8 w-8 text-danger-400" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-50 ring-1 ring-red-200">
+          <AlertCircle className="h-8 w-8 text-red-500" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Invalid verification link</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Invalid verification link</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             This verification link is invalid or missing a token.
           </p>
         </div>
         <Link
           href="/login"
-          className={cn(
-            'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
-          Go to sign in
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+          Go to Sign In
         </Link>
       </div>
     );
@@ -86,12 +79,12 @@ function VerifyEmailForm() {
   if (isLoading) {
     return (
       <div className="space-y-6 text-center animate-fade-in">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10 ring-1 ring-primary-500/20">
-          <Loader2 className="h-8 w-8 text-primary-400 animate-spin" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 ring-1 ring-blue-200">
+          <Loader2 className="h-8 w-8 text-[#0066ff] animate-spin" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Verifying your email</h1>
-          <p className="mt-2 text-sm text-gray-400">
+          <h1 className="text-xl font-bold text-slate-900">Verifying your email</h1>
+          <p className="mt-2 text-xs text-slate-500">
             Please wait while we verify your email address…
           </p>
         </div>
@@ -100,7 +93,7 @@ function VerifyEmailForm() {
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="h-2 w-2 rounded-full bg-primary-400 animate-pulse-soft"
+              className="h-2 w-2 rounded-full bg-[#0066ff] animate-pulse-soft"
               style={{ animationDelay: `${i * 200}ms` }}
             />
           ))}
@@ -113,44 +106,35 @@ function VerifyEmailForm() {
   if (error) {
     return (
       <div className="space-y-6 text-center animate-fade-in">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-danger-500/10 ring-1 ring-danger-500/20">
-          <AlertCircle className="h-8 w-8 text-danger-400" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-50 ring-1 ring-red-200">
+          <AlertCircle className="h-8 w-8 text-red-500" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Verification failed</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Verification failed</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             {error}
           </p>
         </div>
 
         <div className="space-y-3">
-          {/* TODO: wire to a resend-verification endpoint if available */}
           <button
             onClick={() => {
               hasAttempted.current = false;
               clearError();
-              // Re-trigger verification
               if (token) {
                 verifyEmail(token).then((success) => {
                   if (success) setVerified(true);
                 });
               }
             }}
-            className={cn(
-              'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-              'bg-gradient-to-r from-primary-600 to-primary-500',
-              'hover:from-primary-500 hover:to-primary-400',
-              'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-              'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-            )}
+            className="btn btn-primary w-full py-3.5"
           >
-            Try again
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            Try Again
           </button>
 
           <Link
             href="/login"
-            className="flex w-full items-center justify-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+            className="flex w-full items-center justify-center gap-2 text-xs font-bold text-slate-500 hover:text-[#0066ff] transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to sign in
@@ -183,19 +167,19 @@ function VerifyEmailForm() {
 
         {/* Animated success icon */}
         <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
-          <div className="absolute inset-0 rounded-full bg-success-500/20 animate-pulse-soft" />
-          <div className="absolute -inset-2 rounded-full bg-success-500/5 animate-pulse-soft" style={{ animationDelay: '200ms' }} />
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-success-500/10 ring-1 ring-success-500/30">
-            <CheckCircle2 className="h-8 w-8 text-success-400" />
+          <div className="absolute inset-0 rounded-full bg-emerald-50 animate-pulse-soft" />
+          <div className="absolute -inset-2 rounded-full bg-emerald-50 animate-pulse-soft" style={{ animationDelay: '200ms' }} />
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-250">
+            <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
           {/* Sparkle accents */}
-          <Sparkles className="absolute -right-1 -top-1 h-5 w-5 text-warning-400 animate-pulse-soft" />
-          <Sparkles className="absolute -bottom-1 -left-1 h-4 w-4 text-primary-400 animate-pulse-soft" style={{ animationDelay: '300ms' }} />
+          <Sparkles className="absolute -right-1 -top-1 h-5 w-5 text-amber-500 animate-pulse-soft" />
+          <Sparkles className="absolute -bottom-1 -left-1 h-4 w-4 text-blue-500 animate-pulse-soft" style={{ animationDelay: '300ms' }} />
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-white">Email verified!</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Email verified!</h1>
+          <p className="mt-2 text-xs text-slate-505 leading-relaxed">
             Your email has been successfully verified. Your account is now active
             and you can sign in to start using the platform.
           </p>
@@ -203,16 +187,9 @@ function VerifyEmailForm() {
 
         <Link
           href="/login?verified=true"
-          className={cn(
-            'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
           Sign in to your account
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
         </Link>
 
         {/* Confetti CSS animation */}
@@ -235,7 +212,6 @@ function VerifyEmailForm() {
     );
   }
 
-  // Fallback — should not normally reach here
   return null;
 }
 
@@ -243,7 +219,7 @@ export default function VerifyEmailPage() {
   return (
     <Suspense fallback={
       <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-6 w-6 animate-spin text-primary-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#0066ff]" />
       </div>
     }>
       <VerifyEmailForm />

@@ -38,11 +38,11 @@ function RegisterForm() {
 
   /** Strength bar color */
   const strengthColor = useMemo(() => {
-    if (passwordStrength <= 1) return 'bg-danger-500';
-    if (passwordStrength <= 2) return 'bg-warning-500';
-    if (passwordStrength <= 3) return 'bg-warning-400';
-    if (passwordStrength <= 4) return 'bg-success-400';
-    return 'bg-success-500';
+    if (passwordStrength <= 1) return 'bg-red-500';
+    if (passwordStrength <= 2) return 'bg-amber-500';
+    if (passwordStrength <= 3) return 'bg-amber-400';
+    if (passwordStrength <= 4) return 'bg-emerald-400';
+    return 'bg-emerald-500';
   }, [passwordStrength]);
 
   const strengthLabel = useMemo(() => {
@@ -110,37 +110,36 @@ function RegisterForm() {
       <div className="space-y-6 text-center animate-fade-in">
         {/* Animated check icon */}
         <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
-          {/* Outer ring animation */}
-          <div className="absolute inset-0 rounded-full bg-success-500/20 animate-pulse-soft" />
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-success-500/10 ring-1 ring-success-500/30">
-            <CheckCircle2 className="h-8 w-8 text-success-400" />
+          <div className="absolute inset-0 rounded-full bg-emerald-50 animate-pulse-soft" />
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-250">
+            <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold text-white">Check your email</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Check your email</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             We&apos;ve sent a verification link to{' '}
-            <span className="font-medium text-white">{email}</span>.
+            <span className="font-bold text-slate-800">{email}</span>.
             <br />
             Please verify your email to activate your account.
           </p>
         </div>
 
         {/* Helpful tips */}
-        <div className="rounded-lg border border-white/10 bg-white/[0.02] p-4 text-left">
-          <p className="text-xs font-medium text-gray-400 mb-2">Didn&apos;t receive the email?</p>
-          <ul className="space-y-1 text-xs text-gray-500">
+        <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 text-left">
+          <p className="text-[11px] font-bold text-slate-700 mb-2">Didn&apos;t receive the email?</p>
+          <ul className="space-y-1 text-[10px] text-slate-450">
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Check your spam or junk folder
             </li>
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Make sure you entered the correct email
             </li>
             <li className="flex items-center gap-1.5">
-              <div className="h-1 w-1 rounded-full bg-gray-600" />
+              <div className="h-1 w-1 rounded-full bg-slate-400" />
               Wait a few minutes and try again
             </li>
           </ul>
@@ -148,16 +147,9 @@ function RegisterForm() {
 
         <Link
           href={searchParams.get('redirect') ? `/login?redirect=${encodeURIComponent(searchParams.get('redirect')!)}` : '/login'}
-          className={cn(
-            'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
-          Go to sign in
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+          Go to Sign In
         </Link>
       </div>
     );
@@ -166,93 +158,87 @@ function RegisterForm() {
   // ─── Registration Form ──────────────────────────────────────────────
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-white">Create your account</h1>
-        <p className="mt-1.5 text-sm text-gray-400">
-          Start deploying projects in minutes
+      <div className="text-center mb-1">
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Create your account</h1>
+        <p className="mt-1.5 text-xs text-slate-500">
+          Get started with free container credits today
         </p>
       </div>
 
       {/* API error */}
       {error && (
-        <div className="animate-fade-in flex items-center gap-2 rounded-lg border border-danger-500/20 bg-danger-500/10 px-4 py-3 text-sm text-danger-400">
+        <div className="animate-fade-in flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-655">
           <AlertCircle className="h-4 w-4 shrink-0" />
           {error}
         </div>
       )}
 
-      {/* Name fields */}
+      {/* Name row */}
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="firstName" className="block text-xs font-bold text-slate-700">
             First name
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               id="firstName"
               type="text"
-              autoComplete="given-name"
               value={firstName}
               onChange={(e) => {
                 setFirstName(e.target.value);
                 clearFieldError('firstName');
               }}
-              placeholder="John"
+              placeholder="First name"
               className={cn(
-                'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-4 text-sm text-white',
-                'placeholder-gray-500 transition-all duration-200',
-                'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                validationErrors.firstName
-                  ? 'border-danger-500/50'
-                  : 'border-white/10 hover:border-white/20',
+                'w-full rounded-xl border bg-slate-50 py-2.5 pl-9 pr-4 text-xs text-slate-900',
+                'placeholder-slate-400 transition-all duration-200',
+                'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+                validationErrors.firstName ? 'border-red-300' : 'border-slate-200',
               )}
             />
           </div>
           {validationErrors.firstName && (
-            <p className="animate-fade-in text-xs text-danger-400">{validationErrors.firstName}</p>
+            <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.firstName}</p>
           )}
         </div>
 
         <div className="space-y-1.5">
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="lastName" className="block text-xs font-bold text-slate-700">
             Last name
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               id="lastName"
               type="text"
-              autoComplete="family-name"
               value={lastName}
               onChange={(e) => {
                 setLastName(e.target.value);
                 clearFieldError('lastName');
               }}
-              placeholder="Doe"
+              placeholder="Last name"
               className={cn(
-                'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-4 text-sm text-white',
-                'placeholder-gray-500 transition-all duration-200',
-                'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                validationErrors.lastName
-                  ? 'border-danger-500/50'
-                  : 'border-white/10 hover:border-white/20',
+                'w-full rounded-xl border bg-slate-50 py-2.5 pl-9 pr-4 text-xs text-slate-900',
+                'placeholder-slate-400 transition-all duration-200',
+                'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+                validationErrors.lastName ? 'border-red-300' : 'border-slate-200',
               )}
             />
           </div>
           {validationErrors.lastName && (
-            <p className="animate-fade-in text-xs text-danger-400">{validationErrors.lastName}</p>
+            <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.lastName}</p>
           )}
         </div>
       </div>
 
-      {/* Email */}
+      {/* Email address */}
       <div className="space-y-1.5">
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="email" className="block text-xs font-bold text-slate-700">
           Email address
         </label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="email"
             type="email"
@@ -264,27 +250,25 @@ function RegisterForm() {
             }}
             placeholder="you@example.com"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-4 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-              validationErrors.email
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+              'w-full rounded-xl border bg-slate-50 py-2.5 pl-10 pr-4 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+              validationErrors.email ? 'border-red-300' : 'border-slate-200',
             )}
           />
         </div>
         {validationErrors.email && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.email}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.email}</p>
         )}
       </div>
 
       {/* Password */}
       <div className="space-y-1.5">
-        <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="password" className="block text-xs font-bold text-slate-700">
           Password
         </label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="password"
             type={showPassword ? 'text' : 'password'}
@@ -296,31 +280,28 @@ function RegisterForm() {
             }}
             placeholder="••••••••"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-              validationErrors.password
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+              'w-full rounded-xl border bg-slate-50 py-2.5 pl-10 pr-11 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+              validationErrors.password ? 'border-red-300' : 'border-slate-200',
             )}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors"
             tabIndex={-1}
           >
             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {validationErrors.password && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.password}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.password}</p>
         )}
 
         {/* Password strength indicator */}
         {password.length > 0 && (
-          <div className="animate-fade-in space-y-2 pt-1">
-            {/* Strength bar */}
+          <div className="animate-fade-in space-y-2 pt-1.5 select-none">
             <div className="flex items-center gap-2">
               <div className="flex flex-1 gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -328,31 +309,26 @@ function RegisterForm() {
                     key={i}
                     className={cn(
                       'h-1 flex-1 rounded-full transition-all duration-300',
-                      i < passwordStrength ? strengthColor : 'bg-white/10',
+                      i < passwordStrength ? strengthColor : 'bg-slate-100',
                     )}
                   />
                 ))}
               </div>
-              <span className="text-xs text-gray-400">{strengthLabel}</span>
+              <span className="text-[10px] font-bold text-slate-500">{strengthLabel}</span>
             </div>
 
-            {/* Requirements checklist */}
-            <div className="grid grid-cols-1 gap-1">
+            {/* Checklist */}
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1">
               {PASSWORD_REQUIREMENTS.map((req) => {
                 const met = req.test(password);
                 return (
                   <div key={req.label} className="flex items-center gap-1.5">
                     {met ? (
-                      <Check className="h-3 w-3 text-success-400" />
+                      <Check className="h-3 w-3 text-emerald-500 shrink-0" />
                     ) : (
-                      <X className="h-3 w-3 text-gray-600" />
+                      <X className="h-3 w-3 text-slate-300 shrink-0" />
                     )}
-                    <span
-                      className={cn(
-                        'text-xs transition-colors',
-                        met ? 'text-success-400' : 'text-gray-500',
-                      )}
-                    >
+                    <span className={cn('text-[9px] font-bold', met ? 'text-slate-600' : 'text-slate-400')}>
                       {req.label}
                     </span>
                   </div>
@@ -365,11 +341,11 @@ function RegisterForm() {
 
       {/* Confirm Password */}
       <div className="space-y-1.5">
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="confirmPassword" className="block text-xs font-bold text-slate-700">
           Confirm password
         </label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="confirmPassword"
             type={showConfirmPassword ? 'text' : 'password'}
@@ -381,32 +357,28 @@ function RegisterForm() {
             }}
             placeholder="••••••••"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-              validationErrors.confirmPassword
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+              'w-full rounded-xl border bg-slate-50 py-2.5 pl-10 pr-11 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
+              validationErrors.confirmPassword ? 'border-red-300' : 'border-slate-200',
             )}
           />
           <button
             type="button"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors"
             tabIndex={-1}
           >
             {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {validationErrors.confirmPassword && (
-          <p className="animate-fade-in text-xs text-danger-400">
-            {validationErrors.confirmPassword}
-          </p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.confirmPassword}</p>
         )}
       </div>
 
-      {/* Terms */}
-      <div className="space-y-1">
+      {/* Terms of Service checkbox */}
+      <div className="space-y-1.5 select-none">
         <div className="flex items-start gap-2">
           <input
             id="terms"
@@ -416,36 +388,29 @@ function RegisterForm() {
               setAgreeToTerms(e.target.checked);
               clearFieldError('terms');
             }}
-            className="mt-0.5 h-4 w-4 rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-500/20 focus:ring-offset-0"
+            className="h-4 w-4 rounded border-slate-300 bg-slate-50 text-[#0066ff] focus:ring-[#0066ff]/20 focus:ring-offset-0 mt-0.5 cursor-pointer"
           />
-          <label htmlFor="terms" className="text-sm text-gray-400">
+          <label htmlFor="terms" className="text-xs text-slate-500 font-medium cursor-pointer leading-tight">
             I agree to the{' '}
-            <Link href="/terms" className="text-primary-400 hover:text-primary-300 transition-colors">
+            <Link href="/terms" className="font-bold text-[#0066ff] hover:text-blue-750 hover:underline">
               Terms of Service
             </Link>{' '}
             and{' '}
-            <Link href="/privacy" className="text-primary-400 hover:text-primary-300 transition-colors">
+            <Link href="/privacy" className="font-bold text-[#0066ff] hover:text-blue-750 hover:underline">
               Privacy Policy
             </Link>
           </label>
         </div>
         {validationErrors.terms && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.terms}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.terms}</p>
         )}
       </div>
 
-      {/* Submit */}
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={isLoading}
-        className={cn(
-          'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-          'bg-gradient-to-r from-primary-600 to-primary-500',
-          'hover:from-primary-500 hover:to-primary-400',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-        )}
+        className="btn btn-primary w-full py-3.5 mt-2"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
@@ -453,19 +418,18 @@ function RegisterForm() {
             Creating account…
           </span>
         ) : (
-          'Create account'
+          'Sign Up'
         )}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       </button>
 
       {/* Sign in link */}
-      <p className="text-center text-sm text-gray-400">
+      <p className="text-center text-xs text-slate-550 pt-2">
         Already have an account?{' '}
         <Link
           href="/login"
-          className="font-medium text-primary-400 hover:text-primary-300 transition-colors"
+          className="font-bold text-[#0066ff] hover:text-blue-700 transition-colors"
         >
-          Sign in
+          Sign In
         </Link>
       </p>
     </form>
@@ -474,7 +438,11 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={<div className="flex justify-center items-center py-12"><Loader2 className="h-8 w-8 animate-spin text-primary-500" /></div>}>
+    <Suspense fallback={
+      <div className="flex items-center justify-center p-8">
+        <Loader2 className="h-6 w-6 animate-spin text-[#0066ff]" />
+      </div>
+    }>
       <RegisterForm />
     </Suspense>
   );

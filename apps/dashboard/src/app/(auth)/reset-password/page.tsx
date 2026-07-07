@@ -36,11 +36,11 @@ function ResetPasswordForm() {
 
   /** Strength bar color */
   const strengthColor = useMemo(() => {
-    if (passwordStrength <= 1) return 'bg-danger-500';
-    if (passwordStrength <= 2) return 'bg-warning-500';
-    if (passwordStrength <= 3) return 'bg-warning-400';
-    if (passwordStrength <= 4) return 'bg-success-400';
-    return 'bg-success-500';
+    if (passwordStrength <= 1) return 'bg-red-500';
+    if (passwordStrength <= 2) return 'bg-amber-500';
+    if (passwordStrength <= 3) return 'bg-amber-400';
+    if (passwordStrength <= 4) return 'bg-emerald-400';
+    return 'bg-emerald-500';
   }, [passwordStrength]);
 
   const strengthLabel = useMemo(() => {
@@ -94,27 +94,20 @@ function ResetPasswordForm() {
   if (!token) {
     return (
       <div className="space-y-6 text-center animate-fade-in">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-danger-500/10 ring-1 ring-danger-500/20">
-          <AlertCircle className="h-8 w-8 text-danger-400" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-50 ring-1 ring-red-200">
+          <AlertCircle className="h-8 w-8 text-red-500" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Invalid reset link</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Invalid reset link</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             This password reset link is invalid or missing a token. Please request a new one.
           </p>
         </div>
         <Link
           href="/forgot-password"
-          className={cn(
-            'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
           Request new reset link
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
         </Link>
       </div>
     );
@@ -125,29 +118,22 @@ function ResetPasswordForm() {
     return (
       <div className="space-y-6 text-center animate-fade-in">
         <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
-          <div className="absolute inset-0 rounded-full bg-success-500/20 animate-pulse-soft" />
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-success-500/10 ring-1 ring-success-500/30">
-            <CheckCircle2 className="h-8 w-8 text-success-400" />
+          <div className="absolute inset-0 rounded-full bg-emerald-50 animate-pulse-soft" />
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-250">
+            <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Password reset!</h1>
-          <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+          <h1 className="text-xl font-bold text-slate-900">Password reset!</h1>
+          <p className="mt-2 text-xs text-slate-500 leading-relaxed">
             Your password has been successfully reset. You can now sign in with your new password.
           </p>
         </div>
         <Link
           href="/login?reset=true"
-          className={cn(
-            'group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-            'bg-gradient-to-r from-primary-600 to-primary-500',
-            'hover:from-primary-500 hover:to-primary-400',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-            'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-          )}
+          className="btn btn-primary w-full py-3.5"
         >
           Go to sign in
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
         </Link>
       </div>
     );
@@ -158,19 +144,19 @@ function ResetPasswordForm() {
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <div className="text-center">
         {/* Icon */}
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10 ring-1 ring-primary-500/20">
-          <KeyRound className="h-8 w-8 text-primary-400" />
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 ring-1 ring-blue-200">
+          <KeyRound className="h-8 w-8 text-[#0066ff]" />
         </div>
 
-        <h1 className="text-2xl font-bold text-white">Set new password</h1>
-        <p className="mt-2 text-sm text-gray-400">
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Set new password</h1>
+        <p className="mt-2 text-xs text-slate-500">
           Your new password must be different from your previous password.
         </p>
       </div>
 
       {/* API error */}
       {error && (
-        <div className="animate-fade-in flex items-center gap-2 rounded-lg border border-danger-500/20 bg-danger-500/10 px-4 py-3 text-sm text-danger-400">
+        <div className="animate-fade-in flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-655">
           <AlertCircle className="h-4 w-4 shrink-0" />
           {error}
         </div>
@@ -178,11 +164,11 @@ function ResetPasswordForm() {
 
       {/* New Password */}
       <div className="space-y-1.5">
-        <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="password" className="block text-xs font-bold text-slate-700">
           New password
         </label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="password"
             type={showPassword ? 'text' : 'password'}
@@ -195,30 +181,30 @@ function ResetPasswordForm() {
             }}
             placeholder="••••••••"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+              'w-full rounded-xl border bg-slate-50 py-2.5 pl-10 pr-11 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
               validationErrors.password
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+                ? 'border-red-300'
+                : 'border-slate-200 hover:border-slate-300',
             )}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors"
             tabIndex={-1}
           >
             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {validationErrors.password && (
-          <p className="animate-fade-in text-xs text-danger-400">{validationErrors.password}</p>
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">{validationErrors.password}</p>
         )}
 
         {/* Password strength indicator */}
         {password.length > 0 && (
-          <div className="animate-fade-in space-y-2 pt-1">
+          <div className="animate-fade-in space-y-2 pt-1.5 select-none">
             <div className="flex items-center gap-2">
               <div className="flex flex-1 gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -226,28 +212,28 @@ function ResetPasswordForm() {
                     key={i}
                     className={cn(
                       'h-1 flex-1 rounded-full transition-all duration-300',
-                      i < passwordStrength ? strengthColor : 'bg-white/10',
+                      i < passwordStrength ? strengthColor : 'bg-slate-100',
                     )}
                   />
                 ))}
               </div>
-              <span className="text-xs text-gray-400">{strengthLabel}</span>
+              <span className="text-[10px] font-bold text-slate-500">{strengthLabel}</span>
             </div>
 
-            <div className="grid grid-cols-1 gap-1">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1">
               {PASSWORD_REQUIREMENTS.map((req) => {
                 const met = req.test(password);
                 return (
                   <div key={req.label} className="flex items-center gap-1.5">
                     {met ? (
-                      <Check className="h-3 w-3 text-success-400" />
+                      <Check className="h-3 w-3 text-emerald-500 shrink-0" />
                     ) : (
-                      <X className="h-3 w-3 text-gray-600" />
+                      <X className="h-3 w-3 text-slate-300 shrink-0" />
                     )}
                     <span
                       className={cn(
-                        'text-xs transition-colors',
-                        met ? 'text-success-400' : 'text-gray-500',
+                        'text-[9px] font-bold transition-colors',
+                        met ? 'text-slate-600' : 'text-slate-400',
                       )}
                     >
                       {req.label}
@@ -262,11 +248,11 @@ function ResetPasswordForm() {
 
       {/* Confirm Password */}
       <div className="space-y-1.5">
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
+        <label htmlFor="confirmPassword" className="block text-xs font-bold text-slate-700">
           Confirm new password
         </label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             id="confirmPassword"
             type={showConfirmPassword ? 'text' : 'password'}
@@ -278,25 +264,25 @@ function ResetPasswordForm() {
             }}
             placeholder="••••••••"
             className={cn(
-              'w-full rounded-lg border bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white',
-              'placeholder-gray-500 transition-all duration-200',
-              'focus:border-primary-500 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-primary-500/20',
+              'w-full rounded-xl border bg-slate-50 py-2.5 pl-10 pr-11 text-xs text-slate-900',
+              'placeholder-slate-400 transition-all duration-200',
+              'focus:border-[#0066ff] focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100',
               validationErrors.confirmPassword
-                ? 'border-danger-500/50'
-                : 'border-white/10 hover:border-white/20',
+                ? 'border-red-300'
+                : 'border-slate-200 hover:border-slate-300',
             )}
           />
           <button
             type="button"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650 transition-colors"
             tabIndex={-1}
           >
             {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
         </div>
         {validationErrors.confirmPassword && (
-          <p className="animate-fade-in text-xs text-danger-400">
+          <p className="animate-fade-in text-[10px] text-red-500 font-bold">
             {validationErrors.confirmPassword}
           </p>
         )}
@@ -306,14 +292,7 @@ function ResetPasswordForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className={cn(
-          'group relative w-full overflow-hidden rounded-lg px-4 py-2.5 text-sm font-semibold text-white',
-          'bg-gradient-to-r from-primary-600 to-primary-500',
-          'hover:from-primary-500 hover:to-primary-400',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-gray-950',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40',
-        )}
+        className="btn btn-primary w-full py-3.5"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
@@ -321,15 +300,14 @@ function ResetPasswordForm() {
             Resetting…
           </span>
         ) : (
-          'Reset password'
+          'Reset Password'
         )}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       </button>
 
       {/* Back to sign in */}
       <Link
         href="/login"
-        className="flex w-full items-center justify-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+        className="flex w-full items-center justify-center gap-2 text-xs font-bold text-slate-500 hover:text-[#0066ff] transition-colors"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         Back to sign in
@@ -342,7 +320,7 @@ export default function ResetPasswordPage() {
   return (
     <Suspense fallback={
       <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-6 w-6 animate-spin text-primary-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#0066ff]" />
       </div>
     }>
       <ResetPasswordForm />
