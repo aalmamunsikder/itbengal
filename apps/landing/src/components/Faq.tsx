@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, MessageSquare, ShieldCheck, Heart } from 'lucide-react';
+import { MessageSquare, ShieldCheck, Heart, Plus, Minus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Faq() {
@@ -12,64 +12,85 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="py-14 px-6 max-w-3xl mx-auto border-t border-slate-200">
-      <div className="text-center mb-10">
-        <span className="text-[#0052cc] text-xs font-bold uppercase tracking-wider">Support Hub</span>
-        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-2 tracking-tight">
-          FAQ's
-        </h2>
-        <p className="text-slate-500 text-xs md:text-sm">
-          Quick answers to common questions about domains, billing, and isolated hosting environments.
-        </p>
+    <section id="faq" className="py-16 px-6 max-w-4xl mx-auto">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-10">
+        <div className="space-y-3 text-left">
+          <span className="text-[#0066ff] text-xs font-bold uppercase tracking-widest block">
+            Support Hub
+          </span>
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-slate-500 text-xs md:text-sm max-w-xl">
+            Quick answers to common queries about domain registration, billing setups, and isolated container hosting environments.
+          </p>
+        </div>
+        <Link
+          href="https://dashboard.itbengal.xyz/support"
+          className="px-5 py-3 rounded-xl bg-[#0066ff] hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md hover:shadow-blue-500/10 active:scale-[0.98]"
+        >
+          Get in Touch
+        </Link>
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-3 mb-10 text-slate-700">
-        {faqData.map((faq, index) => (
-          <div
-            key={index}
-            className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300"
-          >
-            <button
-              onClick={() => toggleFaq(index)}
-              className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
-            >
-              <span className="font-bold text-slate-800 text-xs md:text-sm">{faq.question}</span>
-              <ChevronDown
-                className={`h-4.5 w-4.5 text-slate-400 transition-transform duration-300 ${
-                  activeFaq === index ? 'rotate-180 text-primaryBlue' : ''
-                }`}
-              />
-            </button>
+      <div className="space-y-3.5 mb-12">
+        {faqData.map((faq, index) => {
+          const isOpen = activeFaq === index;
+          return (
             <div
-              className={`transition-all duration-300 overflow-hidden ${
-                activeFaq === index ? 'max-h-32 border-t border-slate-100' : 'max-h-0'
-              }`}
+              key={index}
+              className="px-5 py-4 rounded-2xl md:rounded-3xl bg-slate-100/60 hover:bg-slate-100/90 border border-slate-200/40 overflow-hidden transition-all duration-300"
             >
-              <p className="px-5 py-4 text-[11px] md:text-xs text-slate-500 leading-relaxed bg-slate-50/50">
-                {faq.answer}
-              </p>
+              <button
+                onClick={() => toggleFaq(index)}
+                className="w-full flex items-center justify-between text-left focus:outline-none"
+              >
+                <h4 className={`font-bold text-slate-800 text-xs md:text-sm transition-colors duration-150 ${isOpen ? 'text-[#0066ff]' : 'hover:text-[#0066ff]'}`}>
+                  {faq.question}
+                </h4>
+                <div className="shrink-0 ml-4 text-slate-400">
+                  {isOpen ? (
+                    <Minus className="h-4 w-4 text-[#0066ff]" />
+                  ) : (
+                    <Plus className="h-4 w-4 hover:text-[#0066ff]" />
+                  )}
+                </div>
+              </button>
+              
+              {/* Expandable description wrapper */}
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isOpen ? 'max-h-40 mt-3 pt-3 border-t border-slate-200/50' : 'max-h-0'
+                }`}
+              >
+                <p className="text-[11px] md:text-xs text-slate-550 leading-relaxed text-slate-500">
+                  {faq.answer}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Local Support profile card (Adapted from Hostnin founder support) */}
-      <div className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm flex flex-col md:flex-row items-center gap-5 mb-10">
-        <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-50 border border-slate-100 flex items-center justify-center shrink-0 shadow-inner">
-          {/* Avatar representation or cloud engineer icon */}
+      {/* Founder Direct Support Card */}
+      <div className="border border-slate-200/80 rounded-2xl p-6 bg-white shadow-sm flex flex-col md:flex-row items-center gap-6 mb-12">
+        <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-50/50 border border-slate-100 flex items-center justify-center shrink-0 shadow-inner">
           <CloudIconRepresent />
-          <span className="absolute bottom-0 right-0 h-4 w-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-[8px] text-white">✓</span>
+          <span className="absolute bottom-0 right-0 h-4.5 w-4.5 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-[9px] text-white font-bold select-none">
+            ✓
+          </span>
         </div>
-        <div className="text-left space-y-1.5">
+        <div className="text-left space-y-2">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-bold text-slate-900">Al-Mamun Sikder</span>
-            <span className="text-[9px] font-bold text-[#0052cc] bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100/50 flex items-center gap-0.5">
-              <Heart className="h-2 w-2 fill-current" />
+            <span className="text-[9px] font-bold text-[#0066ff] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100/50 flex items-center gap-0.5 select-none">
+              <Heart className="h-2.5 w-2.5 fill-current" />
               Founder Support
             </span>
           </div>
-          <h4 className="text-xs font-bold text-slate-650 text-slate-600">ITBengal Infrastructure Architect</h4>
+          <h4 className="text-xs font-bold text-slate-650 text-slate-500">ITBengal Infrastructure Architect</h4>
           <p className="text-slate-500 text-[11px] leading-relaxed">
             The founder who still answers support tickets and monitors container clusters. We guarantee direct engineer access with no automated call centers or template responses.
           </p>
@@ -77,16 +98,16 @@ export default function Faq() {
       </div>
 
       {/* Blue Banner: Have Questions About Hosting or Domains? */}
-      <div className="w-full rounded-xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-6 text-center text-white relative overflow-hidden shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="w-full rounded-2xl bg-gradient-to-r from-[#002e8c] to-[#04081c] p-6 text-center text-white relative overflow-hidden shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-left space-y-1">
-          <h3 className="text-lg font-extrabold">Have Questions About Hosting or Domains?</h3>
-          <p className="text-blue-100/70 text-[11px] md:text-xs">
+          <h3 className="text-base md:text-lg font-extrabold">Have Questions About Hosting or Domains?</h3>
+          <p className="text-blue-100/70 text-[10px] md:text-xs">
             Our local support team is active 24/7. Connect right now to clarify plan choices.
           </p>
         </div>
         <Link
           href="https://dashboard.itbengal.xyz/support"
-          className="bg-[#0052cc] hover:bg-blue-600 text-white font-bold px-5 py-3 rounded-lg text-xs transition-all shadow active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
+          className="bg-[#0066ff] hover:bg-blue-600 text-white font-bold px-5 py-3 rounded-lg text-xs transition-all shadow active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
         >
           <MessageSquare className="h-3.5 w-3.5" />
           Talk to Support
@@ -98,7 +119,7 @@ export default function Faq() {
 
 function CloudIconRepresent() {
   return (
-    <div className="h-10 w-10 rounded-xl bg-[#0052cc] flex items-center justify-center shadow-md">
+    <div className="h-10 w-10 rounded-xl bg-[#0066ff] flex items-center justify-center shadow-md">
       <ShieldCheck className="h-5 w-5 text-white" />
     </div>
   );
