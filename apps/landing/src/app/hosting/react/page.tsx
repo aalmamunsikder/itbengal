@@ -1,16 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { CheckCircle2, Zap } from 'lucide-react';
+import { CheckCircle2, Zap, GitBranch, Globe, Lock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function ReactHostingPage() {
   const features = [
-    { title: 'Git Push Deployment', desc: 'Connect your GitHub repository and trigger automatic production builds on git push.' },
-    { title: 'Global Edge CDN', desc: 'Your static assets are cached globally at low-latency edge nodes for instant rendering.' },
-    { title: 'Turborepo Fast Builds', desc: 'Optimized workspace pipeline execution saves build minutes on every commit.' },
-    { title: 'Let\'s Encrypt TLS', desc: 'Free wildcard SSL certificates automatically provisioned and renewed.' },
+    { title: 'Git Push Deployment', desc: 'Connect your GitHub repository and trigger automatic production builds on git push.', icon: GitBranch },
+    { title: 'Global Edge CDN', desc: 'Your static assets are cached globally at low-latency edge nodes for instant rendering.', icon: Globe },
+    { title: 'Turborepo Fast Builds', desc: 'Optimized workspace pipeline execution saves build minutes on every commit.', icon: Zap },
+    { title: 'Let\'s Encrypt TLS', desc: 'Free wildcard SSL certificates automatically provisioned and renewed.', icon: Lock },
   ];
 
   const plans = [
@@ -38,15 +38,18 @@ export default function ReactHostingPage() {
 
         {/* Key Features Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto mb-14">
-          {features.map((item, idx) => (
-            <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
-              <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
-                <Zap className="h-5 w-5" />
+          {features.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
+                <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
+                  <IconComponent className="h-5 w-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
-              <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing Cards */}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, ShieldCheck, Database } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Database, HardDrive, Zap } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -10,10 +10,10 @@ export default function WordPressHostingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
 
   const features = [
-    { title: 'Isolated Container Sandbox', desc: 'Separate Apache/PHP and MariaDB container runners ensure high security and memory boundaries.' },
-    { title: 'NVMe SSD Storage', desc: 'NVMe-backed disk storage speeds up database read/writes and dashboard operations.' },
-    { title: 'LiteSpeed Cache Engine', desc: 'Pre-configured caching speeds up static rendering for WordPress visitors.' },
-    { title: 'Automated S3 Backups', desc: 'Hourly or daily database backups are compiled, encrypted, and saved to secure S3 storage.' },
+    { title: 'Isolated Container Sandbox', desc: 'Separate Apache/PHP and MariaDB container runners ensure high security and memory boundaries.', icon: ShieldCheck },
+    { title: 'NVMe SSD Storage', desc: 'NVMe-backed disk storage speeds up database read/writes and dashboard operations.', icon: HardDrive },
+    { title: 'LiteSpeed Cache Engine', desc: 'Pre-configured caching speeds up static rendering for WordPress visitors.', icon: Zap },
+    { title: 'Automated S3 Backups', desc: 'Hourly or daily database backups are compiled, encrypted, and saved to secure S3 storage.', icon: Database },
   ];
 
   const plans = [
@@ -79,15 +79,18 @@ export default function WordPressHostingPage() {
 
         {/* Key Features Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto mb-14">
-          {features.map((item, idx) => (
-            <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
-              <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
-                <Database className="h-5 w-5" />
+          {features.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
+                <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
+                  <IconComponent className="h-5 w-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
-              <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing Cards */}

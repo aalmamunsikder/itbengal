@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, Cpu } from 'lucide-react';
+import { CheckCircle2, Cpu, RefreshCw, Package, GitBranch } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -10,10 +10,10 @@ export default function NodejsHostingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
 
   const features = [
-    { title: 'Multiple Node.js Versions', desc: 'Choose between Node.js 16 LTS, 18 LTS, 20 LTS, or 22 LTS dynamically in your panel.' },
-    { title: 'PM2 Process Manager', desc: 'Auto-restart processes and keep your services online with built-in PM2 daemon controllers.' },
-    { title: 'NPM & Yarn Packages', desc: 'Full package management workflow support including scoped packages and lockfiles.' },
-    { title: 'Git Auto Deployments', desc: 'Bind your repository webhooks to automatically trigger rebuilds upon pushing code.' },
+    { title: 'Multiple Node.js Versions', desc: 'Choose between Node.js 16 LTS, 18 LTS, 20 LTS, or 22 LTS dynamically in your panel.', icon: Cpu },
+    { title: 'PM2 Process Manager', desc: 'Auto-restart processes and keep your services online with built-in PM2 daemon controllers.', icon: RefreshCw },
+    { title: 'NPM & Yarn Packages', desc: 'Full package management workflow support including scoped packages and lockfiles.', icon: Package },
+    { title: 'Git Auto Deployments', desc: 'Bind your repository webhooks to automatically trigger rebuilds upon pushing code.', icon: GitBranch },
   ];
 
   const plans = [
@@ -93,15 +93,18 @@ export default function NodejsHostingPage() {
 
         {/* Key Features Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto mb-14">
-          {features.map((item, idx) => (
-            <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
-              <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
-                <Cpu className="h-5 w-5" />
+          {features.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <div key={idx} className="border border-slate-200 rounded-xl p-5 bg-white shadow-sm space-y-2.5">
+                <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center text-primaryBlue">
+                  <IconComponent className="h-5 w-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
-              <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing Cards */}
