@@ -54,6 +54,7 @@ export default function WordPressSettingsPage(props: PageProps) {
   const [phpVersion, setPhpVersion] = useState('8.2');
   const [autoUpdates, setAutoUpdates] = useState(true);
   const [caching, setCaching] = useState(false);
+  const [baseDomain, setBaseDomain] = useState('itbengal.xyz');
 
   const fetchSite = async () => {
     setLoading(true);
@@ -78,6 +79,15 @@ export default function WordPressSettingsPage(props: PageProps) {
 
   useEffect(() => {
     fetchSite();
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        const parts = hostname.split('.');
+        if (parts.length >= 2) {
+          setBaseDomain(parts.slice(-2).join('.'));
+        }
+      }
+    }
   }, [params.id]);
 
   const handleSaveSettings = async (e: React.FormEvent) => {
@@ -213,7 +223,7 @@ export default function WordPressSettingsPage(props: PageProps) {
                 className="w-full rounded-xl border border-slate-100 dark:border-gray-800 bg-white dark:bg-gray-955 px-4 py-2.5 text-sm focus:border-primary-500 outline-none"
               />
               <p className="text-[11px] text-gray-400">
-                Point your domain&apos;s CNAME record to <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-primary-400">itbengal.xyz</code> to activate SSL.
+                Point your domain&apos;s CNAME record to <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-primary-400">{baseDomain}</code> to activate SSL.
               </p>
             </div>
 

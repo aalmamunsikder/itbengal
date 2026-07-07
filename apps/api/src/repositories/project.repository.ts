@@ -18,6 +18,7 @@ import type {
 } from '@itbengal/database';
 
 import { slugify } from '@itbengal/utils';
+import { appConfig } from '../config/app.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -220,7 +221,7 @@ export async function create(
       slug = `${baseSlug}-${suffix}`;
     }
 
-    const domain = `${slug}.app.itbengal.xyz`;
+    const domain = `${slug}.app.${appConfig.domain}`;
 
     // Create the project
     const project = await tx.project.create({

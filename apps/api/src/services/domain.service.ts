@@ -1,6 +1,7 @@
 import { prisma, DomainRegistrationStatus, DnsRecordType } from '@itbengal/database';
 import { NotFoundError, ForbiddenError } from '../middleware/errorHandler.js';
 import * as openprovider from './openprovider.service.js';
+import { appConfig } from '../config/app.js';
 
 const TLD_PRICES: Record<string, number> = {
   com: 1200,
@@ -79,8 +80,8 @@ export async function requestDomainRegistration(
   // 2. Add default Nameservers to DNS Records
   await prisma.dnsRecord.createMany({
     data: [
-      { domainId: domain.id, name: '@', type: 'NS' as DnsRecordType, content: 'ns1.itbengal.xyz', ttl: 86400 },
-      { domainId: domain.id, name: '@', type: 'NS' as DnsRecordType, content: 'ns2.itbengal.xyz', ttl: 86400 },
+      { domainId: domain.id, name: '@', type: 'NS' as DnsRecordType, content: `ns1.${appConfig.domain}`, ttl: 86400 },
+      { domainId: domain.id, name: '@', type: 'NS' as DnsRecordType, content: `ns2.${appConfig.domain}`, ttl: 86400 },
     ],
   });
 

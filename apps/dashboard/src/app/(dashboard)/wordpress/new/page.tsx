@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Loader2, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
@@ -21,6 +21,19 @@ export default function InstallWordPressPage() {
   const [subdomain, setSubdomain] = useState('');
   const [phpVersion, setPhpVersion] = useState('8.2');
   const [wpVersion, setWpVersion] = useState('latest');
+  const [baseDomain, setBaseDomain] = useState('itbengal.xyz');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        const parts = hostname.split('.');
+        if (parts.length >= 2) {
+          setBaseDomain(parts.slice(-2).join('.'));
+        }
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +45,7 @@ export default function InstallWordPressPage() {
     setLoading(true);
     setError(null);
 
-    const domain = `${subdomain.toLowerCase().trim()}.itbengal.xyz`;
+    const domain = `${subdomain.toLowerCase().trim()}.${baseDomain}`;
 
     try {
       const response = await api.post<{ success: boolean; message: string }>('/wordpress', {
@@ -125,7 +138,7 @@ export default function InstallWordPressPage() {
                   className="w-full bg-transparent px-4 py-2.5 text-sm outline-none"
                 />
                 <span className="bg-gray-100 dark:bg-gray-900 border-l border-slate-100 dark:border-gray-800 px-4 py-2.5 text-sm text-gray-400 font-medium flex items-center">
-                  .itbengal.xyz
+                  .{baseDomain}
                 </span>
               </div>
             </div>

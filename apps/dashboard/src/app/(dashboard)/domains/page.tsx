@@ -86,6 +86,36 @@ export default function DomainsPage() {
     fetchDomains();
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('query') || params.get('search');
+      if (query) {
+        setSearchQuery(query);
+        setActiveTab('SEARCH');
+        
+        // Trigger auto-search
+        const autoSearch = async () => {
+          setSearching(true);
+          setMessage(null);
+          try {
+            const res = await api.post<{ success: boolean; data: SearchResult[] }>('/domains/search', {
+              domainName: query,
+            });
+            if (res.success) {
+              setSearchResults(res.data);
+            }
+          } catch (err: any) {
+            setMessage({ type: 'error', text: err.message || 'Domain search failed' });
+          } finally {
+            setSearching(false);
+          }
+        };
+        autoSearch();
+      }
+    }
+  }, []);
+
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery) return;

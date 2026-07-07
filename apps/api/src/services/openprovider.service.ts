@@ -33,6 +33,7 @@ const MARKUP_MULTIPLIER = 1.2; // 20% markup
 const username = process.env['OPENPROVIDER_USERNAME'];
 const password = process.env['OPENPROVIDER_PASSWORD'];
 const isSandbox = !username || !password;
+const platformDomain = process.env['DOMAIN'] ?? 'itbengal.xyz';
 
 /**
  * Search domain availability and return pricing.
@@ -109,8 +110,8 @@ export async function getDnsZone(domainName: string): Promise<OpenproviderDnsRec
   
   // Default mock zone setup
   return [
-    { type: 'NS', name: '@', value: 'ns1.itbengal.xyz', ttl: 86400 },
-    { type: 'NS', name: '@', value: 'ns2.itbengal.xyz', ttl: 86400 },
+    { type: 'NS', name: '@', value: `ns1.${platformDomain}`, ttl: 86400 },
+    { type: 'NS', name: '@', value: `ns2.${platformDomain}`, ttl: 86400 },
     { type: 'A', name: '@', value: '127.0.0.1', ttl: 3600 },
     { type: 'CNAME', name: 'www', value: '@', ttl: 3600 },
   ];
