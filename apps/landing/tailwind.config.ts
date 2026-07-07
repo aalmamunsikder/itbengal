@@ -23,7 +23,8 @@ const config: Config = {
         lightBlue: '#e6f0ff',
       },
       fontFamily: {
-        sans: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-figtree)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-archivo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

@@ -1,5 +1,20 @@
 import type { Metadata } from 'next';
+import { Figtree, Archivo } from 'next/font/google';
 import './globals.css';
+
+const figtree = Figtree({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-figtree',
+  display: 'swap',
+});
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-archivo',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'ITBengal — Premium Managed Hosting Platform',
@@ -12,8 +27,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body>{children}</body>
+    <html lang="en" className={`${figtree.variable} ${archivo.variable}`}>
+      <body className="font-sans antialiased text-slate-800 bg-slate-50">
+        {children}
+      </body>
     </html>
   );
 }

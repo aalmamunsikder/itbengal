@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle2, ShieldCheck, ArrowRight, Server, Database } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Cpu, Zap, Lock, Database, GitBranch, Sparkles, Server } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Features() {
@@ -14,19 +14,43 @@ export default function Features() {
     { title: 'DNS Settings Redirect', desc: 'Wildcard domain configurations matched to new nameservers.' },
   ];
 
-  const tools = [
-    { name: 'WordPress', icon: '📝' },
-    { name: 'Cloudflare', icon: '☁️' },
-    { name: 'LiteSpeed', icon: '⚡' },
-    { name: 'PHP 8.2', icon: '🐘' },
-    { name: 'MariaDB', icon: '💾' },
-    { name: 'NodeJS', icon: '🟢' },
+  const gridFeatures = [
+    {
+      title: 'Isolated Container Stacks',
+      desc: 'Run every WordPress site in its own sandboxed PHP/Apache and MariaDB double-container stack.',
+      icon: Cpu,
+    },
+    {
+      title: 'Sub-5ms Latency Routing',
+      desc: 'BDIX connected South Asian routing ensures minimal page latency and optimal uptime for local audiences.',
+      icon: Zap,
+    },
+    {
+      title: 'Auto-SSL Provisioning',
+      desc: 'Automatic installation and renewal of wildcard Let\'s Encrypt SSL certificates for all custom domains.',
+      icon: Lock,
+    },
+    {
+      title: 'Encrypted S3 Backups',
+      desc: 'Automated daily snapshots packaged, encrypted, and synced to secure offsite S3 object storage.',
+      icon: Database,
+    },
+    {
+      title: 'Git-Push Deployments',
+      desc: 'Sync your GitHub repository or upload raw ZIP archives. Our runners compile and update static apps in seconds.',
+      icon: GitBranch,
+    },
+    {
+      title: 'One-Click Installer',
+      desc: 'Instantly provision fully configured CMS setups, databases, and SSL endpoints from templates.',
+      icon: Sparkles,
+    },
   ];
 
   return (
-    <div className="w-full bg-white py-16 text-slate-800 space-y-24" id="features">
+    <div className="w-full bg-white py-16 text-slate-800 space-y-20" id="features">
       
-      {/* 1. Moving From Another Host? */}
+      {/* SECTION 1: Zero Downtime Migration (Adapted Node visual) */}
       <section className="max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-12 items-center">
         {/* Node diagram illustration on left */}
         <div className="lg:col-span-5 relative flex justify-center">
@@ -82,61 +106,73 @@ export default function Features() {
         </div>
       </section>
 
-      {/* 2. Lightning Fast Loading Speed */}
-      <section className="max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-12 items-center">
-        {/* Text content on left */}
-        <div className="lg:col-span-7 space-y-6 lg:order-2">
+      {/* SECTION 2: 6-Grid Feature Matrix (Adapted from SaasAble feature-20) */}
+      <section className="max-w-7xl mx-auto px-6 space-y-10">
+        <div className="flex flex-col gap-3">
           <span className="text-[#0066ff] text-xs font-bold uppercase tracking-widest block">
-            Optimized Speed Engine
+            Technical Advantages
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
-            Local Uptime & Low Latency
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight max-w-md">
+            Intelligent Container Cloud
           </h2>
-          <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-            Our servers are optimized for South Asian network routing. Your applications load with minimal latency for local audiences in Bangladesh.
-          </p>
+        </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {['Superfast SSD Disks', 'LiteSpeed Cache Engine', 'South Asian BDIX Routing', 'Alpine runner isolation'].map((label, idx) => (
-              <div key={idx} className="flex items-center gap-2 bg-slate-50/40 p-3 rounded-xl border border-slate-100 text-xs font-bold text-slate-650 text-slate-700">
-                <ShieldCheck className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
-                <span>{label}</span>
-              </div>
-            ))}
+        {/* Feature Grid with thin borders */}
+        <div className="rounded-3xl border border-slate-200/80 bg-slate-50/60 overflow-hidden shadow-xs relative">
+          
+          {/* Accent decoration (SaasAble Star layout style) */}
+          <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none select-none">
+            <svg viewBox="0 0 100 100" className="h-24 w-24 text-slate-900" fill="currentColor">
+              <path d="M50 0 L61 38 L100 50 L61 62 L50 100 L39 62 L0 50 L39 38 Z" />
+            </svg>
           </div>
 
-          <div className="pt-2">
-            <Link
-              href="https://dashboard.itbengal.xyz/register"
-              className="inline-flex items-center gap-1.5 bg-[#0066ff] hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-xs md:text-sm transition-all shadow-md hover:shadow-blue-500/10 active:scale-[0.98]"
-            >
-              Deploy Your Website <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y sm:divide-y-0 lg:divide-y divide-slate-200/80 relative -m-px">
+            
+            {gridFeatures.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className={`p-6 md:p-8 flex flex-col items-start gap-6 hover:bg-white transition-all duration-200 ${
+                    index % 2 === 0 ? 'sm:border-r border-slate-200/80' : ''
+                  } ${
+                    index % 3 !== 2 ? 'lg:border-r border-slate-200/80' : ''
+                  }`}
+                >
+                  {/* Circle Icon Badge */}
+                  <div className="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center text-[#0066ff] shrink-0 shadow-2xs">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  
+                  {/* Title & Desc */}
+                  <div className="space-y-2 grow">
+                    <h4 className="text-slate-900 font-bold text-xs md:text-sm">{item.title}</h4>
+                    <p className="text-slate-500 text-[11px] md:text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+
           </div>
         </div>
 
-        {/* Floating badge circles on right */}
-        <div className="lg:col-span-5 relative flex justify-center lg:order-1">
-          <div className="absolute inset-0 bg-blue-100/30 blur-3xl rounded-full pointer-events-none" />
-          <div className="relative rounded-3xl border border-slate-200/80 bg-slate-50/80 p-8 w-full max-w-sm shadow-xs flex flex-col items-center select-none">
-            {/* Center Node */}
-            <div className="h-16 w-16 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-slate-600 shadow-xs text-2xl font-extrabold mb-6 animate-bounce-slow">
-              🚀
-            </div>
-            {/* Round Badge Grid */}
-            <div className="grid grid-cols-2 gap-3.5 w-full">
-              {tools.map((tool, idx) => (
-                <div key={idx} className="flex items-center gap-2 border border-slate-200/80 rounded-xl p-2.5 bg-white shadow-2xs font-bold text-xs text-slate-600 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200">
-                  <span className="text-lg">{tool.icon}</span>
-                  <span>{tool.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Footer info badge */}
+        <div className="flex flex-col items-center justify-center gap-4 text-center pt-4">
+          <p className="text-slate-500 text-xs md:text-sm max-w-sm">
+            Process data faster, secure system boundaries, and launch websites with sub-5ms routing.
+          </p>
+          <Link
+            href="https://dashboard.itbengal.xyz/register"
+            className="inline-flex items-center gap-1.5 bg-[#0066ff] hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-xs transition-all shadow-md active:scale-[0.98]"
+          >
+            Explore all Features
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
-      {/* 3. User-Friendly Control Panel */}
+      {/* SECTION 3: Laptop Container Mockup Widget */}
       <section className="max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-12 items-center">
         {/* Text details on left */}
         <div className="lg:col-span-6 space-y-6">
@@ -144,7 +180,7 @@ export default function Features() {
             Dashboard Portal
           </span>
           <h2 className="text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
-            Isolated Container Stack
+            User-Friendly Control Panel
           </h2>
           <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
             Each WordPress site runs in a dedicated container stack, guaranteeing memory boundaries and solid security out of the box.
@@ -175,7 +211,7 @@ export default function Features() {
                   <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                  <span className="text-[9px] text-slate-500 ml-2 font-mono">dashboard.itbengal.xyz/wordpress</span>
+                  <span className="text-[9px] text-slate-550 ml-2 font-mono">dashboard.itbengal.xyz/wordpress</span>
                 </div>
 
                 {/* Clickable Mockup Tabs */}
@@ -262,6 +298,7 @@ export default function Features() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }
